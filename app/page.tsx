@@ -6,7 +6,7 @@ export default function Home() {
     <>
       <Navbar />
 
-      <main className="flex min-h-[calc(100vh-64px)] flex-col items-center justify-center px-4 text-center">
+      <main className="flex flex-col items-center justify-center px-4 py-24 text-center">
         <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
           Coming Soon
         </h1>
