@@ -1,4 +1,4 @@
-import { ModeToggle } from "@/components/mode-toggle";
+import { ModeToggle } from "@/app/components/ModeToggle";
 
 export function Navbar() {
   return (
