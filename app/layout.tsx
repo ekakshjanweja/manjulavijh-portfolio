@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Tangerine } from "next/font/google";
+import { Geist, Tangerine, Playfair_Display } from "next/font/google";
 import { ThemeProvider } from "@/lib/providers/theme-provider";
 import "./globals.css";
 import { Navbar } from "@/components/common/navbar";
@@ -15,6 +15,11 @@ const tangerine = Tangerine({
   variable: "--font-tangerine",
 });
 
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-playfair",
+});
+
 export const metadata: Metadata = {
   title: "Manjula Vijh",
   description: "Food & Product Photographer based in New Delhi.",
@@ -28,7 +33,9 @@ export default function RootLayout({
   return (
     <>
       <html lang="en" suppressHydrationWarning>
-        <body className={`${geist.variable} ${tangerine.variable} antialiased`}>
+        <body
+          className={`${geist.variable} ${tangerine.variable} ${playfair.variable} antialiased`}
+        >
           <ThemeProvider
             attribute="class"
             defaultTheme="light"
