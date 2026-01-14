@@ -4,11 +4,10 @@ import {
   motion,
   useScroll,
   useTransform,
-  useSpring,
   MotionValue,
 } from "framer-motion";
 import Image from "next/image";
-import { useRef, useEffect, useState } from "react";
+import { useRef } from "react";
 
 const IMAGES = [
   "/images/carousel-one.jpg",
@@ -79,7 +78,6 @@ function ParallaxImage({
   index: number;
   total: number;
   progress: MotionValue<number>;
-  isMobile: boolean;
 }) {
   const step = 1 / total;
   const start = index * step;
@@ -167,14 +165,6 @@ function ParallaxImage({
 
 export function ParallaxBackground({ progress }: ParallaxBackgroundProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
 
   const { scrollYProgress: localProgress } = useScroll({
     target: containerRef,
@@ -184,19 +174,11 @@ export function ParallaxBackground({ progress }: ParallaxBackgroundProps) {
   const activeProgress = progress || localProgress;
 
   return (
-    <div
-      ref={containerRef}
-      className="relative w-full bg-background snap-y snap-mandatory md:snap-none"
-      style={{ height: isMobile ? `${IMAGES.length * 100}vh` : "400vh" }}
-    >
-      {/* Snap sections for mobile */}
-      {IMAGES.map((_, i) => (
-        <div
-          key={i}
-          className="absolute w-full h-screen snap-start snap-always md:snap-align-none"
-          style={{ top: `${i * 100}vh` }}
-        />
-      ))}
+      <div
+        ref={containerRef}
+        className={`relative w-full bg-background`}
+        style={{ height: "400vh" }}
+      >
 
       {/* Progress indicator */}
       <ProgressIndicator progress={activeProgress} total={IMAGES.length} />
@@ -209,7 +191,6 @@ export function ParallaxBackground({ progress }: ParallaxBackgroundProps) {
             index={index}
             total={IMAGES.length}
             progress={activeProgress}
-            isMobile={isMobile}
           />
         ))}
       </div>

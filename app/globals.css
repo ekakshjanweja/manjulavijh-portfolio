@@ -89,6 +89,14 @@
 }
 
 html {
-  scroll-snap-type: y proximity;
+  scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
+}
+
+@media (max-width: 767px) {
+  html {
+    scroll-snap-type: none;
+    scroll-behavior: auto;
+    -webkit-overflow-scrolling: touch;
+  }
 }

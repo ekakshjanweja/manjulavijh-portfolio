@@ -3,26 +3,34 @@
 import { ParallaxBackground } from "@/components/coming-soon/parallax-background";
 import { CustomCursor } from "@/components/coming-soon/custom-cursor";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 
 export default function ComingSoon() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"],
   });
 
-  // Smooth out the scroll for snappier feeling animations
   const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
+    stiffness: isMobile ? 60 : 100,
+    damping: isMobile ? 45 : 30,
     restDelta: 0.001,
   });
 
   const titleOpacity = useTransform(smoothProgress, [0, 0.05], [1, 0]);
   const titleScale = useTransform(smoothProgress, [0, 0.05], [1, 0.95]);
 
-  // Drag to scroll implementation
+  // Drag to scroll implementation (Desktop only)
   useEffect(() => {
     let isDragging = false;
     let startY = 0;
@@ -39,7 +47,7 @@ export default function ComingSoon() {
     };
 
     const handleMouseMove = (e: MouseEvent) => {
-      if (!isDragging) return;
+      if (!isDragging || isMobile) return;
       e.preventDefault();
       const y = e.pageY - (containerRef.current?.offsetTop || 0);
       const walk = (y - startY) * 2; // Scroll speed multiplier
@@ -58,7 +66,7 @@ export default function ComingSoon() {
       window.removeEventListener("mouseup", handleMouseUp);
       window.removeEventListener("mousemove", handleMouseMove);
     };
-  }, []);
+  }, [isMobile]);
 
   return (
     <main
@@ -81,8 +89,8 @@ export default function ComingSoon() {
             style={{ opacity: titleOpacity, scale: titleScale }}
             className="flex-1 flex flex-col items-center justify-center text-center"
           >
-            <span className="font-display text-4xl md:text-5xl text-muted-foreground tracking-wide mb-2">
-              Coming Soon
+            <span className="font-display text-4xl md:text-6xl text-muted-foreground tracking-wide mb-2">
+              coming soon
             </span>
             <h1 className="font-serif text-6xl md:text-8xl lg:text-9xl font-normal tracking-[0.2em] text-foreground uppercase">
               Manjula Vijh
@@ -112,23 +120,6 @@ export default function ComingSoon() {
               </p>
             </div>
           </div>
-        </motion.div>
-
-        {/* Scroll Indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1, duration: 1 }}
-          className="absolute top-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
-        >
-          <span className="text-[9px] uppercase tracking-[0.5em] text-muted-foreground/60">
-            Scroll
-          </span>
-          <motion.div
-            animate={{ height: [24, 48, 24], opacity: [0.2, 0.5, 0.2] }}
-            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-            className="w-px bg-muted-foreground/40"
-          />
         </motion.div>
       </div>
     </main>
