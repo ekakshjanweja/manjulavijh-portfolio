@@ -1,3 +1,5 @@
+import SocialLinks from "@/components/common/social-links";
+
 export default function ComingSoonHero() {
   return (
     <div className="flex-1">
@@ -6,7 +8,7 @@ export default function ComingSoonHero() {
 
       <div>Countdown</div>
 
-      <div>Socials</div>
+      <SocialLinks />
     </div>
   );
 }

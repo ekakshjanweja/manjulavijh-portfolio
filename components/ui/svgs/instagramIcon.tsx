@@ -3,12 +3,12 @@ import type { SVGProps } from "react";
 const InstagramIcon = (props: SVGProps<SVGSVGElement>) => (
   <svg
     {...props}
-    xmlnsXlink="http://www.w3.org/2000/xlink"
+    xmlnsXlink="http://www.w3.org/1999/xlink"
     viewBox="0 0 264.583 264.583"
   >
     <defs>
       <radialGradient
-        href="#a"
+        xlinkHref="#a"
         id="f"
         cx="158.429"
         cy="578.088"
@@ -19,7 +19,7 @@ const InstagramIcon = (props: SVGProps<SVGSVGElement>) => (
         gradientUnits="userSpaceOnUse"
       />
       <radialGradient
-        href="#b"
+        xlinkHref="#b"
         id="g"
         cx="172.615"
         cy="600.692"
@@ -30,7 +30,7 @@ const InstagramIcon = (props: SVGProps<SVGSVGElement>) => (
         gradientUnits="userSpaceOnUse"
       />
       <radialGradient
-        href="#c"
+        xlinkHref="#c"
         id="h"
         cx="144.012"
         cy="51.337"
@@ -41,7 +41,7 @@ const InstagramIcon = (props: SVGProps<SVGSVGElement>) => (
         gradientUnits="userSpaceOnUse"
       />
       <radialGradient
-        href="#d"
+        xlinkHref="#d"
         id="e"
         cx="199.788"
         cy="628.438"

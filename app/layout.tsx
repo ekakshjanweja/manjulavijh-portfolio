@@ -36,7 +36,8 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             <div>
-              <Navbar />
+              {/* TODO: Enable Navbar later */}
+              {/* <Navbar /> */}
               {children}
             </div>
           </ThemeProvider>

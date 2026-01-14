@@ -3,7 +3,7 @@ import HeroImageCarousel from "@/components/coming-soon/hero-image-carousel";
 
 export default function ComingSoon() {
   return (
-    <div className="flex flex-col md:flex-row min-h-[calc(100vh-84px)]">
+    <div className="flex flex-col md:flex-row min-h-screen">
       <HeroImageCarousel />
       <ComingSoonHero />
     </div>
