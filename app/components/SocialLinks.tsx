@@ -1,15 +1,16 @@
-import { Instagram, Behance } from "@/icons/index";
+import { InstagramIcon } from "@/components/ui/svgs/instagramIcon";
+import { Behance } from "@/icons/index";
 
 export default function SocialLinks() {
   return (
-    <div className="flex justify-center gap-6 pt-4 text-white/60">
+    <div className="mt-8 flex items-center justify-center gap-6">
       <a
         href="https://www.instagram.com/manjulavijhphotography/"
         target="_blank"
         rel="noopener noreferrer"
         className="hover:text-white transition"
       >
-        <Instagram />
+        <InstagramIcon className="h-7 w-7" />
       </a>
       <a
         href="https://www.behance.net/manjulavijh1"
