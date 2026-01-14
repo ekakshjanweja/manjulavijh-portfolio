@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Inter } from "next/font/google";
+import { Playfair_Display, Inter, Dancing_Script } from "next/font/google";
 import { ThemeProvider } from "@/app/components/ThemeProvider";
 import "./globals.css";
 
@@ -12,6 +12,11 @@ const playfair = Playfair_Display({
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
+});
+
+const dancingScript = Dancing_Script({
+  subsets: ["latin"],
+  variable: "--font-dancing",
 });
 
 export const metadata: Metadata = {
@@ -27,7 +32,9 @@ export default function RootLayout({
   return (
     <>
       <html lang="en" suppressHydrationWarning>
-        <body className={`${playfair.variable} ${inter.variable} antialiased`}>
+        <body
+          className={`${playfair.variable} ${inter.variable} ${dancingScript.variable} antialiased`}
+        >
           <ThemeProvider
             attribute="class"
             defaultTheme="system"
