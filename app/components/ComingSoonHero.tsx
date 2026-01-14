@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { motion } from "framer-motion";
 import BackgroundImage from "./BackgroundImage";
@@ -15,12 +15,12 @@ export default function ComingSoonHero() {
             initial={{ opacity: 0, letterSpacing: "0.2em" }}
             animate={{ opacity: 1, letterSpacing: "0.4em" }}
             transition={{ duration: 1.2, ease: "easeOut" }}
-            className="font-[var(--font-playfair) text-4xl sm:text-5xl text-white"
+            className="text-4xl sm:text-5xl font-sans text-white"
           >
             COMING SOON
           </motion.h1>
 
-          <p className="text-white/80 text-lg">
+          <p className="text-white/80 text-lg font-display">
             Crafting delicious stories through my lens.
             <br />
             Food & Product Photography
