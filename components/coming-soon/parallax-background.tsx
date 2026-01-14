@@ -39,9 +39,9 @@ function ProgressDot({
   );
 
   return (
-    <div className="h-8 bg-muted overflow-hidden rounded-full">
+    <div className="w-[3px] h-8 bg-stone-200 overflow-hidden rounded-full">
       <motion.div
-        className="w-full h-full bg-foreground origin-top"
+        className="w-full h-full bg-stone-700 origin-top"
         style={{ scaleY }}
       />
     </div>

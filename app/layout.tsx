@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Geist, Tangerine, Playfair_Display } from "next/font/google";
 import { ThemeProvider } from "@/lib/providers/theme-provider";
 import "./globals.css";
-import { Navbar } from "@/components/common/navbar";
 
 const geist = Geist({
   subsets: ["latin"],
