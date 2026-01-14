@@ -1,5 +1,4 @@
 import { InstagramIcon } from "@/components/ui/svgs/instagramIcon";
-import { Behance } from "@/icons/index";
 
 export default function SocialLinks() {
   return (
@@ -11,14 +10,6 @@ export default function SocialLinks() {
         className="hover:text-white transition"
       >
         <InstagramIcon className="h-7 w-7" />
-      </a>
-      <a
-        href="https://www.behance.net/manjulavijh1"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="hover:text-white transition"
-      >
-        <Behance />
       </a>
     </div>
   );
