@@ -45,10 +45,10 @@ export const WorkSection = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <p className="text-accent text-sm uppercase tracking-[0.2em] mb-4 font-medium">
+          <p className="section-kicker text-accent text-xs uppercase mb-4 font-semibold">
             Portfolio
           </p>
-          <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-foreground font-semibold mb-6">
+          <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-foreground font-semibold tracking-tight mb-6">
             Featured Work
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
@@ -62,16 +62,16 @@ export const WorkSection = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="flex justify-center gap-4 mb-12"
+          className="flex flex-wrap justify-center gap-3 mb-12"
         >
           {categories.map((category) => (
             <button
               key={category}
               onClick={() => setActiveCategory(category)}
-              className={`px-6 py-2 text-sm uppercase tracking-wider transition-all duration-300 ${
+              className={`px-5 py-2 text-xs uppercase tracking-[0.3em] rounded-full transition-all duration-300 ${
                 activeCategory === category
-                  ? "bg-foreground text-background"
-                  : "bg-transparent text-foreground border border-border hover:border-foreground"
+                  ? "bg-foreground text-background shadow-sm"
+                  : "bg-transparent text-foreground/80 border border-border/70 hover:border-foreground"
               }`}
             >
               {category}
@@ -80,27 +80,26 @@ export const WorkSection = () => {
         </motion.div>
 
         {/* Portfolio Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredItems.map((item, index) => (
             <motion.div
               key={item.id}
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.1 * index }}
-              layout
-              className="group relative overflow-hidden rounded-lg aspect-4/5 cursor-pointer"
+              initial={{ opacity: 0 }}
+              animate={isInView ? { opacity: 1 } : {}}
+              transition={{ duration: 0.4, delay: 0.08 * index }}
+              className="group relative overflow-hidden rounded-2xl aspect-4/5 cursor-pointer bg-card/40 ring-1 ring-border/60 shadow-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-xl hover:ring-accent/30"
             >
               <Image
                 src={item.image}
                 alt={item.title}
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
               />
-              <div className="absolute inset-0 bg-linear-to-t from-charcoal/90 via-charcoal/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-full group-hover:translate-y-0 transition-transform duration-500">
-                <p className="text-gold text-xs uppercase tracking-wider mb-2">
+              <div className="absolute inset-0 bg-linear-to-t from-charcoal/85 via-charcoal/20 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="absolute bottom-0 left-0 right-0 p-6">
+                <p className="text-gold text-xs uppercase tracking-[0.3em] mb-2">
                   {item.category}
                 </p>
-                <h3 className="font-serif text-xl text-cream font-medium">
+                <h3 className="font-serif text-xl text-cream font-semibold">
                   {item.title}
                 </h3>
               </div>

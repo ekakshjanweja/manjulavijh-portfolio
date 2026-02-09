@@ -45,10 +45,10 @@ export const AboutSection = () => {
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <p className="text-accent text-sm uppercase tracking-[0.2em] mb-F4 font-medium">
+            <p className="section-kicker text-accent text-xs uppercase mb-4 font-semibold">
               About Me
             </p>
-            <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-foreground font-semibold mb-6">
+            <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-foreground font-semibold tracking-tight mb-6">
               The Art of Visual Storytelling
             </h2>
             <div className="space-y-4 text-muted-foreground leading-relaxed">

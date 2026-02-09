@@ -31,20 +31,20 @@ export const HeroSection = () => {
 
       {/* Content */}
       <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
-        <motion.p
+        {/* <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-[#ca8a04] text-sm md:text-base uppercase tracking-[0.3em] mb-6 font-bold"
+          className="section-kicker text-gold text-xs md:text-sm uppercase mb-6 font-semibold"
         >
-          Professional Photography
-        </motion.p>
+          Food + Product Photography
+        </motion.p> */}
 
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="font-serif text-4xl md:text-6xl lg:text-7xl text-white font-semibold leading-tight mb-6"
+          className="font-serif text-4xl md:text-6xl lg:text-7xl text-white font-semibold leading-tight tracking-tight mb-4"
         >
           Manjula Vijh
         </motion.h1>
@@ -53,19 +53,19 @@ export const HeroSection = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.6 }}
-          className="text-white/80 text-lg md:text-2xl font-serif italic mb-4"
+          className="text-white/85 text-lg md:text-2xl font-serif italic mb-3"
         >
-          Food & Product Photographer
+          Visual storyteller for culinary and lifestyle brands
         </motion.p>
 
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.8 }}
-          className="text-white/60 text-base md:text-lg max-w-xl mx-auto mb-10"
+          className="text-white/70 text-base md:text-lg max-w-xl mx-auto mb-10"
         >
-          Capturing the essence of taste & style through evocative imagery that
-          tells your brand&apos;s story
+          Based in New Delhi. I build refined, light-rich imagery that makes
+          everyday moments feel editorial and timeless.
         </motion.p>
 
         <motion.div
@@ -77,7 +77,7 @@ export const HeroSection = () => {
           <Button
             onClick={() => scrollToSection("#portfolio")}
             variant="hero"
-            size="lg"
+            size="default"
             className="min-w-45 bg-[#ca8a04]! text-white! hover:bg-[#ca8a04]/90! shadow-lg hover:shadow-xl"
           >
             View Portfolio
@@ -85,7 +85,7 @@ export const HeroSection = () => {
           <Button
             onClick={() => scrollToSection("#contact")}
             variant="heroOutline"
-            size="lg"
+            size="default"
             className="min-w-45 border-white/80! text-white! hover:bg-white/10!"
           >
             Get in Touch

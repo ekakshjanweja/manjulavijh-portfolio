@@ -1,15 +1,17 @@
-"use client"
+"use client";
 
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { ModeToggle } from "@/components/common/mode-toggle";
+import Image from "next/image";
 
 const navLinks = [
   { name: "Home", href: "#home" },
   { name: "About", href: "#about" },
-  { name: "Work", href: "#work" },
+  { name: "Work", href: "#portfolio" },
   { name: "Services", href: "#services" },
+  { name: "Learning", href: "#learning" },
   { name: "Contact", href: "#contact" },
 ];
 
@@ -58,22 +60,30 @@ export const Navbar = () => {
       transition={{ duration: 0.3, ease: "easeInOut" }}
       className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/50"
     >
-      <div className="max-w-7xl mx-auto px-6 lg:px-12">
-        <div className="flex items-center justify-between h-20">
+      <div className="px-4 lg:px-8">
+        <div className="flex items-center justify-between h-16">
           {/* Logo */}
+          <div className="flex items-center gap-2">
+          <Image
+            src="/images/logo.png"
+            alt="Manjula Vijh Logo"
+            width={80}
+            height={80}
+          />
           <a
             href="#home"
             onClick={(e) => {
               e.preventDefault();
               scrollToSection("#home");
             }}
-            className="font-serif text-2xl font-semibold text-foreground tracking-wide"
+            className="logo-script text-3xl md:text-4xl font-semibold text-foreground tracking-wide"
           >
-            Manjula <span className="text-accent">Vijh</span>
+            Manjula Vijh
           </a>
+          </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-6">
             {navLinks.map((link) => (
               <a
                 key={link.name}

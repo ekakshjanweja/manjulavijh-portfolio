@@ -7,6 +7,7 @@ const footerLinks = [
   { name: "About", href: "#about" },
   { name: "Portfolio", href: "#portfolio" },
   { name: "Services", href: "#services" },
+  { name: "Learning", href: "#learning" },
   { name: "Contact", href: "#contact" },
 ];
 
@@ -24,16 +25,15 @@ export const Footer = () => {
 
   return (
     <footer className="bg-foreground text-primary-foreground">
-      <div className="max-w-7xl mx-auto px-6 lg:px-12 py-16">
+      <div className="max-w-6xl mx-auto px-6 lg:px-10 py-16">
         <div className="grid md:grid-cols-3 gap-12">
           {/* Brand */}
           <div>
-            <h3 className="font-serif text-2xl font-semibold mb-4">
-              Manjula <span className="text-gold">Vijh</span>
+            <h3 className="logo-script text-3xl font-semibold mb-4">
+              Manjula Vijh
             </h3>
             <p className="text-primary-foreground/70 leading-relaxed mb-6">
-              Capturing the essence of taste & style through evocative food and
-              product photography.
+              Light-rich, editorial imagery for culinary and lifestyle brands.
             </p>
             <div className="flex gap-4">
               <a
@@ -82,7 +82,7 @@ export const Footer = () => {
             <div className="space-y-3 text-primary-foreground/70">
               <p>hello@manjulavijh.com</p>
               <p>+91 98765 43210</p>
-              <p>Mumbai, India</p>
+              <p>New Delhi, India</p>
             </div>
           </div>
         </div>

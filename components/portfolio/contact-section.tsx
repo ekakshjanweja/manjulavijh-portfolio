@@ -45,10 +45,10 @@ export const ContactSection = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <p className="text-accent text-sm uppercase tracking-[0.2em] mb-4 font-medium">
+          <p className="section-kicker text-accent text-xs uppercase mb-4 font-semibold">
             Get in Touch
           </p>
-          <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-foreground font-semibold mb-6">
+          <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-foreground font-semibold tracking-tight mb-6">
             Let&apos;s Work Together
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
@@ -65,7 +65,10 @@ export const ContactSection = () => {
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form
+              onSubmit={handleSubmit}
+              className="space-y-6 rounded-2xl border border-border/70 bg-card/70 p-8 md:p-10 backdrop-blur"
+            >
               <div className="grid sm:grid-cols-2 gap-4">
                 <div>
                   <label
@@ -80,7 +83,7 @@ export const ContactSection = () => {
                     type="text"
                     required
                     placeholder="Your name"
-                    className="bg-card"
+                    className="bg-background/80"
                   />
                 </div>
                 <div>
@@ -96,7 +99,7 @@ export const ContactSection = () => {
                     type="email"
                     required
                     placeholder="your@email.com"
-                    className="bg-card"
+                    className="bg-background/80"
                   />
                 </div>
               </div>
@@ -113,7 +116,7 @@ export const ContactSection = () => {
                   type="text"
                   required
                   placeholder="How can I help you?"
-                  className="bg-card"
+                  className="bg-background/80"
                 />
               </div>
               <div>
@@ -129,7 +132,7 @@ export const ContactSection = () => {
                   required
                   placeholder="Tell me about your project..."
                   rows={6}
-                  className="bg-card resize-none"
+                  className="bg-background/80 resize-none"
                 />
               </div>
               <Button
@@ -158,7 +161,7 @@ export const ContactSection = () => {
             className="space-y-8"
           >
             <div>
-              <h3 className="font-serif text-2xl text-foreground font-semibold mb-6">
+              <h3 className="font-serif text-2xl text-foreground font-semibold tracking-tight mb-6">
                 Contact Information
               </h3>
               <div className="space-y-6">
@@ -168,7 +171,7 @@ export const ContactSection = () => {
                       <info.icon className="w-5 h-5 text-accent" />
                     </div>
                     <div>
-                      <p className="text-sm text-muted-foreground">
+                      <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
                         {info.label}
                       </p>
                       <p className="text-foreground font-medium">
@@ -181,7 +184,7 @@ export const ContactSection = () => {
             </div>
 
             <div>
-              <h3 className="font-serif text-xl text-foreground font-semibold mb-4">
+              <h3 className="font-serif text-xl text-foreground font-semibold tracking-tight mb-4">
                 Follow Me
               </h3>
               <div className="flex gap-4">

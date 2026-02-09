@@ -55,10 +55,10 @@ export const ServicesSection = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <p className="text-accent text-sm uppercase tracking-[0.2em] mb-4 font-medium">
+          <p className="section-kicker text-accent text-xs uppercase mb-4 font-semibold">
             Services
           </p>
-          <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-foreground font-semibold mb-6">
+          <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-foreground font-semibold tracking-tight mb-6">
             What I Offer
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
@@ -76,7 +76,7 @@ export const ServicesSection = () => {
               initial={{ opacity: 0, y: 40 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.1 * index }}
-              className="group p-8 bg-card rounded-lg border border-border hover:border-accent/50 transition-all duration-500 hover-lift"
+              className="group p-8 bg-card/80 rounded-xl border border-border/70 hover:border-accent/40 transition-all duration-500 hover-lift backdrop-blur"
             >
               <div className="w-14 h-14 rounded-full bg-accent/10 flex items-center justify-center mb-6 group-hover:bg-accent/20 transition-colors">
                 <service.icon className="w-7 h-7 text-accent" />
