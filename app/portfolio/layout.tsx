@@ -1,16 +1,18 @@
+import { Navbar } from "@/components/portfolio/navbar";
 import { Toaster } from "sonner";
 
-export default function RootLayout({
+export default function PortfolioLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body>
+    <>
+      <div>
+        <Navbar />
         {children}
         <Toaster richColors position="top-right" />
-      </body>
-    </html>
+      </div>
+    </>
   );
 }

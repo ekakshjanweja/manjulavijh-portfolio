@@ -10,90 +10,74 @@ const services = [
     icon: Utensils,
     title: "Food Photography",
     description:
-      "From restaurant menus to cookbooks, I create mouthwatering images that capture the essence and artistry of culinary creations. Every dish tells a story—let me help you tell yours.",
-    features: [
-      "Restaurant & Menu Shoots",
-      "Recipe Photography",
-      "Editorial Food Styling",
-    ],
+      "Mouthwatering images for restaurant menus, cookbooks, and editorial features that capture culinary artistry.",
+    features: ["Restaurant & Menu Shoots", "Recipe Photography", "Editorial Styling"],
   },
   {
     icon: Package,
     title: "Product Photography",
     description:
-      "Elevate your products with stunning imagery designed for e-commerce, advertising, and catalogs. I focus on highlighting textures, details, and the unique qualities that set your products apart.",
-    features: [
-      "E-commerce Ready Images",
-      "Lifestyle Product Shots",
-      "Packaging Photography",
-    ],
+      "Stunning imagery for e-commerce, advertising, and catalogs that highlight textures and unique qualities.",
+    features: ["E-commerce Ready", "Lifestyle Shots", "Packaging Photography"],
   },
   {
     icon: Briefcase,
     title: "Brand Shoots",
     description:
-      "Comprehensive visual storytelling for your brand. From behind-the-scenes content to cohesive campaign imagery, I create visuals that strengthen your brand identity and connect with your audience.",
-    features: [
-      "Brand Story Content",
-      "Social Media Assets",
-      "Campaign Photography",
-    ],
+      "Comprehensive visual storytelling -- from behind-the-scenes content to cohesive campaign imagery.",
+    features: ["Brand Story Content", "Social Media Assets", "Campaign Photography"],
   },
 ];
 
 export const ServicesSection = () => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="services" ref={ref} className="section-padding bg-background">
-      <div className="max-w-7xl mx-auto">
+    <section id="services" ref={ref} className="section-padding bg-section-alt">
+      <div className="max-w-6xl mx-auto">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-14"
         >
           <p className="section-kicker text-accent text-xs uppercase mb-4 font-semibold">
             Services
           </p>
-          <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-foreground font-semibold tracking-tight mb-6">
+          <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-foreground font-semibold tracking-tight mb-5">
             What I Offer
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            Professional photography services tailored to bring your vision to
-            life. Each project receives my full attention and creative
-            expertise.
-          </p>
+          <div className="section-divider" />
         </motion.div>
 
         {/* Services Grid */}
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-3 gap-6 md:gap-8">
           {services.map((service, index) => (
             <motion.div
               key={service.title}
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.1 * index }}
-              className="group p-8 bg-card/80 rounded-xl border border-border/70 hover:border-accent/40 transition-all duration-500 hover-lift backdrop-blur"
+              className="group p-6 md:p-8 bg-card/60 rounded-lg border border-border/50 hover:border-accent/30 transition-all duration-500 hover-lift backdrop-blur-sm"
             >
-              <div className="w-14 h-14 rounded-full bg-accent/10 flex items-center justify-center mb-6 group-hover:bg-accent/20 transition-colors">
-                <service.icon className="w-7 h-7 text-accent" />
+              <div className="w-11 h-11 rounded-full bg-accent/8 flex items-center justify-center mb-5 group-hover:bg-accent/15 transition-colors duration-300">
+                <service.icon className="w-5 h-5 text-accent" />
               </div>
-              <h3 className="font-serif text-2xl text-foreground font-semibold mb-4">
+              <h3 className="font-serif text-xl text-foreground font-semibold mb-3">
                 {service.title}
               </h3>
-              <p className="text-muted-foreground mb-6 leading-relaxed">
+              <p className="text-muted-foreground text-sm leading-relaxed mb-5">
                 {service.description}
               </p>
               <ul className="space-y-2">
                 {service.features.map((feature) => (
                   <li
                     key={feature}
-                    className="flex items-center gap-2 text-sm text-foreground/80"
+                    className="flex items-center gap-2.5 text-sm text-foreground/70"
                   >
-                    <span className="w-1.5 h-1.5 rounded-full bg-accent" />
+                    <span className="w-1 h-1 rounded-full bg-accent/70" />
                     {feature}
                   </li>
                 ))}

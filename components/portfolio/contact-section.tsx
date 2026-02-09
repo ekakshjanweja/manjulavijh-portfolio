@@ -11,7 +11,7 @@ import { toast } from "sonner";
 
 export const ContactSection = () => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -32,48 +32,49 @@ export const ContactSection = () => {
   const contactInfo = [
     { icon: Mail, label: "Email", value: "hello@manjulavijh.com" },
     { icon: Phone, label: "Phone", value: "+91 98765 43210" },
-    { icon: MapPin, label: "Location", value: "Mumbai, India" },
+    { icon: MapPin, label: "Location", value: "New Delhi, India" },
   ];
 
   return (
-    <section id="contact" ref={ref} className="section-padding bg-background">
-      <div className="max-w-7xl mx-auto">
+    <section id="contact" ref={ref} className="section-padding bg-section-alt">
+      <div className="max-w-5xl mx-auto">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-14"
         >
           <p className="section-kicker text-accent text-xs uppercase mb-4 font-semibold">
-            Get in Touch
+            Contact
           </p>
-          <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-foreground font-semibold tracking-tight mb-6">
+          <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-foreground font-semibold tracking-tight mb-5">
             Let&apos;s Work Together
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            Ready to bring your vision to life? I&apos;d love to hear about your
-            project. Drop me a message and let&apos;s create something beautiful
-            together.
+          <div className="section-divider mb-6" />
+          <p className="text-muted-foreground max-w-lg mx-auto text-sm md:text-base">
+            Ready to bring your vision to life? Drop me a message and let&apos;s
+            create something beautiful together.
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20">
-          {/* Contact Form */}
+        <div className="grid lg:grid-cols-5 gap-10 lg:gap-14">
+          {/* Contact Form -- takes 3 columns */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
+            initial={{ opacity: 0, x: -30 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            transition={{ duration: 0.7, delay: 0.2 }}
+            className="lg:col-span-3"
           >
             <form
               onSubmit={handleSubmit}
-              className="space-y-6 rounded-2xl border border-border/70 bg-card/70 p-8 md:p-10 backdrop-blur"
+              className="space-y-5 rounded-lg border border-border/50 bg-card/50 p-6 md:p-8 backdrop-blur-sm"
             >
               <div className="grid sm:grid-cols-2 gap-4">
                 <div>
                   <label
                     htmlFor="name"
-                    className="block text-sm font-medium text-foreground mb-2"
+                    className="block text-xs uppercase tracking-[0.15em] text-muted-foreground mb-2"
                   >
                     Name
                   </label>
@@ -83,13 +84,13 @@ export const ContactSection = () => {
                     type="text"
                     required
                     placeholder="Your name"
-                    className="bg-background/80"
+                    className="bg-background/60 border-border/60 focus:border-accent/40 h-10"
                   />
                 </div>
                 <div>
                   <label
                     htmlFor="email"
-                    className="block text-sm font-medium text-foreground mb-2"
+                    className="block text-xs uppercase tracking-[0.15em] text-muted-foreground mb-2"
                   >
                     Email
                   </label>
@@ -99,14 +100,14 @@ export const ContactSection = () => {
                     type="email"
                     required
                     placeholder="your@email.com"
-                    className="bg-background/80"
+                    className="bg-background/60 border-border/60 focus:border-accent/40 h-10"
                   />
                 </div>
               </div>
               <div>
                 <label
                   htmlFor="subject"
-                  className="block text-sm font-medium text-foreground mb-2"
+                  className="block text-xs uppercase tracking-[0.15em] text-muted-foreground mb-2"
                 >
                   Subject
                 </label>
@@ -116,13 +117,13 @@ export const ContactSection = () => {
                   type="text"
                   required
                   placeholder="How can I help you?"
-                  className="bg-background/80"
+                  className="bg-background/60 border-border/60 focus:border-accent/40 h-10"
                 />
               </div>
               <div>
                 <label
                   htmlFor="message"
-                  className="block text-sm font-medium text-foreground mb-2"
+                  className="block text-xs uppercase tracking-[0.15em] text-muted-foreground mb-2"
                 >
                   Message
                 </label>
@@ -131,15 +132,15 @@ export const ContactSection = () => {
                   name="message"
                   required
                   placeholder="Tell me about your project..."
-                  rows={6}
-                  className="bg-background/80 resize-none"
+                  rows={5}
+                  className="bg-background/60 border-border/60 focus:border-accent/40 resize-none"
                 />
               </div>
               <Button
                 type="submit"
                 disabled={isSubmitting}
                 className="w-full sm:w-auto"
-                size="lg"
+                size="default"
               >
                 {isSubmitting ? (
                   "Sending..."
@@ -153,28 +154,28 @@ export const ContactSection = () => {
             </form>
           </motion.div>
 
-          {/* Contact Info */}
+          {/* Contact Info -- takes 2 columns */}
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
+            initial={{ opacity: 0, x: 30 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="space-y-8"
+            transition={{ duration: 0.7, delay: 0.3 }}
+            className="lg:col-span-2 space-y-8"
           >
             <div>
-              <h3 className="font-serif text-2xl text-foreground font-semibold tracking-tight mb-6">
-                Contact Information
+              <h3 className="font-serif text-xl text-foreground font-semibold tracking-tight mb-6">
+                Get in Touch
               </h3>
-              <div className="space-y-6">
+              <div className="space-y-5">
                 {contactInfo.map((info) => (
-                  <div key={info.label} className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center shrink-0">
-                      <info.icon className="w-5 h-5 text-accent" />
+                  <div key={info.label} className="flex items-start gap-3.5">
+                    <div className="w-10 h-10 rounded-full bg-accent/8 flex items-center justify-center shrink-0">
+                      <info.icon className="w-4 h-4 text-accent" />
                     </div>
                     <div>
-                      <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
+                      <p className="text-[10px] uppercase tracking-[0.25em] text-muted-foreground mb-0.5">
                         {info.label}
                       </p>
-                      <p className="text-foreground font-medium">
+                      <p className="text-foreground text-sm font-medium">
                         {info.value}
                       </p>
                     </div>
@@ -183,26 +184,26 @@ export const ContactSection = () => {
               </div>
             </div>
 
-            <div>
-              <h3 className="font-serif text-xl text-foreground font-semibold tracking-tight mb-4">
-                Follow Me
+            <div className="pt-2">
+              <h3 className="font-serif text-lg text-foreground font-semibold tracking-tight mb-4">
+                Follow Along
               </h3>
-              <div className="flex gap-4">
+              <div className="flex gap-3">
                 <a
                   href="https://www.instagram.com/manjulavijhphotography"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-12 h-12 rounded-full border border-border flex items-center justify-center hover:border-accent hover:text-accent transition-colors"
+                  className="w-10 h-10 rounded-full border border-border/60 flex items-center justify-center text-muted-foreground hover:border-accent hover:text-accent transition-all duration-300"
                   aria-label="Follow on Instagram"
                 >
-                  <Instagram size={20} />
+                  <Instagram size={18} />
                 </a>
                 <a
                   href="mailto:hello@manjulavijh.com"
-                  className="w-12 h-12 rounded-full border border-border flex items-center justify-center hover:border-accent hover:text-accent transition-colors"
+                  className="w-10 h-10 rounded-full border border-border/60 flex items-center justify-center text-muted-foreground hover:border-accent hover:text-accent transition-all duration-300"
                   aria-label="Send email"
                 >
-                  <Mail size={20} />
+                  <Mail size={18} />
                 </a>
               </div>
             </div>

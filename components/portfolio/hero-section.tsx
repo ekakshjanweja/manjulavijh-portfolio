@@ -1,12 +1,23 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { ArrowDown } from "lucide-react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import heroImage from "@/public/images/hero-food.jpg";
 import Image from "next/image";
+import { useRef } from "react";
 
 export const HeroSection = () => {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"],
+  });
+
+  const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+  const contentY = useTransform(scrollYProgress, [0, 0.5], [0, -60]);
+
   const scrollToSection = (href: string) => {
     const element = document.querySelector(href);
     if (element) {
@@ -17,34 +28,41 @@ export const HeroSection = () => {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      ref={ref}
+      className="relative z-0 h-screen flex items-center justify-center overflow-hidden"
     >
-      {/* Background Image */}
-      <div className="absolute inset-0">
+      {/* Parallax Background Image */}
+      <motion.div className="absolute inset-0 z-0" style={{ y: imageY }}>
         <Image
           src={heroImage}
           alt="Food photography by Manjula Vijh"
-          className="w-full h-full object-cover"
+          className="w-full h-[120%] object-cover object-top"
+          priority
+          placeholder="blur"
         />
-        <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/40 to-black/20" />
-      </div>
+      </motion.div>
+
+      {/* Gradient Overlays for depth */}
+      <div className="absolute inset-0 z-0 bg-linear-to-t from-black/70 via-black/30 to-black/10" />
+      <div className="absolute inset-0 z-0 bg-linear-to-r from-black/20 to-transparent" />
 
       {/* Content */}
-      <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
-        {/* <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="section-kicker text-gold text-xs md:text-sm uppercase mb-6 font-semibold"
-        >
-          Food + Product Photography
-        </motion.p> */}
+      <motion.div
+        className="relative z-10 text-center px-6 max-w-4xl mx-auto"
+        style={{ opacity: contentOpacity, y: contentY }}
+      >
+        <motion.div
+          initial={{ opacity: 0, width: 0 }}
+          animate={{ opacity: 1, width: "3rem" }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="h-px bg-gold mx-auto mb-8"
+        />
 
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="font-serif text-4xl md:text-6xl lg:text-7xl text-white font-semibold leading-tight tracking-tight mb-4"
+          className="font-serif text-5xl md:text-7xl lg:text-8xl text-white font-semibold leading-[0.95] tracking-tight mb-6"
         >
           Manjula Vijh
         </motion.h1>
@@ -53,19 +71,19 @@ export const HeroSection = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.6 }}
-          className="text-white/85 text-lg md:text-2xl font-serif italic mb-3"
+          className="text-white/80 text-lg md:text-xl font-serif italic mb-3"
         >
-          Visual storyteller for culinary and lifestyle brands
+          Visual storyteller for culinary &amp; lifestyle brands
         </motion.p>
 
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.8 }}
-          className="text-white/70 text-base md:text-lg max-w-xl mx-auto mb-10"
+          className="text-white/55 text-sm md:text-base max-w-lg mx-auto mb-12 leading-relaxed"
         >
-          Based in New Delhi. I build refined, light-rich imagery that makes
-          everyday moments feel editorial and timeless.
+          Based in New Delhi. Refined, light-rich imagery that makes everyday
+          moments feel editorial and timeless.
         </motion.p>
 
         <motion.div
@@ -77,37 +95,37 @@ export const HeroSection = () => {
           <Button
             onClick={() => scrollToSection("#portfolio")}
             variant="hero"
-            size="default"
-            className="min-w-45 bg-[#ca8a04]! text-white! hover:bg-[#ca8a04]/90! shadow-lg hover:shadow-xl"
+            size="lg"
+            className="min-w-44"
           >
             View Portfolio
           </Button>
           <Button
             onClick={() => scrollToSection("#contact")}
             variant="heroOutline"
-            size="default"
-            className="min-w-45 border-white/80! text-white! hover:bg-white/10!"
+            size="lg"
+            className="min-w-44"
           >
             Get in Touch
           </Button>
         </motion.div>
-      </div>
+      </motion.div>
 
       {/* Scroll Indicator */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+        className="absolute bottom-10 left-1/2 -translate-x-1/2"
       >
         <motion.button
           onClick={() => scrollToSection("#about")}
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-          className="text-white/60 hover:text-white transition-colors"
+          animate={{ y: [0, 8, 0] }}
+          transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+          className="text-white/40 hover:text-white/70 transition-colors"
           aria-label="Scroll to about section"
         >
-          <ArrowDown size={28} />
+          <ChevronDown size={24} strokeWidth={1.5} />
         </motion.button>
       </motion.div>
     </section>

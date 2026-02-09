@@ -109,6 +109,11 @@
 /* Base styles */
 * {
   border-color: var(--color-border);
+  border-radius: 0;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
@@ -138,14 +143,10 @@ h6 {
 .page-shell {
   background-image: radial-gradient(
       circle at top right,
-      hsl(38 70% 50% / 0.08),
+      hsl(38 70% 50% / 0.06),
       transparent 45%
     ),
-    radial-gradient(
-      circle at 20% 20%,
-      hsl(30 10% 15% / 0.06),
-      transparent 50%
-    ),
+    radial-gradient(circle at 20% 20%, hsl(30 10% 15% / 0.04), transparent 50%),
     linear-gradient(
       120deg,
       hsl(40 33% 98%) 0%,
@@ -158,14 +159,10 @@ h6 {
 .dark .page-shell {
   background-image: radial-gradient(
       circle at 80% 10%,
-      hsl(38 70% 55% / 0.1),
+      hsl(38 70% 55% / 0.08),
       transparent 45%
     ),
-    radial-gradient(
-      circle at 15% 25%,
-      hsl(40 25% 95% / 0.06),
-      transparent 50%
-    ),
+    radial-gradient(circle at 15% 25%, hsl(40 25% 95% / 0.04), transparent 50%),
     linear-gradient(
       120deg,
       hsl(30 15% 8%) 0%,
@@ -186,13 +183,13 @@ h6 {
 
 @media (min-width: 768px) {
   .section-padding {
-    padding: 5rem 3rem;
+    padding: 6rem 3rem;
   }
 }
 
 @media (min-width: 1024px) {
   .section-padding {
-    padding: 7rem 6rem;
+    padding: 8rem 6rem;
   }
 }
 
@@ -213,13 +210,13 @@ h6 {
 }
 
 .hover-lift {
-  transition: all 0.3s ease-out;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .hover-lift:hover {
-  transform: translateY(-0.5rem);
-  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1),
-    0 8px 10px -6px rgb(0 0 0 / 0.1);
+  transform: translateY(-0.375rem);
+  box-shadow: 0 20px 40px -12px rgb(0 0 0 / 0.12),
+    0 8px 16px -8px rgb(0 0 0 / 0.08);
 }
 
 .image-overlay {
@@ -259,6 +256,105 @@ h6 {
   width: 100%;
 }
 
+.nav-link-active {
+  opacity: 1;
+}
+
+.nav-link-active::after {
+  width: 100%;
+}
+
+/* Masonry portfolio grid */
+.masonry-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .masonry-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .masonry-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+.masonry-item-tall {
+  grid-row: span 2;
+}
+
+.masonry-item-wide {
+  grid-column: span 2;
+}
+
+/* Lightbox overlay */
+.lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background-color: hsl(30 10% 5% / 0.95);
+  backdrop-filter: blur(20px);
+}
+
+.dark .lightbox-overlay {
+  background-color: hsl(30 10% 3% / 0.95);
+}
+
+/* Carousel section */
+.carousel-section .embla {
+  overflow: hidden;
+}
+
+.carousel-section .embla__container {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.carousel-section .embla__slide {
+  flex: 0 0 80%;
+  min-width: 0;
+}
+
+@media (min-width: 768px) {
+  .carousel-section .embla__slide {
+    flex: 0 0 60%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .carousel-section .embla__slide {
+    flex: 0 0 45%;
+  }
+}
+
+/* Thin elegant scrollbar for carousel */
+.carousel-section::-webkit-scrollbar {
+  height: 2px;
+}
+
+.carousel-section::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.carousel-section::-webkit-scrollbar-thumb {
+  background: var(--color-accent);
+  border-radius: 999px;
+}
+
+/* Section divider */
+.section-divider {
+  width: 3rem;
+  height: 1px;
+  background: var(--color-accent);
+  margin: 0 auto;
+}
+
 /* Animation utilities */
 .animate-fade-up {
   animation: var(--animate-fade-up);
@@ -266,4 +362,10 @@ h6 {
 
 .animate-fade-in {
   animation: var(--animate-fade-in);
+}
+
+/* Selection color */
+::selection {
+  background-color: hsl(38 70% 50% / 0.2);
+  color: inherit;
 }
