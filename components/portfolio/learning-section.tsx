@@ -70,9 +70,9 @@ export const LearningSection = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.1 * index }}
-              className="group flex flex-col rounded-lg border border-border/50 bg-card/50 p-6 hover:border-accent/30 transition-all duration-300 backdrop-blur-sm"
+              className="group flex flex-col rounded-none border border-border/50 bg-card/50 p-6 hover:border-accent/30 transition-all duration-300 backdrop-blur-sm"
             >
-              <div className="w-10 h-10 rounded-full bg-accent/8 flex items-center justify-center mb-4 group-hover:bg-accent/15 transition-colors">
+              <div className="w-10 h-10 rounded-none bg-accent/8 flex items-center justify-center mb-4 group-hover:bg-accent/15 transition-colors">
                 <card.icon className="w-5 h-5 text-accent" />
               </div>
               <h3 className="font-serif text-lg text-foreground font-semibold mb-2">

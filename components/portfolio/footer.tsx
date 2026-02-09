@@ -39,14 +39,14 @@ export const Footer = () => {
                 href="https://www.instagram.com/manjulavijhphotography"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 rounded-full border border-primary-foreground/20 flex items-center justify-center text-primary-foreground/50 hover:border-gold hover:text-gold transition-all duration-300"
+                className="w-9 h-9 rounded-none border border-primary-foreground/20 flex items-center justify-center text-primary-foreground/50 hover:border-gold hover:text-gold transition-all duration-300"
                 aria-label="Follow on Instagram"
               >
                 <Instagram size={16} />
               </a>
               <a
                 href="mailto:hello@manjulavijh.com"
-                className="w-9 h-9 rounded-full border border-primary-foreground/20 flex items-center justify-center text-primary-foreground/50 hover:border-gold hover:text-gold transition-all duration-300"
+                className="w-9 h-9 rounded-none border border-primary-foreground/20 flex items-center justify-center text-primary-foreground/50 hover:border-gold hover:text-gold transition-all duration-300"
                 aria-label="Send email"
               >
                 <Mail size={16} />

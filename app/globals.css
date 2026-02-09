@@ -106,12 +106,6 @@
   --color-warm-gray: hsl(40 15% 55%);
 }
 
-/* Base styles */
-* {
-  border-color: var(--color-border);
-  border-radius: 0;
-}
-
 html {
   scroll-behavior: smooth;
 }

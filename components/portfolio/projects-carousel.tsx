@@ -120,7 +120,7 @@ export const ProjectsCarousel = () => {
                 >
                   <div className="group relative">
                     {/* Image */}
-                    <div className="relative aspect-[4/3] overflow-hidden rounded-lg">
+                    <div className="relative aspect-[4/3] overflow-hidden rounded-none">
                       <Image
                         src={project.image}
                         alt={project.title}
@@ -129,7 +129,7 @@ export const ProjectsCarousel = () => {
                       />
                       {/* Subtle overlay on hover */}
                       <div className="absolute inset-0 bg-linear-to-t from-charcoal/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                      <div className="absolute inset-0 ring-1 ring-inset ring-black/5 rounded-lg" />
+                      <div className="absolute inset-0 ring-1 ring-inset ring-black/5 rounded-none" />
                     </div>
 
                     {/* Caption */}
@@ -151,8 +151,8 @@ export const ProjectsCarousel = () => {
 
             {/* Navigation */}
             <div className="flex items-center justify-center gap-3 mt-10">
-              <CarouselPrevious className="static translate-y-0 size-10 rounded-full border-border/60 hover:border-accent/50 hover:bg-accent/5" />
-              <CarouselNext className="static translate-y-0 size-10 rounded-full border-border/60 hover:border-accent/50 hover:bg-accent/5" />
+              <CarouselPrevious className="static translate-y-0 size-10 rounded-none border-border/60 hover:border-accent/50 hover:bg-accent/5" />
+              <CarouselNext className="static translate-y-0 size-10 rounded-none border-border/60 hover:border-accent/50 hover:bg-accent/5" />
             </div>
           </Carousel>
         </motion.div>

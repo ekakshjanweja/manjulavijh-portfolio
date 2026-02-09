@@ -60,9 +60,9 @@ export const ServicesSection = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.1 * index }}
-              className="group p-6 md:p-8 bg-card/60 rounded-lg border border-border/50 hover:border-accent/30 transition-all duration-500 hover-lift backdrop-blur-sm"
+              className="group p-6 md:p-8 bg-card/60 rounded-none border border-border/50 hover:border-accent/30 transition-all duration-500 hover-lift backdrop-blur-sm"
             >
-              <div className="w-11 h-11 rounded-full bg-accent/8 flex items-center justify-center mb-5 group-hover:bg-accent/15 transition-colors duration-300">
+              <div className="w-11 h-11 rounded-none bg-accent/8 flex items-center justify-center mb-5 group-hover:bg-accent/15 transition-colors duration-300">
                 <service.icon className="w-5 h-5 text-accent" />
               </div>
               <h3 className="font-serif text-xl text-foreground font-semibold mb-3">
@@ -77,7 +77,7 @@ export const ServicesSection = () => {
                     key={feature}
                     className="flex items-center gap-2.5 text-sm text-foreground/70"
                   >
-                    <span className="w-1 h-1 rounded-full bg-accent/70" />
+                    <span className="w-1 h-1 rounded-none bg-accent/70" />
                     {feature}
                   </li>
                 ))}

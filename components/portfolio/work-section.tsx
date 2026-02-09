@@ -128,7 +128,7 @@ export const WorkSection = () => {
               <button
                 key={category}
                 onClick={() => setActiveCategory(category)}
-                className={`px-5 py-2 text-xs uppercase tracking-[0.25em] rounded-full transition-all duration-300 ${
+                className={`px-5 py-2 text-xs uppercase tracking-[0.25em] rounded-none transition-all duration-300 ${
                   activeCategory === category
                     ? "bg-foreground text-background shadow-sm"
                     : "bg-transparent text-muted-foreground hover:text-foreground border border-border/50 hover:border-foreground/30"
@@ -148,7 +148,7 @@ export const WorkSection = () => {
                 initial={{ opacity: 0 }}
                 animate={isInView ? { opacity: 1 } : {}}
                 transition={{ duration: 0.5, delay: 0.06 * index }}
-                className={`group relative overflow-hidden rounded-lg cursor-pointer bg-card/40 ${
+                className={`group relative overflow-hidden rounded-none cursor-pointer bg-card/40 ${
                   item.size === "tall" ? "row-span-2" : "row-span-1"
                 }`}
                 onClick={() => openLightbox(index)}
@@ -174,7 +174,7 @@ export const WorkSection = () => {
                 </div>
 
                 {/* Subtle border */}
-                <div className="absolute inset-0 ring-1 ring-inset ring-black/5 rounded-lg group-hover:ring-accent/20 transition-all duration-500" />
+                <div className="absolute inset-0 ring-1 ring-inset ring-black/5 rounded-none group-hover:ring-accent/20 transition-all duration-500" />
               </motion.div>
             ))}
           </div>

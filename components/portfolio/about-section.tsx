@@ -41,7 +41,7 @@ export const AboutSection = () => {
             transition={{ duration: 0.8 }}
             className="lg:col-span-2 relative"
           >
-            <div className="relative aspect-[3/4] overflow-hidden rounded-lg shadow-2xl shadow-black/10">
+            <div className="relative aspect-[3/4] overflow-hidden rounded-none shadow-2xl shadow-black/10">
               <Image
                 src={photographerPortrait}
                 alt="Manjula Vijh - Food & Product Photographer"
@@ -49,7 +49,7 @@ export const AboutSection = () => {
                 placeholder="blur"
               />
               {/* Subtle gold frame accent */}
-              <div className="absolute inset-0 ring-1 ring-inset ring-white/10 rounded-lg" />
+              <div className="absolute inset-0 ring-1 ring-inset ring-white/10 rounded-none" />
             </div>
           </motion.div>
 

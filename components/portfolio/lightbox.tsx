@@ -74,7 +74,7 @@ export const Lightbox = ({
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
             onClick={onClose}
-            className="absolute top-6 right-6 z-10 w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white/70 hover:text-white hover:bg-white/20 transition-all"
+            className="absolute top-6 right-6 z-10 w-10 h-10 rounded-none bg-white/10 flex items-center justify-center text-white/70 hover:text-white hover:bg-white/20 transition-all"
             aria-label="Close lightbox"
           >
             <X size={20} strokeWidth={1.5} />
@@ -91,7 +91,7 @@ export const Lightbox = ({
                   e.stopPropagation();
                   goPrev();
                 }}
-                className="absolute left-4 md:left-8 z-10 w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white/70 hover:text-white hover:bg-white/20 transition-all"
+                className="absolute left-4 md:left-8 z-10 w-10 h-10 rounded-none bg-white/10 flex items-center justify-center text-white/70 hover:text-white hover:bg-white/20 transition-all"
                 aria-label="Previous image"
               >
                 <ChevronLeft size={20} strokeWidth={1.5} />
@@ -104,7 +104,7 @@ export const Lightbox = ({
                   e.stopPropagation();
                   goNext();
                 }}
-                className="absolute right-4 md:right-8 z-10 w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white/70 hover:text-white hover:bg-white/20 transition-all"
+                className="absolute right-4 md:right-8 z-10 w-10 h-10 rounded-none bg-white/10 flex items-center justify-center text-white/70 hover:text-white hover:bg-white/20 transition-all"
                 aria-label="Next image"
               >
                 <ChevronRight size={20} strokeWidth={1.5} />
@@ -122,7 +122,7 @@ export const Lightbox = ({
             className="relative max-w-5xl w-full mx-4 md:mx-8"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="relative aspect-[4/3] md:aspect-[16/10] overflow-hidden rounded-lg">
+            <div className="relative aspect-[4/3] md:aspect-[16/10] overflow-hidden rounded-none">
               <Image
                 src={currentItem.image}
                 alt={currentItem.title}

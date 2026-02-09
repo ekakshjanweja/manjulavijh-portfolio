@@ -68,7 +68,7 @@ export const ContactSection = () => {
           >
             <form
               onSubmit={handleSubmit}
-              className="space-y-5 rounded-lg border border-border/50 bg-card/50 p-6 md:p-8 backdrop-blur-sm"
+              className="space-y-5 rounded-none border border-border/50 bg-card/50 p-6 md:p-8 backdrop-blur-sm"
             >
               <div className="grid sm:grid-cols-2 gap-4">
                 <div>
@@ -168,7 +168,7 @@ export const ContactSection = () => {
               <div className="space-y-5">
                 {contactInfo.map((info) => (
                   <div key={info.label} className="flex items-start gap-3.5">
-                    <div className="w-10 h-10 rounded-full bg-accent/8 flex items-center justify-center shrink-0">
+                    <div className="w-10 h-10 rounded-none bg-accent/8 flex items-center justify-center shrink-0">
                       <info.icon className="w-4 h-4 text-accent" />
                     </div>
                     <div>
@@ -193,14 +193,14 @@ export const ContactSection = () => {
                   href="https://www.instagram.com/manjulavijhphotography"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full border border-border/60 flex items-center justify-center text-muted-foreground hover:border-accent hover:text-accent transition-all duration-300"
+                  className="w-10 h-10 rounded-none border border-border/60 flex items-center justify-center text-muted-foreground hover:border-accent hover:text-accent transition-all duration-300"
                   aria-label="Follow on Instagram"
                 >
                   <Instagram size={18} />
                 </a>
                 <a
                   href="mailto:hello@manjulavijh.com"
-                  className="w-10 h-10 rounded-full border border-border/60 flex items-center justify-center text-muted-foreground hover:border-accent hover:text-accent transition-all duration-300"
+                  className="w-10 h-10 rounded-none border border-border/60 flex items-center justify-center text-muted-foreground hover:border-accent hover:text-accent transition-all duration-300"
                   aria-label="Send email"
                 >
                   <Mail size={18} />
