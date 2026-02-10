@@ -42,7 +42,7 @@ export const LearningSection = () => {
 
   return (
     <section
-      id="learning"
+      id="resources"
       ref={ref}
       className="section-padding bg-background"
     >

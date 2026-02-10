@@ -75,6 +75,7 @@ export const ProjectsCarousel = () => {
 
   return (
     <section
+      id="portfolio"
       ref={ref}
       className="section-padding bg-background overflow-hidden"
     >
@@ -116,7 +117,7 @@ export const ProjectsCarousel = () => {
               {projects.map((project) => (
                 <CarouselItem
                   key={project.id}
-                  className="pl-4 md:pl-6 basis-[85%] md:basis-[55%] lg:basis-[42%]"
+                  className="pl-4 md:pl-6 basis-[92%] sm:basis-[80%] md:basis-[55%] lg:basis-[42%]"
                 >
                   <div className="group relative">
                     {/* Image */}
@@ -133,14 +134,14 @@ export const ProjectsCarousel = () => {
                     </div>
 
                     {/* Caption */}
-                    <div className="mt-5">
+                    <div className="mt-4 sm:mt-5">
                       <p className="text-accent text-[10px] uppercase tracking-[0.3em] mb-1.5">
                         {project.client}
                       </p>
-                      <h3 className="font-serif text-lg md:text-xl text-foreground font-semibold leading-snug mb-2">
+                      <h3 className="font-serif text-base sm:text-lg md:text-xl text-foreground font-semibold leading-snug mb-2">
                         {project.title}
                       </h3>
-                      <p className="text-muted-foreground text-sm leading-relaxed line-clamp-2">
+                      <p className="text-muted-foreground text-sm leading-relaxed line-clamp-3 sm:line-clamp-2">
                         {project.description}
                       </p>
                     </div>
@@ -150,9 +151,9 @@ export const ProjectsCarousel = () => {
             </CarouselContent>
 
             {/* Navigation */}
-            <div className="flex items-center justify-center gap-3 mt-10">
-              <CarouselPrevious className="static translate-y-0 size-10 rounded-none border-border/60 hover:border-accent/50 hover:bg-accent/5" />
-              <CarouselNext className="static translate-y-0 size-10 rounded-none border-border/60 hover:border-accent/50 hover:bg-accent/5" />
+            <div className="flex items-center justify-center gap-3 mt-8 sm:mt-10">
+              <CarouselPrevious className="static translate-y-0 size-9 sm:size-10 rounded-none border-border/60 hover:border-accent/50 hover:bg-accent/5" />
+              <CarouselNext className="static translate-y-0 size-9 sm:size-10 rounded-none border-border/60 hover:border-accent/50 hover:bg-accent/5" />
             </div>
           </Carousel>
         </motion.div>

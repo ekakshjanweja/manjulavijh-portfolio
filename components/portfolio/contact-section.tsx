@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
+import { FaBehance } from "react-icons/fa";
 
 export const ContactSection = () => {
   const ref = useRef(null);
@@ -189,6 +190,15 @@ export const ContactSection = () => {
                 Follow Along
               </h3>
               <div className="flex gap-3">
+                <a
+                  href="https://www.behance.net/manjulavijh1"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-none border border-border/60 flex items-center justify-center text-muted-foreground hover:border-accent hover:text-accent transition-all duration-300"
+                >
+                  <FaBehance size={18} />
+                </a>
+
                 <a
                   href="https://www.instagram.com/manjulavijhphotography"
                   target="_blank"

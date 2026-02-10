@@ -4,13 +4,13 @@ import { useEffect, useState, useCallback } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { ModeToggle } from "@/components/common/mode-toggle";
-import Image from "next/image";
 
 const navLinks = [
   { name: "Home", href: "#home" },
   { name: "About", href: "#about" },
-  { name: "Work", href: "#portfolio" },
-  { name: "Services", href: "#services" },
+  { name: "Portfolio", href: "#portfolio" },
+  // { name: "Resources", href: "#resources" },
+  { name: "Clients", href: "#clients" },
   { name: "Contact", href: "#contact" },
 ];
 
@@ -55,36 +55,29 @@ export const Navbar = () => {
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isHero
           ? "bg-transparent"
-          : "bg-background/70 backdrop-blur-xl border-b border-border/30 shadow-sm shadow-black/[0.03]"
+          : "bg-background/70 backdrop-blur-xl border-b border-border/30 shadow-sm shadow-black/3"
       }`}
     >
       <div className="px-5 lg:px-10">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex items-center gap-2">
-            <Image
-              src="/images/logo.png"
-              alt="Manjula Vijh Logo"
-              width={60}
-              height={60}
-              className={`opacity-90 ${isHero ? "mix-blend-difference" : ""}`}
-            />
             <a
               href="#home"
               onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
                 e.preventDefault();
                 scrollToSection("#home");
               }}
-              className={`logo-script text-2xl md:text-3xl font-semibold tracking-wide transition-colors duration-300 ${
+              className={`logo-script text-xl md:text-2xl font-semibold tracking-wide transition-colors duration-300 ${
                 isHero ? "mix-blend-difference text-white" : "text-foreground"
               }`}
             >
-              Manjula Vijh
+              MANJULA VIJH
             </a>
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-7">
+          <div className="hidden md:flex  items-center gap-7">
             {navLinks.map((link) => (
               <a
                 key={link.name}
@@ -101,8 +94,8 @@ export const Navbar = () => {
                           : "opacity-60 hover:opacity-100"
                       }`
                     : activeSection === link.href.slice(1)
-                    ? "text-foreground"
-                    : "text-foreground/60 hover:text-foreground"
+                      ? "text-foreground"
+                      : "text-foreground/60 hover:text-foreground"
                 } ${
                   activeSection === link.href.slice(1) ? "nav-link-active" : ""
                 }`}

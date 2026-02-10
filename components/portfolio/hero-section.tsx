@@ -51,41 +51,31 @@ export const HeroSection = () => {
         className="relative z-10 text-center px-6 max-w-4xl mx-auto"
         style={{ opacity: contentOpacity, y: contentY }}
       >
-        <motion.div
-          initial={{ opacity: 0, width: 0 }}
-          animate={{ opacity: 1, width: "3rem" }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="h-px bg-gold mx-auto mb-8"
-        />
-
-        <motion.h1
+        {/* <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
           className="font-serif text-5xl md:text-7xl lg:text-8xl text-white font-semibold leading-[0.95] tracking-tight mb-6"
         >
           Manjula Vijh
-        </motion.h1>
-
+        </motion.h1> */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.6 }}
-          className="text-white/80 text-lg md:text-xl font-serif italic mb-3"
+          className="text-white/80 text-xl md:text-2xl font-serif italic mb-3"
         >
           Visual storyteller for culinary &amp; lifestyle brands
         </motion.p>
-
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.8 }}
           className="text-white/55 text-sm md:text-base max-w-lg mx-auto mb-12 leading-relaxed"
         >
-          Based in New Delhi. Refined, light-rich imagery that makes everyday
-          moments feel editorial and timeless.
+          Based in New Delhi. Creating refined, light-rich imagery that elevates
+          food, products, and everyday moments into timeless visuals.
         </motion.p>
-
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -95,7 +85,7 @@ export const HeroSection = () => {
           <Button
             onClick={() => scrollToSection("#portfolio")}
             variant="hero"
-            size="lg"
+            size="default"
             className="min-w-44 rounded-none"
           >
             View Portfolio
@@ -103,7 +93,7 @@ export const HeroSection = () => {
           <Button
             onClick={() => scrollToSection("#contact")}
             variant="heroOutline"
-            size="lg"
+            size="default"
             className="min-w-44 rounded-none"
           >
             Get in Touch

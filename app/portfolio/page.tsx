@@ -1,4 +1,5 @@
 import { AboutSection } from "@/components/portfolio/about-section";
+import { ClientsSection } from "@/components/portfolio/clients-section";
 import { ContactSection } from "@/components/portfolio/contact-section";
 import { Footer } from "@/components/portfolio/footer";
 import { HeroSection } from "@/components/portfolio/hero-section";
@@ -13,10 +14,10 @@ export default function Portfolio() {
     <div className="page-shell">
       <HeroSection />
       <AboutSection />
-      <WorkSection />
-      {/* <ProjectsCarousel /> */}
-      <ServicesSection />
-      <LearningSection />
+      {/* <WorkSection /> */}
+      <ProjectsCarousel />
+      <ClientsSection />
+      {/* <LearningSection /> */}
       <ContactSection />
       <Footer />
     </div>

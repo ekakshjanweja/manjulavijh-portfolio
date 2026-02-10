@@ -1,12 +1,14 @@
 "use client";
 
 import { Instagram, Mail, ArrowUp } from "lucide-react";
+import { FaBehance } from "react-icons/fa";
 
 const footerLinks = [
   { name: "Home", href: "#home" },
   { name: "About", href: "#about" },
-  { name: "Portfolio", href: "#portfolio" },
+  { name: "Work", href: "#portfolio" },
   { name: "Services", href: "#services" },
+  { name: "Resources", href: "#resources" },
   { name: "Contact", href: "#contact" },
 ];
 
@@ -25,16 +27,24 @@ export const Footer = () => {
   return (
     <footer className="bg-foreground text-primary-foreground">
       <div className="max-w-5xl mx-auto px-6 lg:px-10 py-14">
-        <div className="grid md:grid-cols-3 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
           {/* Brand */}
           <div>
-            <h3 className="logo-script text-3xl font-semibold mb-3">
+            <h3 className="logo-script text-xl font-semibold mb-3">
               Manjula Vijh
             </h3>
             <p className="text-primary-foreground/50 leading-relaxed text-sm mb-5">
               Light-rich, editorial imagery for culinary and lifestyle brands.
             </p>
             <div className="flex gap-3">
+              <a
+                href="https://www.behance.net/manjulavijh1"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-9 h-9 rounded-none border border-primary-foreground/20 flex items-center justify-center text-primary-foreground/50 hover:border-gold hover:text-gold transition-all duration-300"
+              >
+                <FaBehance size={16} />
+              </a>
               <a
                 href="https://www.instagram.com/manjulavijhphotography"
                 target="_blank"
