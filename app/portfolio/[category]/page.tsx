@@ -98,7 +98,7 @@ export default function CategoryPage({
                 {category.description}
               </p>
             </div>
-            <div className="relative aspect-[4/3] overflow-hidden border border-border/60 bg-card">
+            <div className="relative aspect-4/3 overflow-hidden border border-border/60 bg-card">
               <Image
                 src={category.hero}
                 alt={`${category.title} hero`}
@@ -120,7 +120,7 @@ export default function CategoryPage({
                 key={item.title}
                 className="group border border-border/60 bg-card"
               >
-                <div className="relative aspect-[4/3] overflow-hidden">
+                <div className="relative aspect-4/3 overflow-hidden">
                   <Image
                     src={item.image}
                     alt={item.title}

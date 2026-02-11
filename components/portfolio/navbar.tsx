@@ -29,6 +29,7 @@ const portfolioLinks = [
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
+  const [mounted, setMounted] = useState(false);
   const isHero = activeSection === "home";
 
   const updateActiveSection = useCallback(() => {
@@ -65,6 +66,12 @@ export const Navbar = () => {
 
     setIsOpen(false);
   };
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null;
 
   return (
     <nav

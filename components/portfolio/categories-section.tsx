@@ -42,7 +42,7 @@ export const CategoriesSection = () => {
       ref={ref}
       className="py-16 bg-background"
     >
-      <div className="w-full px-4 md:px-8">
+      <div className="w-full px-8 md:px-16">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}

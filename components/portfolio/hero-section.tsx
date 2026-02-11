@@ -3,7 +3,6 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import heroImage from "@/public/images/hero-food.jpg";
 import Image from "next/image";
 import { useRef } from "react";
 import {
@@ -50,11 +49,10 @@ export const HeroSection = () => {
             <CarouselItem className="flex justify-center pl-0">
               <div className="relative w-full h-screen">
                 <Image
-                  src={heroImage}
+                  src="/images/carousel/carousel-two.jpg"
                   alt="Food photography by Manjula Vijh"
                   fill
                   priority
-                  placeholder="blur"
                   sizes="100vw"
                   className="object-cover object-top"
                 />
@@ -64,11 +62,9 @@ export const HeroSection = () => {
             <CarouselItem className="flex justify-center pl-0">
               <div className="relative w-full h-screen">
                 <Image
-                  src={heroImage}
+                  src="/images/carousel/carousel-one.jpg"
                   alt="Food photography by Manjula Vijh"
                   fill
-                  priority
-                  placeholder="blur"
                   sizes="100vw"
                   className="object-cover object-top"
                 />
@@ -78,11 +74,21 @@ export const HeroSection = () => {
             <CarouselItem className="flex justify-center pl-0">
               <div className="relative w-full h-screen">
                 <Image
-                  src={heroImage}
+                  src="/images/carousel/carousel-three.jpg"
                   alt="Food photography by Manjula Vijh"
                   fill
-                  priority
-                  placeholder="blur"
+                  sizes="100vw"
+                  className="object-cover object-top"
+                />
+              </div>
+            </CarouselItem>
+
+            <CarouselItem className="flex justify-center pl-0">
+              <div className="relative w-full h-screen">
+                <Image
+                  src="/images/carousel/carousel-four.jpg"
+                  alt="Food photography by Manjula Vijh"
+                  fill
                   sizes="100vw"
                   className="object-cover object-top"
                 />

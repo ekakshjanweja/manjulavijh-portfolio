@@ -81,7 +81,7 @@ export const SignatureWork = () => {
       className="py-16 bg-background overflow-hidden"
     >
       {/* <div className="max-w-7xl mx-auto"> */}
-      <div className="w-full px-4 md:px-8 xl:px-12">
+      <div className="w-full px-8 md:px-16">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
