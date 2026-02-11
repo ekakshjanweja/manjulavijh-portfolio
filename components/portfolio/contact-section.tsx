@@ -3,12 +3,20 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef, useState } from "react";
-import { Mail, Phone, MapPin, Instagram, Send } from "lucide-react";
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Instagram,
+  Send,
+  Facebook,
+  Linkedin,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
-import { FaBehance } from "react-icons/fa";
+import { FaBehance, FaPinterest } from "react-icons/fa";
 
 export const ContactSection = () => {
   const ref = useRef(null);
@@ -31,8 +39,8 @@ export const ContactSection = () => {
   };
 
   const contactInfo = [
-    { icon: Mail, label: "Email", value: "hello@manjulavijh.com" },
-    { icon: Phone, label: "Phone", value: "+91 98765 43210" },
+    { icon: Mail, label: "Email", value: " manjulavijhphotography@gmail.com" },
+    { icon: Phone, label: "Phone", value: "+91 99710 06505" },
     { icon: MapPin, label: "Location", value: "New Delhi, India" },
   ];
 
@@ -69,7 +77,7 @@ export const ContactSection = () => {
           >
             <form
               onSubmit={handleSubmit}
-              className="space-y-5 rounded-none border border-border/50 bg-card/50 p-6 md:p-8 backdrop-blur-sm"
+              className="space-y-5 border border-border/50 bg-card/50 p-6 md:p-8 backdrop-blur-sm"
             >
               <div className="grid sm:grid-cols-2 gap-4">
                 <div>
@@ -169,7 +177,7 @@ export const ContactSection = () => {
               <div className="space-y-5">
                 {contactInfo.map((info) => (
                   <div key={info.label} className="flex items-start gap-3.5">
-                    <div className="w-10 h-10 rounded-none bg-accent/8 flex items-center justify-center shrink-0">
+                    <div className="w-10 h-10 bg-accent/8 flex items-center justify-center shrink-0">
                       <info.icon className="w-4 h-4 text-accent" />
                     </div>
                     <div>
@@ -194,26 +202,58 @@ export const ContactSection = () => {
                   href="https://www.behance.net/manjulavijh1"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-none border border-border/60 flex items-center justify-center text-muted-foreground hover:border-accent hover:text-accent transition-all duration-300"
+                  className="w-10 h-10 border border-border/60 flex items-center justify-center text-muted-foreground hover:border-accent hover:text-accent transition-all duration-300"
+                  aria-label="Follow on Behance"
                 >
                   <FaBehance size={18} />
+                </a>
+
+                <a
+                  href="https://pin.it/5nf68vmnb"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 border border-border/60 flex items-center justify-center text-muted-foreground hover:border-accent hover:text-accent transition-all duration-300"
+                  aria-label="Follow on Pinterest"
+                >
+                  <FaPinterest size={18} />
                 </a>
 
                 <a
                   href="https://www.instagram.com/manjulavijhphotography"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-none border border-border/60 flex items-center justify-center text-muted-foreground hover:border-accent hover:text-accent transition-all duration-300"
+                  className="w-10 h-10 border border-border/60 flex items-center justify-center text-muted-foreground hover:border-accent hover:text-accent transition-all duration-300"
                   aria-label="Follow on Instagram"
                 >
                   <Instagram size={18} />
                 </a>
+
                 <a
-                  href="mailto:hello@manjulavijh.com"
-                  className="w-10 h-10 rounded-none border border-border/60 flex items-center justify-center text-muted-foreground hover:border-accent hover:text-accent transition-all duration-300"
+                  href="https://www.facebook.com/profile.php?id=100082670445094"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 border border-border/60 flex items-center justify-center text-muted-foreground hover:border-accent hover:text-accent transition-all duration-300"
+                  aria-label="Follow on Facebook"
+                >
+                  <Facebook size={18} />
+                </a>
+
+                <a
+                  href="mailto: manjulavijhphotography@gmail.com"
+                  className="w-10 h-10 border border-border/60 flex items-center justify-center text-muted-foreground hover:border-accent hover:text-accent transition-all duration-300"
                   aria-label="Send email"
                 >
                   <Mail size={18} />
+                </a>
+
+                <a
+                  href="https://www.linkedin.com/in/dr-manjula-vijh-648b5b2b5"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 border border-border/60 flex items-center justify-center text-muted-foreground hover:border-accent hover:text-accent transition-all duration-300"
+                  aria-label="Connect on LinkedIn"
+                >
+                  <Linkedin size={18} />
                 </a>
               </div>
             </div>

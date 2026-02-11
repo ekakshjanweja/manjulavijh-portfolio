@@ -8,7 +8,7 @@ export default function PortfolioLayout({
 }) {
   return (
     <>
-      <div>
+      <div className="w-full max-w-[100vw] overflow-x-hidden">
         <Navbar />
         {children}
         <Toaster richColors position="top-right" />

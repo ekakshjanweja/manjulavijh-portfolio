@@ -21,9 +21,9 @@ const portfolioLinks = [
     children: [
       { name: "Food", href: "/portfolio/food" },
       { name: "Product", href: "/portfolio/product" },
-      { name: "Portfolio", href: "/portfolio/portfolio" }
-    ]
-  }
+      { name: "Portfolio", href: "/portfolio/portfolio" },
+    ],
+  },
 ];
 
 export const Navbar = () => {
@@ -56,10 +56,7 @@ export const Navbar = () => {
     setIsOpen(false);
   };
 
-  const handleLinkClick = (
-    href: string,
-    e?: MouseEvent<HTMLAnchorElement>
-  ) => {
+  const handleLinkClick = (href: string, e?: MouseEvent<HTMLAnchorElement>) => {
     if (href.startsWith("#")) {
       e?.preventDefault();
       scrollToSection(href);
@@ -77,18 +74,18 @@ export const Navbar = () => {
           : "bg-background/70 backdrop-blur-xl border-b border-border/30 shadow-sm shadow-black/3"
       }`}
     >
-      <div className="px-5 lg:px-10">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-10">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-            <a
-              href="#home"
-              onClick={(e) => {
-                handleLinkClick("#home", e);
-              }}
-              className={`logo-script text-xl md:text-2xl font-semibold tracking-wide ${
-                isHero ? "mix-blend-difference text-white" : "text-foreground"
-              }`}
-            >
+          <a
+            href="#home"
+            onClick={(e) => {
+              handleLinkClick("#home", e);
+            }}
+            className={`logo-script text-base sm:text-lg md:text-2xl font-semibold tracking-wide whitespace-nowrap shrink-0 ${
+              isHero ? "mix-blend-difference text-white" : "text-foreground"
+            }`}
+          >
             MANJULA VIJH
           </a>
 
@@ -96,10 +93,7 @@ export const Navbar = () => {
           <div className="hidden md:flex items-center gap-7">
             {navLinks.map((link) =>
               link.name === "Portfolio" ? (
-                <div
-                  key={link.name}
-                  className="relative group"
-                >
+                <div key={link.name} className="relative group">
                   <a
                     key={link.name}
                     href={link.href}
@@ -128,58 +122,58 @@ export const Navbar = () => {
                   <div className="absolute left-0 top-full z-40 pt-2 opacity-0 translate-y-1 pointer-events-none transition-all duration-200 group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto group-focus-within:opacity-100 group-focus-within:translate-y-0 group-focus-within:pointer-events-auto">
                     <div className="min-w-48  border border-border/60 bg-background/95 shadow-lg backdrop-blur-md">
                       <div className="flex flex-col">
-                      {portfolioLinks.map((item) => (
-                        <div
-                          key={item.name}
-                          className="relative group/collection"
-                        >
-                          <a
-                            href={item.href}
-                            onClick={(e) => {
-                              handleLinkClick(item.href, e);
-                            }}
-                            className="flex items-center justify-between gap-2 px-3 py-2 text-[11px] font-medium uppercase tracking-[0.18em] text-foreground/70 transition-colors hover:bg-accent/15 hover:text-foreground"
+                        {portfolioLinks.map((item) => (
+                          <div
+                            key={item.name}
+                            className="relative group/collection"
                           >
-                            {item.name}
+                            <a
+                              href={item.href}
+                              onClick={(e) => {
+                                handleLinkClick(item.href, e);
+                              }}
+                              className="flex items-center justify-between gap-2 px-3 py-2 text-[11px] font-medium uppercase tracking-[0.18em] text-foreground/70 transition-colors hover:bg-accent/15 hover:text-foreground"
+                            >
+                              {item.name}
+                              {item.children && (
+                                <span className="text-foreground/40">&gt;</span>
+                              )}
+                            </a>
                             {item.children && (
-                              <span className="text-foreground/40">&gt;</span>
-                            )}
-                          </a>
-                          {item.children && (
-                            <div className="absolute left-full top-0 z-50 ml-2 min-w-44 border border-border/60 bg-background/95 shadow-lg backdrop-blur-md opacity-0 translate-x-1 pointer-events-none transition-all duration-200 group-hover/collection:opacity-100 group-hover/collection:translate-x-0 group-hover/collection:pointer-events-auto group-focus-within/collection:opacity-100 group-focus-within/collection:translate-x-0 group-focus-within/collection:pointer-events-auto">
-                              <div className="flex flex-col py-1">
-                                {item.children.map((child) => (
-                                  <a
-                                    key={child.name}
-                                    href={child.href}
-                                    onClick={(e) => {
-                                      handleLinkClick(child.href, e);
-                                    }}
-                                    className="block px-3 py-2 text-[10px] font-medium uppercase tracking-[0.2em] text-foreground/60 transition-colors hover:bg-accent/15 hover:text-foreground"
-                                  >
-                                    {child.name}
-                                  </a>
-                                ))}
+                              <div className="absolute left-full top-0 z-50 ml-2 min-w-44 border border-border/60 bg-background/95 shadow-lg backdrop-blur-md opacity-0 translate-x-1 pointer-events-none transition-all duration-200 group-hover/collection:opacity-100 group-hover/collection:translate-x-0 group-hover/collection:pointer-events-auto group-focus-within/collection:opacity-100 group-focus-within/collection:translate-x-0 group-focus-within/collection:pointer-events-auto">
+                                <div className="flex flex-col py-1">
+                                  {item.children.map((child) => (
+                                    <a
+                                      key={child.name}
+                                      href={child.href}
+                                      onClick={(e) => {
+                                        handleLinkClick(child.href, e);
+                                      }}
+                                      className="block px-3 py-2 text-[10px] font-medium uppercase tracking-[0.2em] text-foreground/60 transition-colors hover:bg-accent/15 hover:text-foreground"
+                                    >
+                                      {child.name}
+                                    </a>
+                                  ))}
+                                </div>
                               </div>
-                            </div>
-                          )}
-                        </div>
-                      ))}
+                            )}
+                          </div>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </div>
-                </div>
               ) : (
-                  <a
-                    key={link.name}
-                    href={link.href}
-                    onClick={(e) => {
-                      handleLinkClick(link.href, e);
-                    }}
-                    className={`relative text-xs font-medium uppercase tracking-[0.15em] transition-all ${
-                      isHero
-                        ? `mix-blend-difference text-white ${
-                            activeSection === link.href.slice(1)
+                <a
+                  key={link.name}
+                  href={link.href}
+                  onClick={(e) => {
+                    handleLinkClick(link.href, e);
+                  }}
+                  className={`relative text-xs font-medium uppercase tracking-[0.15em] transition-all ${
+                    isHero
+                      ? `mix-blend-difference text-white ${
+                          activeSection === link.href.slice(1)
                             ? ""
                             : "opacity-60 hover:opacity-100"
                         }`
@@ -201,7 +195,7 @@ export const Navbar = () => {
           </div>
 
           {/* Mobile Controls */}
-          <div className="flex items-center gap-3 md:hidden">
+          <div className="flex items-center gap-1 sm:gap-3 md:hidden shrink-0">
             <ModeToggle isHero={isHero} />
             <button
               onClick={() => setIsOpen(!isOpen)}
@@ -219,6 +213,7 @@ export const Navbar = () => {
       <AnimatePresence>
         {isOpen && (
           <motion.div
+            id="mobile-nav"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}

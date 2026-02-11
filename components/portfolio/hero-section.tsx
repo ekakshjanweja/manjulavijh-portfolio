@@ -138,7 +138,7 @@ export const HeroSection = () => {
             onClick={() => scrollToSection("#portfolio")}
             variant="hero"
             size="default"
-            className="min-w-44 rounded-none"
+            className="w-full sm:w-auto sm:min-w-44 rounded-none dark:text-white!"
           >
             View Portfolio
           </Button>
@@ -146,7 +146,7 @@ export const HeroSection = () => {
             onClick={() => scrollToSection("#contact")}
             variant="heroOutline"
             size="default"
-            className="min-w-44 rounded-none"
+            className="w-full sm:w-auto sm:min-w-44 rounded-none text-white! border-white! "
           >
             Get in Touch
           </Button>

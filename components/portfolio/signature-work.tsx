@@ -12,7 +12,6 @@ import {
 } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
 
-
 import work1 from "@/public/images/carousel-one.jpg";
 import work2 from "@/public/images/carousel-two.jpg";
 import work3 from "@/public/images/carousel-three.jpg";
@@ -79,9 +78,10 @@ export const SignatureWork = () => {
     <section
       id="portfolio"
       ref={ref}
-      className="section-padding bg-background overflow-hidden"
+      className="py-16 bg-background overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto">
+      {/* <div className="max-w-7xl mx-auto"> */}
+      <div className="w-full px-4 md:px-8 xl:px-12">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -113,9 +113,10 @@ export const SignatureWork = () => {
               align: "start",
               loop: true,
             }}
-            className="w-full" plugins={[Autoplay({ delay: 2000 })]}
+            className="w-full"
+            plugins={[Autoplay({ delay: 2000 })]}
           >
-            <CarouselContent className="-ml-4 md:-ml-6">
+            <CarouselContent >
               {projects.map((project) => (
                 <CarouselItem
                   key={project.id}
@@ -123,7 +124,7 @@ export const SignatureWork = () => {
                 >
                   <div className="group relative">
                     {/* Image */}
-                    <div className="relative aspect-[4/3] overflow-hidden rounded-none">
+                    <div className="relative aspect-4/5 overflow-hidden rounded-none">
                       <Image
                         src={project.image}
                         alt={project.title}
@@ -140,12 +141,12 @@ export const SignatureWork = () => {
                       <p className="text-accent text-[10px] uppercase tracking-[0.3em] mb-1.5">
                         {project.client}
                       </p>
-                      <h3 className="font-serif text-base sm:text-lg md:text-xl text-foreground font-semibold leading-snug mb-2">
+                      {/* <h3 className="font-serif text-base sm:text-lg md:text-xl text-foreground font-semibold leading-snug mb-2">
                         {project.title}
-                      </h3>
-                      <p className="text-muted-foreground text-sm leading-relaxed line-clamp-3 sm:line-clamp-2">
+                      </h3> */}
+                      {/* <p className="text-muted-foreground text-sm leading-relaxed line-clamp-3 sm:line-clamp-2">
                         {project.description}
-                      </p>
+                      </p> */}
                     </div>
                   </div>
                 </CarouselItem>

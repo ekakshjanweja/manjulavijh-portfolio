@@ -1,14 +1,13 @@
 "use client";
 
-import { Instagram, Mail, ArrowUp } from "lucide-react";
-import { FaBehance } from "react-icons/fa";
+import { Instagram, Mail, ArrowUp, Facebook, Linkedin } from "lucide-react";
+import { FaBehance, FaPinterest } from "react-icons/fa";
 
 const footerLinks = [
   { name: "Home", href: "#home" },
   { name: "About", href: "#about" },
-  { name: "Work", href: "#portfolio" },
-  { name: "Services", href: "#services" },
-  { name: "Resources", href: "#resources" },
+  { name: "Portfolio", href: "#portfolio" },
+  { name: "Clients", href: "#clients" },
   { name: "Contact", href: "#contact" },
 ];
 
@@ -27,9 +26,9 @@ export const FooterSection = () => {
   return (
     <footer className="bg-foreground text-primary-foreground">
       <div className="max-w-5xl mx-auto px-6 lg:px-10 py-14">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-x-2 gap-y-8 md:gap-10">
           {/* Brand */}
-          <div>
+          <div className="col-span-2 md:col-span-1">
             <h3 className="logo-script text-xl font-semibold mb-3">
               Manjula Vijh
             </h3>
@@ -42,9 +41,21 @@ export const FooterSection = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-9 h-9 rounded-none border border-primary-foreground/20 flex items-center justify-center text-primary-foreground/50 hover:border-gold hover:text-gold transition-all duration-300"
+                aria-label="Follow on Behance"
               >
                 <FaBehance size={16} />
               </a>
+
+              <a
+                href="https://pin.it/5nf68vmnb"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-9 h-9 rounded-none border border-primary-foreground/20 flex items-center justify-center text-primary-foreground/50 hover:border-gold hover:text-gold transition-all duration-300"
+                aria-label="Follow on Pinterest"
+              >
+                <FaPinterest size={16} />
+              </a>
+
               <a
                 href="https://www.instagram.com/manjulavijhphotography"
                 target="_blank"
@@ -54,12 +65,33 @@ export const FooterSection = () => {
               >
                 <Instagram size={16} />
               </a>
+
               <a
-                href="mailto:hello@manjulavijh.com"
+                href="https://www.facebook.com/profile.php?id=100082670445094"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-9 h-9 rounded-none border border-primary-foreground/20 flex items-center justify-center text-primary-foreground/50 hover:border-gold hover:text-gold transition-all duration-300"
+                aria-label="Follow on Facebook"
+              >
+                <Facebook size={16} />
+              </a>
+
+              <a
+                href="mailto:manjulavijhphotography@gmail.com"
                 className="w-9 h-9 rounded-none border border-primary-foreground/20 flex items-center justify-center text-primary-foreground/50 hover:border-gold hover:text-gold transition-all duration-300"
                 aria-label="Send email"
               >
                 <Mail size={16} />
+              </a>
+
+              <a
+                href="https://www.linkedin.com/in/dr-manjula-vijh-648b5b2b5"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-9 h-9 rounded-none border border-primary-foreground/20 flex items-center justify-center text-primary-foreground/50 hover:border-gold hover:text-gold transition-all duration-300"
+                aria-label="Connect on LinkedIn"
+              >
+                <Linkedin size={18} />
               </a>
             </div>
           </div>
@@ -93,8 +125,8 @@ export const FooterSection = () => {
               Contact
             </h4>
             <div className="space-y-2.5 text-primary-foreground/50 text-sm">
-              <p>hello@manjulavijh.com</p>
-              <p>+91 98765 43210</p>
+              <p>manjulavijhphotography@gmail.com</p>
+              <p>+91 99710 06505</p>
               <p>New Delhi, India</p>
             </div>
           </div>

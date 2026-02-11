@@ -14,13 +14,15 @@ const categories = [
     title: "Food",
     slug: "food",
     image: foodImage,
-    description: "Food photography featuring dishes, menus, and editorial stories.",
+    description:
+      "Food photography featuring dishes, menus, and editorial stories.",
   },
   {
     title: "Product",
     slug: "product",
     image: productImage,
-    description: "Minimal product photography highlighting texture and composition.",
+    description:
+      "Minimal product photography highlighting texture and composition.",
   },
   {
     title: "Portrait",
@@ -38,16 +40,16 @@ export const CategoriesSection = () => {
     <section
       id="categories"
       ref={ref}
-      className="section-padding bg-background"
+      className="py-16 bg-background"
     >
-      <div className="max-w-7xl mx-auto">
+      <div className="w-full px-4 md:px-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <p className="section-kicker text-accent text-xs uppercase mb-4 -mt-36 font-semibold">
+          <p className="section-kicker text-accent text-xs uppercase mb-4 -mt-24 font-semibold">
             Categories
           </p>
           <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-foreground font-semibold tracking-tight mb-5">
@@ -63,7 +65,8 @@ export const CategoriesSection = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="grid grid-cols-1 sm:grid-cols-3 gap-6 items-stretch"
+          // className="grid grid-cols-1 sm:grid-cols-3 gap-6 items-stretch"
+          className="grid grid-cols-1 md:grid-cols-3 gap-6"
         >
           {categories.map((category) => (
             <Link
@@ -71,7 +74,8 @@ export const CategoriesSection = () => {
               href={`/portfolio/${category.slug}`}
               className="group relative flex h-full flex-col overflow-hidden border border-border/60 bg-card"
             >
-              <div className="relative aspect-4/3 overflow-hidden">
+              {/* <div className="relative aspect-3/2 overflow-hidden"> */}
+              <div className="relative h-110 md:h-120 overflow-hidden">
                 <Image
                   src={category.image}
                   alt={`${category.title} category sample`}
