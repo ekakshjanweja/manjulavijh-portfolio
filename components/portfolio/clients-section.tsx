@@ -60,7 +60,7 @@ export const ClientsSection = () => {
             Clients
           </p>
           <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-foreground font-semibold tracking-tight mb-5">
-            Brands I&apos;ve Worked With
+            Brands
           </h2>
           <div className="section-divider mb-6" />
           <p className="text-muted-foreground max-w-2xl mx-auto text-sm md:text-base">
@@ -79,7 +79,7 @@ export const ClientsSection = () => {
               className="group rounded-none border border-border/50 bg-card/60 px-4 py-5 md:px-6 md:py-7 flex flex-col items-center justify-center gap-4 hover:border-accent/30 transition-all duration-300"
             >
               <div
-                className={`h-12 w-12 md:h-14 md:w-14 rounded-full bg-gradient-to-br ${brand.tone} flex items-center justify-center border border-border/50 text-xs md:text-sm font-semibold tracking-[0.2em] text-foreground/80`}
+                className={`h-12 w-12 md:h-14 md:w-14 rounded-full bg-linear-to-br ${brand.tone} flex items-center justify-center border border-border/50 text-xs md:text-sm font-semibold tracking-[0.2em] text-foreground/80`}
               >
                 {brand.initials}
               </div>

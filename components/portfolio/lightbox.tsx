@@ -122,7 +122,7 @@ export const Lightbox = ({
             className="relative max-w-5xl w-full mx-4 md:mx-8"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="relative aspect-[4/3] md:aspect-[16/10] overflow-hidden rounded-none">
+            <div className="relative aspect-4/3 md:aspect-16/10 overflow-hidden rounded-none">
               <Image
                 src={currentItem.image}
                 alt={currentItem.title}

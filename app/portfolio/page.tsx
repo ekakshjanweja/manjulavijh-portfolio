@@ -1,13 +1,10 @@
+import { HeroSection } from "@/components/portfolio/hero-section";
 import { AboutSection } from "@/components/portfolio/about-section";
+import { SignatureWork } from "@/components/portfolio/signature-work";
+import { CategoriesSection } from "@/components/portfolio/categories-section";
 import { ClientsSection } from "@/components/portfolio/clients-section";
 import { ContactSection } from "@/components/portfolio/contact-section";
-import { Footer } from "@/components/portfolio/footer";
-import { HeroSection } from "@/components/portfolio/hero-section";
-import { LearningSection } from "@/components/portfolio/learning-section";
-import { Navbar } from "@/components/portfolio/navbar";
-import { ProjectsCarousel } from "@/components/portfolio/projects-carousel";
-import { ServicesSection } from "@/components/portfolio/service-section";
-import { WorkSection } from "@/components/portfolio/work-section";
+import { FooterSection } from "@/components/portfolio/footer-section";
 
 export default function Portfolio() {
   return (
@@ -15,11 +12,12 @@ export default function Portfolio() {
       <HeroSection />
       <AboutSection />
       {/* <WorkSection /> */}
-      <ProjectsCarousel />
+      <SignatureWork />
+      <CategoriesSection />
       <ClientsSection />
       {/* <LearningSection /> */}
       <ContactSection />
-      <Footer />
+      <FooterSection />
     </div>
   );
 }

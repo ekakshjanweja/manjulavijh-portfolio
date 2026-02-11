@@ -12,7 +12,7 @@ const footerLinks = [
   { name: "Contact", href: "#contact" },
 ];
 
-export const Footer = () => {
+export const FooterSection = () => {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };

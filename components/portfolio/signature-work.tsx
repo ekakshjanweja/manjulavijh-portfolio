@@ -10,6 +10,8 @@ import {
   CarouselPrevious,
   CarouselNext,
 } from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
+
 
 import work1 from "@/public/images/carousel-one.jpg";
 import work2 from "@/public/images/carousel-two.jpg";
@@ -69,7 +71,7 @@ const projects = [
   },
 ];
 
-export const ProjectsCarousel = () => {
+export const SignatureWork = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
@@ -111,7 +113,7 @@ export const ProjectsCarousel = () => {
               align: "start",
               loop: true,
             }}
-            className="w-full"
+            className="w-full" plugins={[Autoplay({ delay: 2000 })]}
           >
             <CarouselContent className="-ml-4 md:-ml-6">
               {projects.map((project) => (

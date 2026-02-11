@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, type MouseEvent } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { ModeToggle } from "@/components/common/mode-toggle";
@@ -9,9 +9,21 @@ const navLinks = [
   { name: "Home", href: "#home" },
   { name: "About", href: "#about" },
   { name: "Portfolio", href: "#portfolio" },
-  // { name: "Resources", href: "#resources" },
   { name: "Clients", href: "#clients" },
   { name: "Contact", href: "#contact" },
+];
+
+const portfolioLinks = [
+  { name: "Signature Work", href: "#portfolio" },
+  {
+    name: "Explore Collections",
+    href: "#categories",
+    children: [
+      { name: "Food", href: "/portfolio/food" },
+      { name: "Product", href: "/portfolio/product" },
+      { name: "Portfolio", href: "/portfolio/portfolio" }
+    ]
+  }
 ];
 
 export const Navbar = () => {
@@ -20,7 +32,7 @@ export const Navbar = () => {
   const isHero = activeSection === "home";
 
   const updateActiveSection = useCallback(() => {
-    const sections = navLinks.map((link) => link.href.slice(1));
+    const sections = navLinks.map((l) => l.href.slice(1));
     const scrollPosition = window.scrollY + 120;
 
     for (let i = sections.length - 1; i >= 0; i--) {
@@ -33,20 +45,27 @@ export const Navbar = () => {
   }, []);
 
   useEffect(() => {
-    const onScroll = () => {
-      updateActiveSection();
-    };
-
-    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("scroll", updateActiveSection, { passive: true });
     updateActiveSection();
-    return () => window.removeEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", updateActiveSection);
   }, [updateActiveSection]);
 
   const scrollToSection = (href: string) => {
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+    const el = document.querySelector(href);
+    if (el) el.scrollIntoView({ behavior: "smooth" });
+    setIsOpen(false);
+  };
+
+  const handleLinkClick = (
+    href: string,
+    e?: MouseEvent<HTMLAnchorElement>
+  ) => {
+    if (href.startsWith("#")) {
+      e?.preventDefault();
+      scrollToSection(href);
+      return;
     }
+
     setIsOpen(false);
   };
 
@@ -61,65 +80,134 @@ export const Navbar = () => {
       <div className="px-5 lg:px-10">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <div className="flex items-center gap-2">
             <a
               href="#home"
-              onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
-                e.preventDefault();
-                scrollToSection("#home");
+              onClick={(e) => {
+                handleLinkClick("#home", e);
               }}
-              className={`logo-script text-xl md:text-2xl font-semibold tracking-wide transition-colors duration-300 ${
+              className={`logo-script text-xl md:text-2xl font-semibold tracking-wide ${
                 isHero ? "mix-blend-difference text-white" : "text-foreground"
               }`}
             >
-              MANJULA VIJH
-            </a>
-          </div>
+            MANJULA VIJH
+          </a>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex  items-center gap-7">
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
-                  e.preventDefault();
-                  scrollToSection(link.href);
-                }}
-                className={`relative text-xs font-medium uppercase tracking-[0.15em] transition-all duration-300 ${
-                  isHero
-                    ? `mix-blend-difference text-white ${
-                        activeSection === link.href.slice(1)
-                          ? ""
-                          : "opacity-60 hover:opacity-100"
-                      }`
-                    : activeSection === link.href.slice(1)
-                      ? "text-foreground"
-                      : "text-foreground/60 hover:text-foreground"
-                } ${
-                  activeSection === link.href.slice(1) ? "nav-link-active" : ""
-                }`}
-              >
-                {link.name}
-                <span
-                  className={`absolute -bottom-1 left-0 h-px bg-accent transition-all duration-300 ${
-                    activeSection === link.href.slice(1) ? "w-full" : "w-0"
+          <div className="hidden md:flex items-center gap-7">
+            {navLinks.map((link) =>
+              link.name === "Portfolio" ? (
+                <div
+                  key={link.name}
+                  className="relative group"
+                >
+                  <a
+                    key={link.name}
+                    href={link.href}
+                    onClick={(e) => {
+                      handleLinkClick(link.href, e);
+                    }}
+                    className={`relative text-xs font-medium uppercase tracking-[0.15em] transition-all ${
+                      isHero
+                        ? `mix-blend-difference text-white ${
+                            activeSection === link.href.slice(1)
+                              ? ""
+                              : "opacity-60 hover:opacity-100"
+                          }`
+                        : activeSection === link.href.slice(1)
+                          ? "text-foreground"
+                          : "text-foreground/60 hover:text-foreground"
+                    }`}
+                  >
+                    {link.name}
+                    <span
+                      className={`absolute -bottom-1 left-0 h-px bg-accent transition-all ${
+                        activeSection === link.href.slice(1) ? "w-full" : "w-0"
+                      }`}
+                    />
+                  </a>
+                  <div className="absolute left-0 top-full z-40 pt-2 opacity-0 translate-y-1 pointer-events-none transition-all duration-200 group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto group-focus-within:opacity-100 group-focus-within:translate-y-0 group-focus-within:pointer-events-auto">
+                    <div className="min-w-48  border border-border/60 bg-background/95 shadow-lg backdrop-blur-md">
+                      <div className="flex flex-col">
+                      {portfolioLinks.map((item) => (
+                        <div
+                          key={item.name}
+                          className="relative group/collection"
+                        >
+                          <a
+                            href={item.href}
+                            onClick={(e) => {
+                              handleLinkClick(item.href, e);
+                            }}
+                            className="flex items-center justify-between gap-2 px-3 py-2 text-[11px] font-medium uppercase tracking-[0.18em] text-foreground/70 transition-colors hover:bg-accent/15 hover:text-foreground"
+                          >
+                            {item.name}
+                            {item.children && (
+                              <span className="text-foreground/40">&gt;</span>
+                            )}
+                          </a>
+                          {item.children && (
+                            <div className="absolute left-full top-0 z-50 ml-2 min-w-44 border border-border/60 bg-background/95 shadow-lg backdrop-blur-md opacity-0 translate-x-1 pointer-events-none transition-all duration-200 group-hover/collection:opacity-100 group-hover/collection:translate-x-0 group-hover/collection:pointer-events-auto group-focus-within/collection:opacity-100 group-focus-within/collection:translate-x-0 group-focus-within/collection:pointer-events-auto">
+                              <div className="flex flex-col py-1">
+                                {item.children.map((child) => (
+                                  <a
+                                    key={child.name}
+                                    href={child.href}
+                                    onClick={(e) => {
+                                      handleLinkClick(child.href, e);
+                                    }}
+                                    className="block px-3 py-2 text-[10px] font-medium uppercase tracking-[0.2em] text-foreground/60 transition-colors hover:bg-accent/15 hover:text-foreground"
+                                  >
+                                    {child.name}
+                                  </a>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+                </div>
+              ) : (
+                  <a
+                    key={link.name}
+                    href={link.href}
+                    onClick={(e) => {
+                      handleLinkClick(link.href, e);
+                    }}
+                    className={`relative text-xs font-medium uppercase tracking-[0.15em] transition-all ${
+                      isHero
+                        ? `mix-blend-difference text-white ${
+                            activeSection === link.href.slice(1)
+                            ? ""
+                            : "opacity-60 hover:opacity-100"
+                        }`
+                      : activeSection === link.href.slice(1)
+                        ? "text-foreground"
+                        : "text-foreground/60 hover:text-foreground"
                   }`}
-                />
-              </a>
-            ))}
+                >
+                  {link.name}
+                  <span
+                    className={`absolute -bottom-1 left-0 h-px bg-accent transition-all ${
+                      activeSection === link.href.slice(1) ? "w-full" : "w-0"
+                    }`}
+                  />
+                </a>
+              ),
+            )}
             <ModeToggle isHero={isHero} />
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile Controls */}
           <div className="flex items-center gap-3 md:hidden">
             <ModeToggle isHero={isHero} />
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className={`p-2 transition-colors ${
+              className={`p-2 ${
                 isHero ? "mix-blend-difference text-white" : "text-foreground"
               }`}
-              aria-label="Toggle menu"
             >
               {isOpen ? <X size={22} /> : <Menu size={22} />}
             </button>
@@ -137,27 +225,58 @@ export const Navbar = () => {
             transition={{ duration: 0.3 }}
             className="md:hidden bg-background/95 backdrop-blur-xl border-b border-border/30"
           >
-            <div className="px-6 py-5 space-y-1">
-              {navLinks.map((link, index) => (
-                <motion.a
-                  key={link.name}
-                  href={link.href}
-                  onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
-                    e.preventDefault();
-                    scrollToSection(link.href);
-                  }}
-                  initial={{ opacity: 0, x: -15 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.05 }}
-                  className={`block text-sm font-medium uppercase tracking-[0.15em] py-2.5 transition-colors ${
-                    activeSection === link.href.slice(1)
-                      ? "text-foreground"
-                      : "text-foreground/50 hover:text-foreground"
-                  }`}
-                >
-                  {link.name}
-                </motion.a>
-              ))}
+            <div className="px-6 py-5 space-y-2">
+              {navLinks.map((link) =>
+                link.name === "Portfolio" ? (
+                  <div key={link.name} className="space-y-1">
+                    <span className="block text-sm font-medium uppercase tracking-[0.15em] text-foreground/70 py-2">
+                      Portfolio
+                    </span>
+                    <div className="pl-4 space-y-1">
+                      {portfolioLinks.map((item) => (
+                        <div key={item.name} className="space-y-1">
+                          <a
+                            href={item.href}
+                            onClick={(e) => {
+                              handleLinkClick(item.href, e);
+                            }}
+                            className="block text-xs uppercase tracking-wider py-1 text-foreground/50 hover:text-foreground"
+                          >
+                            {item.name}
+                          </a>
+                          {item.children && (
+                            <div className="pl-3 space-y-1">
+                              {item.children.map((child) => (
+                                <a
+                                  key={child.name}
+                                  href={child.href}
+                                  onClick={(e) => {
+                                    handleLinkClick(child.href, e);
+                                  }}
+                                  className="block text-[11px] uppercase tracking-wider py-1 text-foreground/50 hover:text-foreground"
+                                >
+                                  {child.name}
+                                </a>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ) : (
+                  <a
+                    key={link.name}
+                    href={link.href}
+                    onClick={(e) => {
+                      handleLinkClick(link.href, e);
+                    }}
+                    className="block text-sm font-medium uppercase tracking-[0.15em] py-2 text-foreground/60 hover:text-foreground"
+                  >
+                    {link.name}
+                  </a>
+                ),
+              )}
             </div>
           </motion.div>
         )}

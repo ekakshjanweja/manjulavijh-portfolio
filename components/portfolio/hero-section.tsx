@@ -6,6 +6,14 @@ import { Button } from "@/components/ui/button";
 import heroImage from "@/public/images/hero-food.jpg";
 import Image from "next/image";
 import { useRef } from "react";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
 
 export const HeroSection = () => {
   const ref = useRef(null);
@@ -33,13 +41,57 @@ export const HeroSection = () => {
     >
       {/* Parallax Background Image */}
       <motion.div className="absolute inset-0 z-0" style={{ y: imageY }}>
-        <Image
-          src={heroImage}
-          alt="Food photography by Manjula Vijh"
-          className="w-full h-[120%] object-cover object-top"
-          priority
-          placeholder="blur"
-        />
+        <Carousel
+          className="-mt-4"
+          opts={{ loop: true }}
+          plugins={[Autoplay({ delay: 3000 })]}
+        >
+          <CarouselContent className="ml-0">
+            <CarouselItem className="flex justify-center pl-0">
+              <div className="relative w-full h-screen">
+                <Image
+                  src={heroImage}
+                  alt="Food photography by Manjula Vijh"
+                  fill
+                  priority
+                  placeholder="blur"
+                  sizes="100vw"
+                  className="object-cover object-top"
+                />
+              </div>
+            </CarouselItem>
+
+            <CarouselItem className="flex justify-center pl-0">
+              <div className="relative w-full h-screen">
+                <Image
+                  src={heroImage}
+                  alt="Food photography by Manjula Vijh"
+                  fill
+                  priority
+                  placeholder="blur"
+                  sizes="100vw"
+                  className="object-cover object-top"
+                />
+              </div>
+            </CarouselItem>
+
+            <CarouselItem className="flex justify-center pl-0">
+              <div className="relative w-full h-screen">
+                <Image
+                  src={heroImage}
+                  alt="Food photography by Manjula Vijh"
+                  fill
+                  priority
+                  placeholder="blur"
+                  sizes="100vw"
+                  className="object-cover object-top"
+                />
+              </div>
+            </CarouselItem>
+          </CarouselContent>
+          <CarouselPrevious />
+          <CarouselNext />
+        </Carousel>
       </motion.div>
 
       {/* Gradient Overlays for depth */}

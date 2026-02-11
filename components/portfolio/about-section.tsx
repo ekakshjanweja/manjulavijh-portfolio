@@ -41,7 +41,7 @@ export const AboutSection = () => {
             transition={{ duration: 0.8 }}
             className="lg:col-span-2 relative"
           >
-            <div className="relative aspect-[3/4] overflow-hidden rounded-none shadow-2xl shadow-black/10">
+            <div className="relative aspect-3/4 overflow-hidden rounded-none shadow-2xl shadow-black/10">
               <Image
                 src={photographerPortrait}
                 alt="Manjula Vijh - Food & Product Photographer"
