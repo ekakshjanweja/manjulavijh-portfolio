@@ -12,9 +12,9 @@ export const ClientsSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="clients" ref={ref} className="py-20 bg-muted/30">
+    <section id="clients" ref={ref} className="py-48 bg-muted/30">
       {/* <div className="max-w-6xl mx-auto px-6"> */}
-<div className="w-full px-0">
+      <div className="w-full px-0">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -59,7 +59,7 @@ export const ClientsSection = () => {
         <div className="text-center mt-16">
           <Link
             href="/portfolio/brands"
-            className="inline-flex border border-foreground px-10 py-3 text-sm tracking-wide hover:bg-foreground/10 hover:text-gold transition-all duration-300"
+            className="inline-flex px-10 py-3 text-sm tracking-wide  border border-input bg-neutral-400/10 hover:border-accent hover:bg-accent/5 transition-all duration-300"
           >
             MORE
           </Link>

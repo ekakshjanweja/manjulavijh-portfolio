@@ -4,7 +4,6 @@ import { SignatureWork } from "@/components/portfolio/signature-work";
 import { CategoriesSection } from "@/components/portfolio/categories-section";
 import { ClientsSection } from "@/components/portfolio/clients-section";
 import { ContactSection } from "@/components/portfolio/contact-section";
-import { FooterSection } from "@/components/portfolio/footer-section";
 
 export default function Portfolio() {
   return (
@@ -17,7 +16,6 @@ export default function Portfolio() {
       <ClientsSection />
       {/* <LearningSection /> */}
       <ContactSection />
-      <FooterSection />
     </div>
   );
 }

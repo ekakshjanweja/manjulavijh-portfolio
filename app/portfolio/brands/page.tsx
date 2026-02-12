@@ -12,7 +12,7 @@ export default function BrandsPage() {
             href="/portfolio"
             className="text-xs font-semibold uppercase tracking-[0.3em] text-accent"
           >
-            Back to portfolio
+            ← Back to portfolio
           </Link>
           <div className="mt-6">
             <p className="section-kicker text-accent text-xs uppercase mb-4 font-semibold">

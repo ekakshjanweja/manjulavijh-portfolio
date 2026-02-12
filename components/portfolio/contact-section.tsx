@@ -7,16 +7,13 @@ import {
   Mail,
   Phone,
   MapPin,
-  Instagram,
   Send,
-  Facebook,
-  Linkedin,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
-import { FaBehance, FaPinterest } from "react-icons/fa";
+import { socialLinks } from "@/components/portfolio/social-links";
 
 export const ContactSection = () => {
   const ref = useRef(null);
@@ -45,7 +42,7 @@ export const ContactSection = () => {
   ];
 
   return (
-    <section id="contact" ref={ref} className="section-padding bg-section-alt">
+    <section id="contact" ref={ref} className="py-18 bg-section-alt">
       <div className="max-w-5xl mx-auto">
         {/* Header */}
         <motion.div
@@ -198,63 +195,18 @@ export const ContactSection = () => {
                 Follow Along
               </h3>
               <div className="flex gap-3">
-                <a
-                  href="https://www.behance.net/manjulavijh1"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 border border-border/60 flex items-center justify-center text-muted-foreground hover:border-accent hover:text-accent transition-all duration-300"
-                  aria-label="Follow on Behance"
-                >
-                  <FaBehance size={18} />
-                </a>
-
-                <a
-                  href="https://pin.it/5nf68vmnb"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 border border-border/60 flex items-center justify-center text-muted-foreground hover:border-accent hover:text-accent transition-all duration-300"
-                  aria-label="Follow on Pinterest"
-                >
-                  <FaPinterest size={18} />
-                </a>
-
-                <a
-                  href="https://www.instagram.com/manjulavijhphotography"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 border border-border/60 flex items-center justify-center text-muted-foreground hover:border-accent hover:text-accent transition-all duration-300"
-                  aria-label="Follow on Instagram"
-                >
-                  <Instagram size={18} />
-                </a>
-
-                <a
-                  href="https://www.facebook.com/profile.php?id=100082670445094"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 border border-border/60 flex items-center justify-center text-muted-foreground hover:border-accent hover:text-accent transition-all duration-300"
-                  aria-label="Follow on Facebook"
-                >
-                  <Facebook size={18} />
-                </a>
-
-                <a
-                  href="mailto: manjulavijhphotography@gmail.com"
-                  className="w-10 h-10 border border-border/60 flex items-center justify-center text-muted-foreground hover:border-accent hover:text-accent transition-all duration-300"
-                  aria-label="Send email"
-                >
-                  <Mail size={18} />
-                </a>
-
-                <a
-                  href="https://www.linkedin.com/in/dr-manjula-vijh-648b5b2b5"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 border border-border/60 flex items-center justify-center text-muted-foreground hover:border-accent hover:text-accent transition-all duration-300"
-                  aria-label="Connect on LinkedIn"
-                >
-                  <Linkedin size={18} />
-                </a>
+                {socialLinks.map((social) => (
+                  <a
+                    key={social.label}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={social.label}
+                    className="w-10 h-10 border border-border/60 flex items-center justify-center text-muted-foreground hover:border-accent hover:text-accent transition-all duration-300"
+                  >
+                    <social.icon size={18} />
+                  </a>
+                ))}
               </div>
             </div>
           </motion.div>

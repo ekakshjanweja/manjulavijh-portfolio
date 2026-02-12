@@ -1,7 +1,7 @@
 "use client";
 
-import { Instagram, Mail, ArrowUp, Facebook, Linkedin } from "lucide-react";
-import { FaBehance, FaPinterest } from "react-icons/fa";
+import { socialLinks } from "@/components/portfolio/social-links";
+import { ArrowUp } from "lucide-react";
 
 const footerLinks = [
   { name: "Home", href: "#home" },
@@ -36,63 +36,18 @@ export const FooterSection = () => {
               Light-rich, editorial imagery for culinary and lifestyle brands.
             </p>
             <div className="flex gap-3">
-              <a
-                href="https://www.behance.net/manjulavijh1"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-9 h-9 rounded-none border border-primary-foreground/20 flex items-center justify-center text-primary-foreground/50 hover:border-gold hover:text-gold transition-all duration-300"
-                aria-label="Follow on Behance"
-              >
-                <FaBehance size={16} />
-              </a>
-
-              <a
-                href="https://pin.it/5nf68vmnb"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-9 h-9 rounded-none border border-primary-foreground/20 flex items-center justify-center text-primary-foreground/50 hover:border-gold hover:text-gold transition-all duration-300"
-                aria-label="Follow on Pinterest"
-              >
-                <FaPinterest size={16} />
-              </a>
-
-              <a
-                href="https://www.instagram.com/manjulavijhphotography"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-9 h-9 rounded-none border border-primary-foreground/20 flex items-center justify-center text-primary-foreground/50 hover:border-gold hover:text-gold transition-all duration-300"
-                aria-label="Follow on Instagram"
-              >
-                <Instagram size={16} />
-              </a>
-
-              <a
-                href="https://www.facebook.com/profile.php?id=100082670445094"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-9 h-9 rounded-none border border-primary-foreground/20 flex items-center justify-center text-primary-foreground/50 hover:border-gold hover:text-gold transition-all duration-300"
-                aria-label="Follow on Facebook"
-              >
-                <Facebook size={16} />
-              </a>
-
-              <a
-                href="mailto:manjulavijhphotography@gmail.com"
-                className="w-9 h-9 rounded-none border border-primary-foreground/20 flex items-center justify-center text-primary-foreground/50 hover:border-gold hover:text-gold transition-all duration-300"
-                aria-label="Send email"
-              >
-                <Mail size={16} />
-              </a>
-
-              <a
-                href="https://www.linkedin.com/in/dr-manjula-vijh-648b5b2b5"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-9 h-9 rounded-none border border-primary-foreground/20 flex items-center justify-center text-primary-foreground/50 hover:border-gold hover:text-gold transition-all duration-300"
-                aria-label="Connect on LinkedIn"
-              >
-                <Linkedin size={18} />
-              </a>
+              {socialLinks.map((social) => (
+                <a
+                  key={social.label}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={social.label}
+                  className="w-9 h-9 border border-border/60 flex items-center justify-center text-muted-foreground hover:border-accent hover:text-accent transition-all duration-300"
+                >
+                  <social.icon size={16} />
+                </a>
+              ))}
             </div>
           </div>
 

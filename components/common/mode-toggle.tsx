@@ -15,8 +15,8 @@ export function ModeToggle({ isHero = false }: ModeToggleProps) {
     <Button
       variant="ghost"
       onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-      className={`bg-transparent! hover:bg-pink-200/20! dark:hover:bg-pink-200/20! px-4 py-1.5 rounded-full text-sm font-bold transition duration-300 ${
-        isHero ? "mix-blend-difference text-white" : "text-foreground!"
+      className={`bg-transparent! hover:text-foreground! px-4 py-1.5 rounded-full text-sm font-bold transition duration-300 ${
+        isHero ? "mix-blend-difference text-white" : "text-foreground/60!"
       }`}
     >
       <Sun className="h-[1.2rem] w-[1.2rem] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" />

@@ -121,7 +121,7 @@ export const HeroSection = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.6 }}
-          className="text-white/80 text-xl md:text-2xl font-serif italic mb-3"
+          className="text-white/80 text-2xl md:text-3xl font-semibold font-serif italic mb-3"
         >
           Visual storyteller for culinary &amp; lifestyle brands
         </motion.p>
@@ -129,7 +129,7 @@ export const HeroSection = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.8 }}
-          className="text-white/55 text-sm md:text-base max-w-lg mx-auto mb-12 leading-relaxed"
+          className="text-white/65 text-md md:text-lg max-w-lg mx-auto mb-12 leading-relaxed"
         >
           Based in New Delhi. Creating refined, light-rich imagery that elevates
           food, products, and everyday moments into timeless visuals.

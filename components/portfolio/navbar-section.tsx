@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, useCallback, type MouseEvent } from "react";
+import { usePathname, useRouter } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { ModeToggle } from "@/components/common/mode-toggle";
@@ -21,18 +22,22 @@ const portfolioLinks = [
     children: [
       { name: "Food", href: "/portfolio/food" },
       { name: "Product", href: "/portfolio/product" },
-      { name: "Portfolio", href: "/portfolio/portfolio" },
+      { name: "Portrait", href: "/portfolio/portrait" },
     ],
   },
 ];
 
-export const Navbar = () => {
+export const NavbarSection = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
   const [mounted, setMounted] = useState(false);
-  const isHero = activeSection === "home";
+  const pathname = usePathname();
+  const router = useRouter();
+  const isMainPortfolioPage = pathname === "/portfolio";
+  const isHero = isMainPortfolioPage && activeSection === "home";
 
   const updateActiveSection = useCallback(() => {
+    if (!isMainPortfolioPage) return;
     const sections = navLinks.map((l) => l.href.slice(1));
     const scrollPosition = window.scrollY + 120;
 
@@ -43,7 +48,7 @@ export const Navbar = () => {
         break;
       }
     }
-  }, []);
+  }, [isMainPortfolioPage]);
 
   useEffect(() => {
     window.addEventListener("scroll", updateActiveSection, { passive: true });
@@ -60,7 +65,13 @@ export const Navbar = () => {
   const handleLinkClick = (href: string, e?: MouseEvent<HTMLAnchorElement>) => {
     if (href.startsWith("#")) {
       e?.preventDefault();
-      scrollToSection(href);
+      if (isMainPortfolioPage) {
+        scrollToSection(href);
+      } else {
+        // Navigate to main portfolio page with hash
+        router.push(`/portfolio${href}`);
+      }
+      setIsOpen(false);
       return;
     }
 
@@ -147,7 +158,7 @@ export const Navbar = () => {
                               )}
                             </a>
                             {item.children && (
-                              <div className="absolute left-full top-0 z-50 ml-2 min-w-44 border border-border/60 bg-background/95 shadow-lg backdrop-blur-md opacity-0 translate-x-1 pointer-events-none transition-all duration-200 group-hover/collection:opacity-100 group-hover/collection:translate-x-0 group-hover/collection:pointer-events-auto group-focus-within/collection:opacity-100 group-focus-within/collection:translate-x-0 group-focus-within/collection:pointer-events-auto">
+                              <div className="absolute left-full top-0 z-50 min-w-44 border border-border/60 bg-background/95 shadow-lg backdrop-blur-md opacity-0 translate-x-1 pointer-events-none transition-all duration-200 delay-75 group-hover/collection:opacity-100 group-hover/collection:translate-x-0 group-hover/collection:pointer-events-auto group-focus-within/collection:opacity-100 group-focus-within/collection:translate-x-0 group-focus-within/collection:pointer-events-auto before:absolute before:content-[''] before:-left-4 before:top-0 before:w-4 before:h-full">
                                 <div className="flex flex-col py-1">
                                   {item.children.map((child) => (
                                     <a
