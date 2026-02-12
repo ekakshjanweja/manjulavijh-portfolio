@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 
 type Card = {
   id: number;
-  content: JSX.Element | React.ReactNode | string;
+  content: React.ReactNode;
   className: string;
   thumbnail: string;
 };
@@ -36,8 +36,8 @@ export const LayoutGrid = ({ cards }: { cards: Card[] }) => {
               selected?.id === card.id
                 ? "rounded-lg cursor-pointer absolute inset-0 h-1/2 w-full md:w-1/2 m-auto z-50 flex justify-center items-center flex-wrap flex-col"
                 : lastSelected?.id === card.id
-                ? "z-40 bg-white rounded-xl h-full w-full"
-                : "bg-white rounded-xl h-full w-full"
+                  ? "z-40 bg-white rounded-xl h-full w-full"
+                  : "bg-white rounded-xl h-full w-full",
             )}
             layoutId={`card-${card.id}`}
           >
@@ -50,7 +50,7 @@ export const LayoutGrid = ({ cards }: { cards: Card[] }) => {
         onClick={handleOutsideClick}
         className={cn(
           "absolute h-full w-full left-0 top-0 bg-black opacity-0 z-10",
-          selected?.id ? "pointer-events-auto" : "pointer-events-none"
+          selected?.id ? "pointer-events-auto" : "pointer-events-none",
         )}
         animate={{ opacity: selected?.id ? 0.3 : 0 }}
       />
@@ -66,7 +66,7 @@ const ImageComponent = ({ card }: { card: Card }) => {
       height="500"
       width="500"
       className={cn(
-        "object-cover object-top absolute inset-0 h-full w-full transition duration-200"
+        "object-cover object-top absolute inset-0 h-full w-full transition duration-200",
       )}
       alt="thumbnail"
     />
@@ -75,7 +75,7 @@ const ImageComponent = ({ card }: { card: Card }) => {
 
 const SelectedCard = ({ selected }: { selected: Card | null }) => {
   return (
-    <div className="bg-transparent h-full w-full flex flex-col justify-end rounded-lg shadow-2xl relative z-[60]">
+    <div className="bg-transparent h-full w-full flex flex-col justify-end rounded-lg shadow-2xl relative z-60">
       <motion.div
         initial={{
           opacity: 0,
@@ -103,7 +103,7 @@ const SelectedCard = ({ selected }: { selected: Card | null }) => {
           duration: 0.3,
           ease: "easeInOut",
         }}
-        className="relative px-8 pb-4 z-[70]"
+        className="relative px-8 pb-4 z-70"
       >
         {selected?.content}
       </motion.div>
