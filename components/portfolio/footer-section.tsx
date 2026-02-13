@@ -1,6 +1,6 @@
 "use client";
 
-import { socialLinks } from "@/components/portfolio/social-links";
+import { socialLinks } from "@/components/portfolio/data/social-links";
 import { ArrowUp } from "lucide-react";
 
 const footerLinks = [
@@ -30,11 +30,11 @@ export const FooterSection = () => {
           {/* Brand */}
           <div className="col-span-2 md:col-span-1">
             <h3 className="logo-script text-xl font-semibold mb-3">
-              Manjula Vijh
+              Dr. Manjula Vijh
             </h3>
-            <p className="text-primary-foreground/50 leading-relaxed text-sm mb-5">
+            {/* <p className="text-primary-foreground/50 leading-relaxed text-sm mb-5">
               Light-rich, editorial imagery for culinary and lifestyle brands.
-            </p>
+            </p> */}
             <div className="flex gap-3">
               {socialLinks.map((social) => (
                 <a

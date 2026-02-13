@@ -148,17 +148,17 @@ h6 {
   letter-spacing: 0.01em;
 }
 
-/* .logo-script {
+.logo-script {
   font-family: "Playfair Display", serif;
   font-style: normal;
   letter-spacing: 0.01em;
-} */
+}
 
-.logo-script {
+/* .logo-script {
   font-family: "Cinzel", serif;
   font-weight: 600;
   letter-spacing: 0.12em;
-}
+} */
 
 .page-shell {
   background-image: radial-gradient(
@@ -193,7 +193,7 @@ h6 {
 
 .section-kicker {
   font-family: var(--font-geist-sans), sans-serif;
-  letter-spacing: 0.35em;
+  letter-spacing: 0.25em;
 }
 
 /* Component classes */

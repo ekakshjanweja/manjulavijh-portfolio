@@ -5,6 +5,10 @@ import { ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { useRef } from "react";
+import carouselOne from "@/public/images/carousel/carousel-one.jpg";
+import carouselTwo from "@/public/images/carousel/carousel-two.jpg";
+import carouselThree from "@/public/images/carousel/carousel-three.jpg";
+import carouselFour from "@/public/images/carousel/carousel-four.jpg";
 import {
   Carousel,
   CarouselContent,
@@ -33,26 +37,29 @@ export const HeroSection = () => {
   };
 
   return (
-    <section
-      id="home"
-      ref={ref}
-      className="relative z-0 h-screen flex items-center justify-center overflow-hidden"
-    >
+      <section
+        id="home"
+        ref={ref}
+        className="relative z-0 h-screen flex items-center justify-center overflow-hidden bg-black bg-cover bg-center"
+        style={{ backgroundImage: `url(${carouselTwo.src})` }}
+      >
       {/* Parallax Background Image */}
       <motion.div className="absolute inset-0 z-0" style={{ y: imageY }}>
-        <Carousel
-          className="-mt-4"
-          opts={{ loop: true }}
-          plugins={[Autoplay({ delay: 3000 })]}
-        >
-          <CarouselContent className="ml-0">
-            <CarouselItem className="flex justify-center pl-0">
-              <div className="relative w-full h-screen">
+          <Carousel
+            className="-mt-4"
+            opts={{ loop: true }}
+            plugins={[Autoplay({ delay: 3000 })]}
+          >
+            <CarouselContent className="ml-0">
+              <CarouselItem className="flex justify-center pl-0">
+              <div className="relative w-full h-screen bg-black">
                 <Image
-                  src="/images/carousel/carousel-two.jpg"
+                  src={carouselTwo}
                   alt="Food photography by Manjula Vijh"
                   fill
                   priority
+                  fetchPriority="high"
+                  placeholder="blur"
                   sizes="100vw"
                   className="object-cover object-top"
                 />
@@ -60,11 +67,12 @@ export const HeroSection = () => {
             </CarouselItem>
 
             <CarouselItem className="flex justify-center pl-0">
-              <div className="relative w-full h-screen">
+              <div className="relative w-full h-screen bg-black">
                 <Image
-                  src="/images/carousel/carousel-one.jpg"
+                  src={carouselOne}
                   alt="Food photography by Manjula Vijh"
                   fill
+                  placeholder="blur"
                   sizes="100vw"
                   className="object-cover object-top"
                 />
@@ -72,11 +80,12 @@ export const HeroSection = () => {
             </CarouselItem>
 
             <CarouselItem className="flex justify-center pl-0">
-              <div className="relative w-full h-screen">
+              <div className="relative w-full h-screen bg-black">
                 <Image
-                  src="/images/carousel/carousel-three.jpg"
+                  src={carouselThree}
                   alt="Food photography by Manjula Vijh"
                   fill
+                  placeholder="blur"
                   sizes="100vw"
                   className="object-cover object-top"
                 />
@@ -84,11 +93,12 @@ export const HeroSection = () => {
             </CarouselItem>
 
             <CarouselItem className="flex justify-center pl-0">
-              <div className="relative w-full h-screen">
+              <div className="relative w-full h-screen bg-black">
                 <Image
-                  src="/images/carousel/carousel-four.jpg"
+                  src={carouselFour}
                   alt="Food photography by Manjula Vijh"
                   fill
+                  placeholder="blur"
                   sizes="100vw"
                   className="object-cover object-top"
                 />
@@ -121,18 +131,18 @@ export const HeroSection = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.6 }}
-          className="text-white/80 text-2xl md:text-3xl font-semibold font-serif italic mb-3"
+          className="text-white/80 text-4xl md:text-4xl font-bold font-serif mb-3"
         >
-          Visual storyteller for culinary &amp; lifestyle brands
+          Culinary and Lifestyle Photography
         </motion.p>
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.8 }}
-          className="text-white/65 text-md md:text-lg max-w-lg mx-auto mb-12 leading-relaxed"
+          className="text-white/65 text-lg md:text-xl max-w-lg font-serif mx-auto mb-12 leading-relaxed"
         >
-          Based in New Delhi. Creating refined, light-rich imagery that elevates
-          food, products, and everyday moments into timeless visuals.
+          Thoughtful work across food, products, and everyday moments, shaped
+          into timeless visuals.
         </motion.p>
         <motion.div
           initial={{ opacity: 0, y: 20 }}

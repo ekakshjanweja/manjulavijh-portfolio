@@ -3,19 +3,11 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import foodHero from "@/public/images/hero-food.jpg";
 import portraitHero from "@/public/images/photographer-portrait.jpg";
-import work1 from "@/public/images/carousel-one.jpg";
-import work2 from "@/public/images/carousel-two.jpg";
-import work3 from "@/public/images/carousel-three.jpg";
-import work4 from "@/public/images/carousel-four.jpg";
-import work5 from "@/public/images/carousel-five.jpg";
-import work6 from "@/public/images/carousel-six.jpg";
 import MasonryGrid from "@/components/portfolio/masonry-grid";
-import { socialLinks } from "@/components/portfolio/social-links";
-
-type CategoryItem = {
-  title: string;
-  image: StaticImageData;
-};
+import { socialLinks } from "@/components/portfolio/data/social-links";
+import { foodImages } from "@/components/portfolio/data/food-images";
+import { productImages } from "@/components/portfolio/data/product-images";
+import { portraitImages } from "@/components/portfolio/data/portrait-images";
 
 type CategoryEntry = {
   title: string;
@@ -23,60 +15,26 @@ type CategoryEntry = {
   headline: string;
   subheadline: string;
   hero: StaticImageData;
-  items: CategoryItem[];
 };
 
-type ImageItem = {
-  src: string;
-  size?: "small" | "medium" | "large";
-  shape?: "square" | "portrait";
-};
-
-const categoryData: Record<string, CategoryEntry> = {
+const categoryMeta = {
   food: {
     title: "Food",
-    description: "Editorial plates, menus, and seasonal ingredient stories.",
     headline: "Bringing Brands to Life",
     subheadline: "Through Food Photography",
     hero: foodHero,
-    items: [
-      { title: "Chef's Table", image: work6 },
-      { title: "Farm-to-Plate", image: work3 },
-      { title: "Artisan Pastries", image: work2 },
-      { title: "Fresh Harvest", image: work1 },
-      { title: "Kitchen Rituals", image: work4 },
-      { title: "Golden Hour Dishes", image: work5 },
-    ],
   },
   product: {
     title: "Product",
-    description: "Refined still-life and branding for luxury products.",
     headline: "Elevating Products",
     subheadline: "Through Visual Storytelling",
-    hero: work1,
-    items: [
-      { title: "Skincare Collection", image: work1 },
-      { title: "Fragrance Series", image: work5 },
-      { title: "Modern Flat Lay", image: work4 },
-      { title: "Boutique Packaging", image: work2 },
-      { title: "Studio Essentials", image: work6 },
-      { title: "Details & Texture", image: work3 },
-    ],
+    hero: foodHero,
   },
   portrait: {
     title: "Portrait",
-    description: "Character-led portraits with soft light and depth.",
     headline: "Capturing Essence",
     subheadline: "Through Portrait Photography",
     hero: portraitHero,
-    items: [
-      { title: "Editorial Portrait", image: portraitHero },
-      { title: "Studio Calm", image: work4 },
-      { title: "Warm Tones", image: work3 },
-      { title: "Quiet Confidence", image: work2 },
-      { title: "Ambient Light", image: work5 },
-      { title: "City Narrative", image: work6 },
-    ],
   },
 };
 
@@ -86,20 +44,23 @@ export default async function CategoryPage({
   params: Promise<{ category: string }>;
 }) {
   const { category: categorySlug } = await params;
-  const category = categoryData[categorySlug];
+  const category = categoryMeta[categorySlug as keyof typeof categoryMeta];
 
   if (!category) {
     notFound();
   }
 
-  const images: ImageItem[] = [
-    { src: "/images/carousel-one.jpg", size: "large" },
-    { src: "/images/carousel-two.jpg", shape: "portrait" },
-    { src: "/images/carousel-three.jpg", size: "small" },
-    { src: "/images/carousel-four.jpg", size: "medium" },
-    { src: "/images/carousel-five.jpg", shape: "square" },
-    { src: "/images/carousel-six.jpg", size: "large" },
-  ];
+  const galleryMap = {
+    food: foodImages,
+    product: productImages,
+    portrait: portraitImages,
+  };
+
+  const images = galleryMap[categorySlug as keyof typeof galleryMap];
+
+  if (!images) {
+    notFound();
+  }
 
   return (
     <div className="page-shell">
@@ -112,6 +73,7 @@ export default async function CategoryPage({
             alt={`${category.title} hero`}
             fill
             priority
+            sizes="100vw"
             placeholder="blur"
             className="object-cover"
           />
@@ -122,17 +84,17 @@ export default async function CategoryPage({
 
         {/* Content */}
         <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
-          <h1 className="font-serif text-2xl md:text-3xl lg:text-4xl text-white/80 italic font-semibold tracking-wide mb-2">
+          <h1 className="font-serif text-2xl md:text-3xl lg:text-4xl text-white/80 font-semibold tracking-wide mb-2">
             {category.headline}
           </h1>
-          <h2 className="font-serif text-xl md:text-2xl lg:text-4xl text-white/80 italic font-semibold tracking-wide mb-8">
+          <h2 className="font-serif text-xl md:text-2xl lg:text-4xl text-white/80 font-semibold tracking-wide mb-8">
             {category.subheadline}
           </h2>
           <a
             href="#gallery"
             className="text-white/65 text-sm md:text-md max-w-lg mx-auto mb-12 leading-relaxed"
           >
-            Scroll down to see more ↓  
+            Scroll down to see more ↓
           </a>
 
           {/* Social Links */}

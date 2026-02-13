@@ -25,48 +25,36 @@ const projects = [
     image: work1,
     title: "Luxury Skincare Campaign",
     client: "Belle Botanics",
-    description:
-      "A refined editorial series for a luxury skincare launch, blending natural textures with elegant studio lighting.",
   },
   {
     id: 2,
     image: work2,
     title: "Patisserie Menu Refresh",
     client: "Maison Doux",
-    description:
-      "Reimagining a classic patisserie menu with warm, inviting food photography that celebrates artisan craft.",
   },
   {
     id: 3,
     image: work3,
     title: "Farm-to-Table Story",
     client: "Green Roots Kitchen",
-    description:
-      "A visual narrative following fresh ingredients from local farms to beautifully plated dishes.",
   },
   {
     id: 4,
     image: work4,
     title: "Specialty Coffee Series",
     client: "Roast & Pour",
-    description:
-      "Moody, atmospheric imagery capturing the craft and ritual of specialty coffee brewing.",
   },
   {
     id: 5,
     image: work5,
     title: "Fragrance Collection",
     client: "Oud Atelier",
-    description:
-      "Still-life photography for a premium fragrance house, emphasizing luxury and craftsmanship.",
   },
   {
     id: 6,
     image: work6,
     title: "Restaurant Rebrand",
     client: "The Ember Grill",
-    description:
-      "Bold food photography supporting a complete restaurant rebrand and marketing campaign.",
   },
 ];
 
@@ -78,7 +66,7 @@ export const SignatureWork = () => {
     <section
       id="portfolio"
       ref={ref}
-      className="py-16 bg-background overflow-hidden"
+      className="py-16 -mt-16 bg-background "
     >
       {/* <div className="max-w-7xl mx-auto"> */}
       <div className="w-full px-8 md:px-16">
@@ -89,17 +77,17 @@ export const SignatureWork = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-14"
         >
-          <p className="section-kicker text-accent text-xs uppercase mb-4 font-semibold">
-            Projects
-          </p>
-          <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-foreground font-semibold tracking-tight mb-5">
+          <p className="section-kicker text-accent text-xl mb-4 font-semibold">
             Signature Work
-          </h2>
+          </p>
+          {/* <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-foreground font-semibold tracking-tight mb-5">
+            Signature Work
+          </h2> */}
           <div className="section-divider mb-6" />
-          <p className="text-muted-foreground max-w-xl mx-auto text-sm md:text-base">
+          {/* <p className="text-muted-foreground max-w-xl mx-auto text-sm md:text-base">
             Curated collaborations and photo series that define my creative
             vision.
-          </p>
+          </p> */}
         </motion.div>
 
         {/* Carousel */}
@@ -116,7 +104,7 @@ export const SignatureWork = () => {
             className="w-full"
             plugins={[Autoplay({ delay: 2000 })]}
           >
-            <CarouselContent >
+            <CarouselContent>
               {projects.map((project) => (
                 <CarouselItem
                   key={project.id}

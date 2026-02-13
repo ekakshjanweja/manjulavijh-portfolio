@@ -49,16 +49,16 @@ export const CategoriesSection = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <p className="section-kicker text-accent text-xs uppercase mb-4 -mt-24 font-semibold">
-            Categories
+          <p className="section-kicker text-accent text-xl mb-4 font-semibold">
+            Explore Collections
           </p>
-          <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-foreground font-semibold tracking-tight mb-5">
+          {/* <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-foreground font-semibold tracking-tight mb-5">
             Explore The Collections
-          </h2>
+          </h2> */}
           <div className="section-divider mb-6" />
-          <p className="text-muted-foreground max-w-xl mx-auto text-sm md:text-base">
+          {/* <p className="text-muted-foreground max-w-xl mx-auto text-sm md:text-base">
             Dive into focused galleries curated by subject and visual style.
-          </p>
+          </p> */}
         </motion.div>
 
         <motion.div

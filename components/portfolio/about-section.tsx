@@ -3,9 +3,7 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
-import { Camera, Award, Heart } from "lucide-react";
-import photographerPortrait from "@/public/images/photographer-portrait.jpg";
-import Image from "next/image";
+
 import { AnimatedImages } from "@/components/ui/animated-images";
 
 export const AboutSection = () => {
@@ -34,19 +32,22 @@ export const AboutSection = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <p className="section-kicker text-accent text-xs uppercase mb-4 font-semibold">
-            About
+          <p className="section-kicker text-accent text-xl  mb-4 font-semibold">
+            About Dr. Manjula Vijh
           </p>
+          {/* <h1 className=" font-serif text-black/75 text-3xl  mb-4 font-semibold">
+            About Dr. Manjula Vijh
+          </h1> */}
           <div className="section-divider mb-6" />
         </motion.div>
 
-        <div className="mb-12 text-center">
+        {/* <div className="mb-12 text-center">
           <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-foreground font-semibold tracking-tight leading-tight">
             The Art of
             <br />
             <span className="text-gold">Visual Storytelling</span>
           </h2>
-        </div>
+        </div> */}
 
         <div className="grid lg:grid-cols-5 gap-12 lg:gap-20 items-start">
           {/* Image -- takes 2 columns */}
@@ -81,47 +82,30 @@ export const AboutSection = () => {
           >
             <div className="space-y-5 text-muted-foreground leading-relaxed text-base">
               <p>
-                Manjula&apos;s journey into photography began quietly at home,
+                Manjula&apos;s journey into photography began quietly at home
                 through a love for baking. What started as documenting her own
-                bakes soon became an exploration of food, form, and
-                presentation. Over time, attention shifted from the act of
-                baking itself to the visual details around it, how food is
-                styled, composed, and experienced, turning a personal interest
-                into a deeper visual pursuit.
+                creations gradually became an exploration of food, form, and
+                presentation. Over time, her focus shifted from baking itself to
+                styling, composition, and the visual experience surrounding
+                food.
               </p>
               <p>
                 With over fourteen years of experience in academia and research,
-                and holding a PhD in Electronics, her approach to photography is
-                shaped by clarity, patience, and a methodical way of working.
-                The transition from an academic career into photography felt
-                like a natural and timely shift, allowing her to follow a
-                long-standing passion for food and visual expression, while
-                retaining the same rigour and depth of thought.
+                and a PhD in Electronics, her approach to photography is shaped
+                by clarity, patience, and a methodical mindset. Moving from
+                academia into photography felt like a natural progression,
+                allowing her to pursue visual expression while retaining the
+                same rigour and depth of thought. Her practice has evolved
+                through mentorship, collaboration, and continued self-driven
+                exploration.
               </p>
               <p>
-                Along the way, her practice has been shaped through learning
-                under experienced photographers and stylists, alongside
-                sustained self-driven exploration. This balance of mentorship,
-                study, and independent practice continues to inform her evolving
-                visual language.
-              </p>
-              <p>
-                Food remains at the heart of her work. It offers a space to
-                explore ideas of art and aesthetics through everyday subjects.
-                Her images are built gradually, paying attention to styling,
-                composition, and texture, while allowing light, shadow, and mood
-                to emerge intuitively. The approach remains understated, guided
-                by nuance, detail, and quiet storytelling. Lifestyle, product,
-                and portrait work flow naturally from this foundation, guided by
-                the same sensitivity and attention to detail.
-              </p>
-              <p>
-                When working with clients, the process is collaborative and
-                thoughtful. Each project begins with understanding context,
-                purpose, and vision, followed by a careful translation into
-                visuals that feel cohesive, purposeful, and authentic. The focus
-                remains on creating work that aligns with the brand&apos;s
-                identity while maintaining a distinct point of view.
+                Food remains at the core of her work, offering a space to
+                explore art through everyday subjects. Images develop gradually,
+                with careful attention to styling, texture, light, and mood.
+                Lifestyle, product, and portrait projects extend naturally from
+                this foundation, with a collaborative process that translates a
+                brand’s intent into thoughtful, cohesive visuals.
               </p>
             </div>
           </motion.div>

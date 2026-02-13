@@ -13,7 +13,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
-import { socialLinks } from "@/components/portfolio/social-links";
+import { socialLinks } from "@/components/portfolio/data/social-links";
 
 export const ContactSection = () => {
   const ref = useRef(null);
@@ -42,7 +42,7 @@ export const ContactSection = () => {
   ];
 
   return (
-    <section id="contact" ref={ref} className="py-18 bg-section-alt">
+    <section id="contact" ref={ref} className="py-16 bg-section-alt">
       <div className="max-w-5xl mx-auto">
         {/* Header */}
         <motion.div
@@ -51,17 +51,17 @@ export const ContactSection = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-14"
         >
-          <p className="section-kicker text-accent text-xs uppercase mb-4 font-semibold">
+          <p className="section-kicker text-accent text-xl mb-4 font-semibold">
             Contact
           </p>
-          <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-foreground font-semibold tracking-tight mb-5">
+          {/* <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-foreground font-semibold tracking-tight mb-5">
             Let&apos;s Work Together
-          </h2>
+          </h2> */}
           <div className="section-divider mb-6" />
-          <p className="text-muted-foreground max-w-lg mx-auto text-sm md:text-base">
+          {/* <p className="text-muted-foreground max-w-lg mx-auto text-sm md:text-base">
             Ready to bring your vision to life? Drop me a message and let&apos;s
             create something beautiful together.
-          </p>
+          </p> */}
         </motion.div>
 
         <div className="grid lg:grid-cols-5 gap-10 lg:gap-14">
@@ -202,7 +202,7 @@ export const ContactSection = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={social.label}
-                    className="w-10 h-10 border border-border/60 flex items-center justify-center text-muted-foreground hover:border-accent hover:text-accent transition-all duration-300"
+                    className="w-10 h-10 border border-border/80 flex items-center justify-center text-muted-foreground hover:border-accent hover:text-accent transition-all duration-300"
                   >
                     <social.icon size={18} />
                   </a>
