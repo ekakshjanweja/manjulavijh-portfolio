@@ -7,7 +7,7 @@ import MasonryGrid from "@/components/portfolio/masonry-grid";
 import { socialLinks } from "@/components/portfolio/data/social-links";
 import { foodImages } from "@/components/portfolio/data/food-images";
 import { productImages } from "@/components/portfolio/data/product-images";
-import { portraitImages } from "@/components/portfolio/data/portrait-images";
+import { conceptImages } from "@/components/portfolio/data/concept-images";
 
 type CategoryEntry = {
   title: string;
@@ -30,8 +30,8 @@ const categoryMeta = {
     subheadline: "Through Visual Storytelling",
     hero: foodHero,
   },
-  portrait: {
-    title: "Portrait",
+  concept: {
+    title: "Concept",
     headline: "Capturing Essence",
     subheadline: "Through Portrait Photography",
     hero: portraitHero,
@@ -53,7 +53,7 @@ export default async function CategoryPage({
   const galleryMap = {
     food: foodImages,
     product: productImages,
-    portrait: portraitImages,
+    concept: conceptImages,
   };
 
   const images = galleryMap[categorySlug as keyof typeof galleryMap];

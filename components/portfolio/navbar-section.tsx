@@ -22,9 +22,10 @@ const portfolioLinks = [
     children: [
       { name: "Food", href: "/portfolio/food" },
       { name: "Product", href: "/portfolio/product" },
-      { name: "Portrait", href: "/portfolio/portrait" },
+      //{ name: "Portrait", href: "/portfolio/portrait" },
     ],
   },
+  { name: "Concept", href: "/portfolio/concept" },
 ];
 
 export const NavbarSection = () => {

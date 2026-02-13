@@ -40,12 +40,11 @@ export const AnimatedImages = ({
   }, [autoplay, images.length]);
 
   return (
-    <div className="w-full">
-      <div className="relative h-110 w-110">
+    <div className="w-full flex flex-col items-center">
+      <div className="relative aspect-9/11 w-72 sm:w-8 md:w-96 lg:w-110 mx-auto">
         <AnimatePresence>
           {images.map((image, index) => {
-            const rotation =
-              presetRotations[index % presetRotations.length];
+            const rotation = presetRotations[index % presetRotations.length];
 
             return (
               <motion.div
@@ -61,9 +60,7 @@ export const AnimatedImages = ({
                   scale: isActive(index) ? 1 : 0.95,
                   z: isActive(index) ? 0 : -100,
                   rotate: isActive(index) ? 0 : rotation,
-                  zIndex: isActive(index)
-                    ? 40
-                    : images.length + 2 - index,
+                  zIndex: isActive(index) ? 40 : images.length + 2 - index,
                   y: isActive(index) ? [0, -40, 0] : 0,
                 }}
                 exit={{
@@ -91,7 +88,7 @@ export const AnimatedImages = ({
       </div>
 
       {/* Arrows */}
-      <div className="flex justify-center items-center gap-4 mt-4 w-110">
+      <div className="flex justify-center items-center gap-4 mt-4 w-full">
         <button
           onClick={handlePrev}
           className="flex size-8 items-center justify-center border border-input bg-background hover:border-accent hover:bg-accent/5 transition delay-100 disabled:pointer-events-none disabled:opacity-50"

@@ -23,7 +23,11 @@ export const AboutSection = () => {
   ];
 
   return (
-    <section id="about" ref={ref} className="section-padding bg-background">
+    <section
+      id="about"
+      ref={ref}
+      className="section-padding bg-background overflow-x-hidden"
+    >
       <div className="max-w-7xl mx-auto">
         {/* Section header */}
         <motion.div
@@ -32,7 +36,7 @@ export const AboutSection = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <p className="section-kicker text-accent text-xl  mb-4 font-semibold">
+          <p className="section-kicker text-accent text-2xl md:text-3xl lg:text-5xl mb-4 font-semibold">
             About Dr. Manjula Vijh
           </p>
           {/* <h1 className=" font-serif text-black/75 text-3xl  mb-4 font-semibold">
@@ -49,7 +53,9 @@ export const AboutSection = () => {
           </h2>
         </div> */}
 
-        <div className="grid lg:grid-cols-5 gap-12 lg:gap-20 items-start">
+        {/* <div className="grid lg:grid-cols-5 gap-12 lg:gap-20 items-start"> */}
+        {/* <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-20 items-start"> */}
+        <div className="grid grid-cols-1 xl:grid-cols-5 gap-10 xl:gap-20 items-start">
           {/* Image -- takes 2 columns */}
           {/* <motion.div
             initial={{ opacity: 0, x: -40 }}
@@ -69,7 +75,10 @@ export const AboutSection = () => {
             </div>
           </motion.div> */}
 
-          <div className="lg:col-span-2">
+          {/* <div className="xl:col-span-2 flex justify-center xl:justify-start">
+            <AnimatedImages images={images} autoplay />
+          </div> */}
+          <div className="xl:col-span-2 min-w-0 flex justify-center xl:justify-start">
             <AnimatedImages images={images} autoplay />
           </div>
 
@@ -78,34 +87,40 @@ export const AboutSection = () => {
             initial={{ opacity: 0, x: 40 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="lg:col-span-3 lg:pl-8"
+            className="xl:col-span-3 xl:pl-8 min-w-0"
           >
-            <div className="space-y-5 text-muted-foreground leading-relaxed text-base">
+            {/* <div className="space-y-5  text-muted-foreground leading-relaxed text-base"> */}
+            <div className="mx-auto space-y-5 text-center text-muted-foreground leading-relaxed text-base">
               <p>
-                Manjula&apos;s journey into photography began quietly at home
+                Manjula&apos;s journey into photography began quietly at home,
                 through a love for baking. What started as documenting her own
-                creations gradually became an exploration of food, form, and
-                presentation. Over time, her focus shifted from baking itself to
-                styling, composition, and the visual experience surrounding
-                food.
-              </p>
-              <p>
-                With over fourteen years of experience in academia and research,
-                and a PhD in Electronics, her approach to photography is shaped
-                by clarity, patience, and a methodical mindset. Moving from
-                academia into photography felt like a natural progression,
-                allowing her to pursue visual expression while retaining the
-                same rigour and depth of thought. Her practice has evolved
-                through mentorship, collaboration, and continued self-driven
+                bakes soon became an exploration of food, form, and
+                presentation. Over time, attention shifted from the act of
+                baking itself to the visual details around it, how food is
+                styled, composed, and experienced, turning a personal interest
+                into a deeper visual pursuit. With over fourteen years of
+                experience in academia and research, and holding a PhD in
+                Electronics, her approach to photography is shaped by clarity,
+                patience, and a methodical way of working. The transition from
+                an academic career into photography felt like a natural shift,
+                allowing her to follow a long-standing passion for food and
+                visual expression while retaining rigour and depth of thought.
+                Her practice has evolved through learning under experienced
+                photographers and stylists, alongside sustained self-driven
                 exploration.
               </p>
               <p>
-                Food remains at the core of her work, offering a space to
-                explore art through everyday subjects. Images develop gradually,
-                with careful attention to styling, texture, light, and mood.
-                Lifestyle, product, and portrait projects extend naturally from
-                this foundation, with a collaborative process that translates a
-                brand’s intent into thoughtful, cohesive visuals.
+                Food remains at the heart of her work, offering a space to
+                explore art and aesthetics through everyday subjects. Images are
+                built gradually, with attention to styling, composition, and
+                texture, allowing light, shadow, and mood to emerge intuitively.
+                The work favours subtle narratives and visual restraint,
+                allowing nuance and detail to take precedence. Lifestyle,
+                product, and portrait work flow naturally from this foundation.
+                When working with clients, the process is collaborative and
+                thoughtful, translating context and intent into visuals that
+                feel cohesive, purposeful, and aligned with the brand&apos;s
+                identity.
               </p>
             </div>
           </motion.div>

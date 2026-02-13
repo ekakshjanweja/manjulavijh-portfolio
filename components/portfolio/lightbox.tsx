@@ -91,7 +91,7 @@ export const Lightbox = ({
                   e.stopPropagation();
                   goPrev();
                 }}
-                className="absolute left-4 md:left-8 z-10 w-10 h-10 rounded-none bg-white/10 flex items-center justify-center text-white/70 hover:text-white hover:bg-white/20 transition-all"
+                className="absolute left-4 md:left-8 z-10 hidden md:flex w-10 h-10 rounded-none bg-white/10 items-center justify-center text-white/70 hover:text-white hover:bg-white/20 transition-all"
                 aria-label="Previous image"
               >
                 <ChevronLeft size={20} strokeWidth={1.5} />
@@ -104,7 +104,7 @@ export const Lightbox = ({
                   e.stopPropagation();
                   goNext();
                 }}
-                className="absolute right-4 md:right-8 z-10 w-10 h-10 rounded-none bg-white/10 flex items-center justify-center text-white/70 hover:text-white hover:bg-white/20 transition-all"
+                className="absolute right-4 md:right-8 z-10 hidden md:flex w-10 h-10 rounded-none bg-white/10 items-center justify-center text-white/70 hover:text-white hover:bg-white/20 transition-all"
                 aria-label="Next image"
               >
                 <ChevronRight size={20} strokeWidth={1.5} />
@@ -130,6 +130,31 @@ export const Lightbox = ({
                 placeholder="blur"
               />
             </div>
+
+            {items.length > 1 && (
+              <div className="mt-4 flex items-center justify-center gap-3 md:hidden">
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    goPrev();
+                  }}
+                  className="w-10 h-10 rounded-none bg-white/10 flex items-center justify-center text-white/70 hover:text-white hover:bg-white/20 transition-all"
+                  aria-label="Previous image"
+                >
+                  <ChevronLeft size={20} strokeWidth={1.5} />
+                </button>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    goNext();
+                  }}
+                  className="w-10 h-10 rounded-none bg-white/10 flex items-center justify-center text-white/70 hover:text-white hover:bg-white/20 transition-all"
+                  aria-label="Next image"
+                >
+                  <ChevronRight size={20} strokeWidth={1.5} />
+                </button>
+              </div>
+            )}
 
             {/* Caption */}
             <motion.div

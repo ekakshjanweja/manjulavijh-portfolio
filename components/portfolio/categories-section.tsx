@@ -24,12 +24,12 @@ const categories = [
     description:
       "Minimal product photography highlighting texture and composition.",
   },
-  {
-    title: "Portrait",
-    slug: "portrait",
-    image: portraitImage,
-    description: "Clean, modern portrait photography with emotional depth.",
-  },
+  // {
+  //   title: "Portrait",
+  //   slug: "portrait",
+  //   image: portraitImage,
+  //   description: "Clean, modern portrait photography with emotional depth.",
+  // },
 ];
 
 export const CategoriesSection = () => {
@@ -49,7 +49,7 @@ export const CategoriesSection = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <p className="section-kicker text-accent text-xl mb-4 font-semibold">
+          <p className="section-kicker text-accent text-2xl md:text-3xl lg:text-5xl mb-4 font-semibold">
             Explore Collections
           </p>
           {/* <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-foreground font-semibold tracking-tight mb-5">
@@ -66,7 +66,7 @@ export const CategoriesSection = () => {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.2 }}
           // className="grid grid-cols-1 sm:grid-cols-3 gap-6 items-stretch"
-          className="grid grid-cols-1 md:grid-cols-3 gap-6"
+          className="grid grid-cols-1 md:grid-cols-2 gap-6"
         >
           {categories.map((category) => (
             <Link

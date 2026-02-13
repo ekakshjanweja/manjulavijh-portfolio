@@ -27,7 +27,7 @@ export const HeroSection = () => {
       return () => mq.removeEventListener("change", callback);
     },
     () => window.matchMedia("(max-width: 768px)").matches,
-    () => true
+    () => true,
   );
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -37,7 +37,7 @@ export const HeroSection = () => {
   const imageY = useTransform(
     scrollYProgress,
     [0, 1],
-    ["0%", isMobile ? "0%" : "20%"]
+    ["0%", isMobile ? "0%" : "20%"],
   );
   const contentOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
   const contentY = useTransform(scrollYProgress, [0, 0.5], [0, -60]);
@@ -50,22 +50,22 @@ export const HeroSection = () => {
   };
 
   return (
-      <section
-        id="home"
-        ref={ref}
-        className="relative z-0 h-[100svh] min-h-[100svh] flex items-center justify-center overflow-hidden bg-black bg-cover bg-center"
-        style={{ backgroundImage: `url(${carouselTwo.src})` }}
-      >
+    <section
+      id="home"
+      ref={ref}
+      className="relative z-0 h-svh min-h-svh flex items-center justify-center overflow-hidden bg-black bg-cover bg-center"
+      style={{ backgroundImage: `url(${carouselTwo.src})` }}
+    >
       {/* Parallax Background Image */}
       <motion.div className="absolute inset-0 z-0" style={{ y: imageY }}>
-          <Carousel
-            className="-mt-4 h-full"
-            opts={{ loop: true }}
-            plugins={[Autoplay({ delay: 3000 })]}
-          >
-            <CarouselContent className="ml-0">
-              <CarouselItem className="flex justify-center pl-0">
-              <div className="relative w-full h-[100svh] min-h-[100svh] bg-black">
+        <Carousel
+          className="h-full"
+          opts={{ loop: true }}
+          plugins={[Autoplay({ delay: 3000 })]}
+        >
+          <CarouselContent className="ml-0">
+            <CarouselItem className="flex justify-center pl-0">
+              <div className="relative w-full h-svh min-h-svh bg-black">
                 <Image
                   src={carouselTwo}
                   alt="Food photography by Manjula Vijh"
@@ -80,7 +80,7 @@ export const HeroSection = () => {
             </CarouselItem>
 
             <CarouselItem className="flex justify-center pl-0">
-              <div className="relative w-full h-[100svh] min-h-[100svh] bg-black">
+              <div className="relative w-full h-svh min-h-svh bg-black">
                 <Image
                   src={carouselOne}
                   alt="Food photography by Manjula Vijh"
@@ -94,7 +94,7 @@ export const HeroSection = () => {
             </CarouselItem>
 
             <CarouselItem className="flex justify-center pl-0">
-              <div className="relative w-full h-[100svh] min-h-[100svh] bg-black">
+              <div className="relative w-full h-svh min-h-svh bg-black">
                 <Image
                   src={carouselThree}
                   alt="Food photography by Manjula Vijh"
@@ -108,7 +108,7 @@ export const HeroSection = () => {
             </CarouselItem>
 
             <CarouselItem className="flex justify-center pl-0">
-              <div className="relative w-full h-[100svh] min-h-[100svh] bg-black">
+              <div className="relative w-full h-svh min-h-svh bg-black">
                 <Image
                   src={carouselFour}
                   alt="Food photography by Manjula Vijh"

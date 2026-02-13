@@ -21,7 +21,7 @@ export const ClientsSection = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <p className="section-kicker text-accent text-xl mb-4 font-semibold">
+          <p className="section-kicker text-accent text-2xl md:text-3xl lg:text-5xl mb-4 font-semibold">
             Clients
           </p>
           {/* <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-foreground font-semibold tracking-tight mb-5">
@@ -42,10 +42,10 @@ export const ClientsSection = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.08 * index }}
-              // className="group rounded-none border border-border/50 bg-card/60 px-4 py-5 md:px-6 md:py-7 flex flex-col items-center justify-center gap-4 hover:border-accent/30 transition-all duration-300"
+              //className="group rounded-none over border border-border/50 bg-card/60 px-4 py-5 md:px-6 md:py-7 flex flex-col items-center justify-center gap-4 hover:border-accent/30 transition-all duration-300"
               className="flex items-center justify-center group"
             >
-              <div className="relative w-52 h-28 md:w-60 md:h-36">
+              <div className="relative mx-2 w-64 h-32 md:w-72 md:h-40 lg:w-80 lg:h-44">
                 <Image
                   src={brand.logo}
                   alt={brand.name}

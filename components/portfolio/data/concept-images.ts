@@ -5,7 +5,7 @@ export type ImageItem = {
   shape?: "square" | "portrait";
 };
 
-export const portraitImages: ImageItem[] = [
+export const conceptImages: ImageItem[] = [
   {
     id: 1,
     src: "/images/portfolio/portrait-01.jpg",

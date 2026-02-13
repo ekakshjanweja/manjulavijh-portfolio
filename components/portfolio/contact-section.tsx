@@ -51,7 +51,7 @@ export const ContactSection = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-14"
         >
-          <p className="section-kicker text-accent text-xl mb-4 font-semibold">
+          <p className="section-kicker text-accent text-2xl md:text-3xl lg:text-5xl mb-4 font-semibold">
             Contact
           </p>
           {/* <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-foreground font-semibold tracking-tight mb-5">
