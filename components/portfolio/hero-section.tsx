@@ -4,7 +4,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import { useRef } from "react";
+import { useRef, useSyncExternalStore } from "react";
 import carouselOne from "@/public/images/carousel/carousel-one.jpg";
 import carouselTwo from "@/public/images/carousel/carousel-two.jpg";
 import carouselThree from "@/public/images/carousel/carousel-three.jpg";
@@ -20,12 +20,25 @@ import Autoplay from "embla-carousel-autoplay";
 
 export const HeroSection = () => {
   const ref = useRef(null);
+  const isMobile = useSyncExternalStore(
+    (callback) => {
+      const mq = window.matchMedia("(max-width: 768px)");
+      mq.addEventListener("change", callback);
+      return () => mq.removeEventListener("change", callback);
+    },
+    () => window.matchMedia("(max-width: 768px)").matches,
+    () => true
+  );
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"],
   });
 
-  const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
+  const imageY = useTransform(
+    scrollYProgress,
+    [0, 1],
+    ["0%", isMobile ? "0%" : "20%"]
+  );
   const contentOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
   const contentY = useTransform(scrollYProgress, [0, 0.5], [0, -60]);
 
@@ -40,19 +53,19 @@ export const HeroSection = () => {
       <section
         id="home"
         ref={ref}
-        className="relative z-0 h-screen flex items-center justify-center overflow-hidden bg-black bg-cover bg-center"
+        className="relative z-0 h-[100svh] min-h-[100svh] flex items-center justify-center overflow-hidden bg-black bg-cover bg-center"
         style={{ backgroundImage: `url(${carouselTwo.src})` }}
       >
       {/* Parallax Background Image */}
       <motion.div className="absolute inset-0 z-0" style={{ y: imageY }}>
           <Carousel
-            className="-mt-4"
+            className="-mt-4 h-full"
             opts={{ loop: true }}
             plugins={[Autoplay({ delay: 3000 })]}
           >
             <CarouselContent className="ml-0">
               <CarouselItem className="flex justify-center pl-0">
-              <div className="relative w-full h-screen bg-black">
+              <div className="relative w-full h-[100svh] min-h-[100svh] bg-black">
                 <Image
                   src={carouselTwo}
                   alt="Food photography by Manjula Vijh"
@@ -67,11 +80,12 @@ export const HeroSection = () => {
             </CarouselItem>
 
             <CarouselItem className="flex justify-center pl-0">
-              <div className="relative w-full h-screen bg-black">
+              <div className="relative w-full h-[100svh] min-h-[100svh] bg-black">
                 <Image
                   src={carouselOne}
                   alt="Food photography by Manjula Vijh"
                   fill
+                  priority
                   placeholder="blur"
                   sizes="100vw"
                   className="object-cover object-top"
@@ -80,11 +94,12 @@ export const HeroSection = () => {
             </CarouselItem>
 
             <CarouselItem className="flex justify-center pl-0">
-              <div className="relative w-full h-screen bg-black">
+              <div className="relative w-full h-[100svh] min-h-[100svh] bg-black">
                 <Image
                   src={carouselThree}
                   alt="Food photography by Manjula Vijh"
                   fill
+                  priority
                   placeholder="blur"
                   sizes="100vw"
                   className="object-cover object-top"
@@ -93,11 +108,12 @@ export const HeroSection = () => {
             </CarouselItem>
 
             <CarouselItem className="flex justify-center pl-0">
-              <div className="relative w-full h-screen bg-black">
+              <div className="relative w-full h-[100svh] min-h-[100svh] bg-black">
                 <Image
                   src={carouselFour}
                   alt="Food photography by Manjula Vijh"
                   fill
+                  priority
                   placeholder="blur"
                   sizes="100vw"
                   className="object-cover object-top"
