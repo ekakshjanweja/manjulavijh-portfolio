@@ -53,32 +53,9 @@ export const AboutSection = () => {
           </h2>
         </div> */}
 
-        {/* <div className="grid lg:grid-cols-5 gap-12 lg:gap-20 items-start"> */}
-        {/* <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-20 items-start"> */}
-        <div className="grid grid-cols-1 xl:grid-cols-5 gap-10 xl:gap-20 items-start">
-          {/* Image -- takes 2 columns */}
-          {/* <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8 }}
-            className="lg:col-span-2 relative"
-          >
-            <div className="relative aspect-3/4 overflow-hidden rounded-none shadow-2xl shadow-black/10">
-              <Image
-                src={photographerPortrait}
-                alt="Manjula Vijh - Food & Product Photographer"
-                className="w-full h-full object-cover"
-                placeholder="blur"
-              />
-              {/* Subtle gold frame accent */}
-          {/* <div className="absolute inset-0 ring-1 ring-inset ring-white/10 rounded-none" />
-            </div>
-          </motion.div> */}
-
-          {/* <div className="xl:col-span-2 flex justify-center xl:justify-start">
-            <AnimatedImages images={images} autoplay />
-          </div> */}
-          <div className="xl:col-span-2 min-w-0 flex justify-center xl:justify-start">
+        <div className="about-grid-fix grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-16 items-start">
+          {/* Image carousel -- takes 2 columns */}
+          <div className="about-image-container lg:col-span-2 min-w-0 flex justify-center lg:justify-start">
             <AnimatedImages images={images} autoplay />
           </div>
 
@@ -87,10 +64,9 @@ export const AboutSection = () => {
             initial={{ opacity: 0, x: 40 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="xl:col-span-3 xl:pl-8 min-w-0"
+            className="lg:col-span-3 lg:pl-8 min-w-0"
           >
-            {/* <div className="space-y-5  text-muted-foreground leading-relaxed text-base"> */}
-            <div className="mx-auto space-y-5 text-center text-muted-foreground leading-relaxed text-base">
+            <div className="mx-auto space-y-5 text-center lg:text-left text-muted-foreground leading-relaxed text-base">
               <p>
                 Manjula&apos;s journey into photography began quietly at home,
                 through a love for baking. What started as documenting her own

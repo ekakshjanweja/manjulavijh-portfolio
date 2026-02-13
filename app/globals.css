@@ -389,3 +389,20 @@ h6 {
   background-color: hsl(38 70% 50% / 0.2);
   color: inherit;
 }
+
+/* iPad Pro fix - keep about section stacked at exactly 1024px width */
+@media (width: 1024px) {
+  .about-grid-fix {
+    grid-template-columns: 1fr !important;
+  }
+  
+  .about-grid-fix > * {
+    grid-column: span 1 !important;
+    padding-left: 0 !important;
+    text-align: center !important;
+  }
+  
+  .about-grid-fix .about-image-container {
+    justify-content: center !important;
+  }
+}

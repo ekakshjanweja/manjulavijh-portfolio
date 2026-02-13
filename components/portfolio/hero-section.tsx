@@ -61,7 +61,7 @@ export const HeroSection = () => {
         <Carousel
           className="h-full"
           opts={{ loop: true }}
-          plugins={[Autoplay({ delay: 3000 })]}
+          plugins={[Autoplay({ delay: 4000, stopOnInteraction: false })]}
         >
           <CarouselContent className="ml-0">
             <CarouselItem className="flex justify-center pl-0">
@@ -71,7 +71,6 @@ export const HeroSection = () => {
                   alt="Food photography by Manjula Vijh"
                   fill
                   priority
-                  fetchPriority="high"
                   placeholder="blur"
                   sizes="100vw"
                   className="object-cover object-top"
@@ -85,8 +84,8 @@ export const HeroSection = () => {
                   src={carouselOne}
                   alt="Food photography by Manjula Vijh"
                   fill
-                  priority
-                  placeholder="blur"
+                  loading="lazy"
+                  placeholder="empty"
                   sizes="100vw"
                   className="object-cover object-top"
                 />
@@ -99,8 +98,8 @@ export const HeroSection = () => {
                   src={carouselThree}
                   alt="Food photography by Manjula Vijh"
                   fill
-                  priority
-                  placeholder="blur"
+                  loading="lazy"
+                  placeholder="empty"
                   sizes="100vw"
                   className="object-cover object-top"
                 />
@@ -113,8 +112,8 @@ export const HeroSection = () => {
                   src={carouselFour}
                   alt="Food photography by Manjula Vijh"
                   fill
-                  priority
-                  placeholder="blur"
+                  loading="lazy"
+                  placeholder="empty"
                   sizes="100vw"
                   className="object-cover object-top"
                 />
