@@ -14,22 +14,17 @@ const categories = [
     title: "Food",
     slug: "food",
     image: foodImage,
-    description:
-      "Food photography featuring dishes, menus, and editorial stories.",
   },
   {
     title: "Product",
     slug: "product",
     image: productImage,
-    description:
-      "Minimal product photography highlighting texture and composition.",
   },
-  // {
-  //   title: "Portrait",
-  //   slug: "portrait",
-  //   image: portraitImage,
-  //   description: "Clean, modern portrait photography with emotional depth.",
-  // },
+  {
+    title: "Concept",
+    slug: "concept",
+    image: portraitImage,
+  },
 ];
 
 export const CategoriesSection = () => {
@@ -37,11 +32,7 @@ export const CategoriesSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section
-      id="categories"
-      ref={ref}
-      className="py-16 bg-background"
-    >
+    <section id="categories" ref={ref} className="py-16 bg-background">
       <div className="w-full px-8 md:px-16">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -65,8 +56,8 @@ export const CategoriesSection = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.2 }}
-          // className="grid grid-cols-1 sm:grid-cols-3 gap-6 items-stretch"
-          className="grid grid-cols-1 md:grid-cols-2 gap-6"
+           className="grid grid-cols-1 sm:grid-cols-3 gap-6 items-stretch"
+          //className="grid grid-cols-1 md:grid-cols-2 gap-6"
         >
           {categories.map((category) => (
             <Link
@@ -91,9 +82,6 @@ export const CategoriesSection = () => {
                 <h3 className="font-serif text-xl text-cream font-semibold mb-2">
                   {category.title}
                 </h3>
-                <p className="text-cream/80 text-sm leading-relaxed">
-                  {category.description}
-                </p>
               </div>
             </Link>
           ))}

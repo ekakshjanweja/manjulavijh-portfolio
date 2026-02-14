@@ -4,11 +4,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import { useRef, useSyncExternalStore } from "react";
-import carouselOne from "@/public/images/carousel/carousel-one.jpg";
-import carouselTwo from "@/public/images/carousel/carousel-two.jpg";
-import carouselThree from "@/public/images/carousel/carousel-three.jpg";
-import carouselFour from "@/public/images/carousel/carousel-four.jpg";
+import { useRef, useState, useEffect } from "react";
 import {
   Carousel,
   CarouselContent,
@@ -18,17 +14,26 @@ import {
 } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
 
+import Carousel_1 from "@/public/images/home_carousel/Carousel_1.jpg";
+import Carousel_2 from "@/public/images/home_carousel/Carousel_2.jpg";
+import Carousel_3 from "@/public/images/home_carousel/Carousel_3.jpg";
+import Carousel_4 from "@/public/images/home_carousel/Carousel_4.jpg";
+import Carousel_5 from "@/public/images/home_carousel/Carousel_5.jpg";
+import carousel_1 from "@/public/images/home_carousel/carousel_1.jpg";
+import carousel_2 from "@/public/images/home_carousel/carousel_2.png";
+
 export const HeroSection = () => {
   const ref = useRef(null);
-  const isMobile = useSyncExternalStore(
-    (callback) => {
-      const mq = window.matchMedia("(max-width: 768px)");
-      mq.addEventListener("change", callback);
-      return () => mq.removeEventListener("change", callback);
-    },
-    () => window.matchMedia("(max-width: 768px)").matches,
-    () => true,
-  );
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 768px)");
+    setIsMobile(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
+
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"],
@@ -54,7 +59,7 @@ export const HeroSection = () => {
       id="home"
       ref={ref}
       className="relative z-0 h-svh min-h-svh flex items-center justify-center overflow-hidden bg-black bg-cover bg-center"
-      style={{ backgroundImage: `url(${carouselTwo.src})` }}
+      style={{ backgroundImage: `url(${Carousel_1.src})` }}
     >
       {/* Parallax Background Image */}
       <motion.div className="absolute inset-0 z-0" style={{ y: imageY }}>
@@ -67,7 +72,7 @@ export const HeroSection = () => {
             <CarouselItem className="flex justify-center pl-0">
               <div className="relative w-full h-svh min-h-svh bg-black">
                 <Image
-                  src={carouselTwo}
+                  src={Carousel_1}
                   alt="Food photography by Manjula Vijh"
                   fill
                   priority
@@ -81,7 +86,7 @@ export const HeroSection = () => {
             <CarouselItem className="flex justify-center pl-0">
               <div className="relative w-full h-svh min-h-svh bg-black">
                 <Image
-                  src={carouselOne}
+                  src={Carousel_2}
                   alt="Food photography by Manjula Vijh"
                   fill
                   loading="lazy"
@@ -95,7 +100,7 @@ export const HeroSection = () => {
             <CarouselItem className="flex justify-center pl-0">
               <div className="relative w-full h-svh min-h-svh bg-black">
                 <Image
-                  src={carouselThree}
+                  src={Carousel_3}
                   alt="Food photography by Manjula Vijh"
                   fill
                   loading="lazy"
@@ -109,7 +114,20 @@ export const HeroSection = () => {
             <CarouselItem className="flex justify-center pl-0">
               <div className="relative w-full h-svh min-h-svh bg-black">
                 <Image
-                  src={carouselFour}
+                  src={Carousel_4}
+                  alt="Food photography by Manjula Vijh"
+                  fill
+                  loading="lazy"
+                  placeholder="empty"
+                  sizes="100vw"
+                  className="object-cover object-top"
+                />
+              </div>
+            </CarouselItem>
+            <CarouselItem className="flex justify-center pl-0">
+              <div className="relative w-full h-svh min-h-svh bg-black">
+                <Image
+                  src={Carousel_5}
                   alt="Food photography by Manjula Vijh"
                   fill
                   loading="lazy"
@@ -126,8 +144,10 @@ export const HeroSection = () => {
       </motion.div>
 
       {/* Gradient Overlays for depth */}
-      <div className="absolute inset-0 z-0 bg-linear-to-t from-black/70 via-black/30 to-black/10" />
-      <div className="absolute inset-0 z-0 bg-linear-to-r from-black/20 to-transparent" />
+      {/* <div className="absolute inset-0 z-0 bg-linear-to-t from-black/70 via-black/30 to-black/10" />
+      <div className="absolute inset-0 z-0 bg-linear-to-r from-black/20 to-transparent" /> */}
+      <div className="absolute inset-0 z-0 bg-gradient-to-t from-black/85 via-black/55 to-black/25" />
+      <div className="absolute inset-0 z-0 bg-black/20" />
 
       {/* Content */}
       <motion.div
@@ -145,15 +165,15 @@ export const HeroSection = () => {
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-          className="text-white/80 text-4xl md:text-4xl font-bold font-serif mb-3"
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="text-white/80 text-4xl uppercase md:text-4xl font-bold font-serif mb-3"
         >
           Culinary and Lifestyle Photography
         </motion.p>
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.8 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
           className="text-white/65 text-lg md:text-xl max-w-lg font-serif mx-auto mb-12 leading-relaxed"
         >
           Thoughtful work across food, products, and everyday moments, shaped
@@ -162,7 +182,7 @@ export const HeroSection = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 1 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4"
         >
           <Button

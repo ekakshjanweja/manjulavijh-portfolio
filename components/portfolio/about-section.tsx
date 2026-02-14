@@ -53,7 +53,7 @@ export const AboutSection = () => {
           </h2>
         </div> */}
 
-        <div className="about-grid-fix grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-16 items-start">
+        <div className="about-grid-fix grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-16 lg:items-center">
           {/* Image carousel -- takes 2 columns */}
           <div className="about-image-container lg:col-span-2 min-w-0 flex justify-center lg:justify-start">
             <AnimatedImages images={images} autoplay />
@@ -66,37 +66,40 @@ export const AboutSection = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="lg:col-span-3 lg:pl-8 min-w-0"
           >
-            <div className="mx-auto space-y-5 text-center lg:text-left text-muted-foreground leading-relaxed text-base">
+            <div className="mx-auto space-y-5 text-justify text-muted-foreground leading-relaxed text-base">
               <p>
-                Manjula&apos;s journey into photography began quietly at home,
-                through a love for baking. What started as documenting her own
-                bakes soon became an exploration of food, form, and
-                presentation. Over time, attention shifted from the act of
-                baking itself to the visual details around it, how food is
-                styled, composed, and experienced, turning a personal interest
-                into a deeper visual pursuit. With over fourteen years of
-                experience in academia and research, and holding a PhD in
-                Electronics, her approach to photography is shaped by clarity,
-                patience, and a methodical way of working. The transition from
-                an academic career into photography felt like a natural shift,
-                allowing her to follow a long-standing passion for food and
-                visual expression while retaining rigour and depth of thought.
-                Her practice has evolved through learning under experienced
-                photographers and stylists, alongside sustained self-driven
+                Manjula’s journey into photography began at home, through a
+                simple love for baking. Photographing her own bakes slowly
+                became a way of paying attention, not just to the food itself,
+                but to how things looked, felt, and came together visually. Over
+                time, this grew into a deeper interest in food, form, and
+                presentation, and later expanded to include products and styled
+                scenes, influenced by a broader curiosity for art, creativity,
+                and visual balance. This meant noticing the small details around
+                how subjects are framed, styled, and composed, and how these
+                choices shape the way they are experienced. What began as a
+                personal habit gradually turned into a focused photographic
+                practice shaped by curiosity, observation, and hands-on
                 exploration.
               </p>
               <p>
-                Food remains at the heart of her work, offering a space to
-                explore art and aesthetics through everyday subjects. Images are
-                built gradually, with attention to styling, composition, and
-                texture, allowing light, shadow, and mood to emerge intuitively.
-                The work favours subtle narratives and visual restraint,
-                allowing nuance and detail to take precedence. Lifestyle,
-                product, and portrait work flow naturally from this foundation.
-                When working with clients, the process is collaborative and
-                thoughtful, translating context and intent into visuals that
-                feel cohesive, purposeful, and aligned with the brand&apos;s
-                identity.
+                With over fourteen years of experience in academia and research,
+                and holding a PhD in Electronics, her way of working carries a
+                sense of patience, structure, and clarity. Largely self-taught,
+                she has learned through consistent practice, experimentation,
+                and guidance from experienced photographers and stylists along
+                the way. Food continues to be a constant presence in her work,
+                alongside product and conceptual explorations, offering space to
+                work with aesthetics, mood, and visual storytelling through
+                everyday subjects. Over the years, she has built an extensive
+                and evolving collection of props, surfaces, and objects,
+                particularly for food and product photography, which naturally
+                support her styling process. Images are developed gradually,
+                with attention to composition, light, and shadow, allowing
+                texture, mood, and nuance to emerge with care. When working with
+                clients, the approach is collaborative and thoughtful,
+                translating ideas and intent into visuals that feel cohesive,
+                purposeful, and true to the brand.
               </p>
             </div>
           </motion.div>

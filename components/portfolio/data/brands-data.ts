@@ -24,12 +24,17 @@ export const brands = [
     logo: "/images/logos/wethechefs.png",
   },
   {
-    name: "TruVitals",
-    logo: "/images/logos/truvitals.png",
+    name: "Naqsh",
+    logo: "/images/logos/naqsh.png",
   },
+
   {
     name: "Sauve Bags",
     logo: "/images/logos/sauvebags.png",
+  },
+  {
+    name: "Ruva",
+    logo: "/images/logos/ruva.png",
   },
   {
     name: "Hambrehombre",
@@ -38,6 +43,10 @@ export const brands = [
   {
     name: "Bakery La Mia",
     logo: "/images/logos/lamia.png",
+  },
+  {
+    name: "TruVitals",
+    logo: "/images/logos/truvitals.png",
   },
   {
     name: "The Bakistry",
@@ -52,4 +61,17 @@ export const brands = [
   //   name: "Nitara Jewels",
   //   logo: "/images/logos/nitarajewels.png",
   // },
+
+  {
+    name: "Ahad",
+    logo: "/images/logos/ahad.png",
+  },
+  {
+    name: "Mrignandini",
+    logo: "/images/logos/mrignandini.png",
+  },
+  {
+    name: "Whyte Farms",
+    logo: "/images/logos/whyte.png",
+  },
 ];
