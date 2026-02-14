@@ -41,6 +41,7 @@ export const HeroSection = () => {
   const isInView = useInView(ref, { margin: "-20% 0px", once: false });
   const prefersReducedMotion = useReducedMotion();
   const [isMobile, setIsMobile] = useState(false);
+  const [carouselApi, setCarouselApi] = useState<any>(null);
 
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 768px)");
@@ -64,7 +65,9 @@ export const HeroSection = () => {
   const contentY = useTransform(scrollYProgress, [0, 0.5], [0, -60]);
 
   useEffect(() => {
-    const autoplay = autoplayRef.current;
+    if (!carouselApi) return;
+
+    const autoplay = carouselApi.plugins()?.autoplay;
     if (!autoplay) return;
 
     if (!isInView || prefersReducedMotion) {
@@ -73,7 +76,7 @@ export const HeroSection = () => {
     }
 
     autoplay.play();
-  }, [isInView, prefersReducedMotion]);
+  }, [carouselApi, isInView, prefersReducedMotion]);
 
   const scrollToSection = (href: string) => {
     const element = document.querySelector(href);
@@ -91,6 +94,7 @@ export const HeroSection = () => {
       {/* Parallax Background Image */}
       <motion.div className="absolute inset-0 z-0" style={{ y: imageY }}>
         <Carousel
+          setApi={setCarouselApi}
           className="h-full"
           opts={{ loop: true }}
           plugins={[autoplayRef.current]}
