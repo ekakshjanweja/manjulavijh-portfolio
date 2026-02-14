@@ -1,73 +1,99 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { motion, useInView, useReducedMotion } from "framer-motion";
+import dynamic from "next/dynamic";
+import { useEffect, useRef } from "react";
 import Image from "next/image";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselPrevious,
-  CarouselNext,
-} from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
 
-import work1 from "@/public/images/carousel-one.jpg";
-import work2 from "@/public/images/carousel-two.jpg";
-import work3 from "@/public/images/carousel-three.jpg";
-import work4 from "@/public/images/carousel-four.jpg";
-import work5 from "@/public/images/carousel-five.jpg";
-import work6 from "@/public/images/carousel-six.jpg";
+import Brand_1 from "@/public/images/signature_work/Brand_1.jpg";
+import Brand_2 from "@/public/images/signature_work/Brand_2.jpg";
+import Brand_3 from "@/public/images/signature_work/Brand_3.jpg";
+import Brand_4 from "@/public/images/signature_work/Brand_4.jpg";
+import Brand_5 from "@/public/images/signature_work/Brand_5.jpg";
+import Brand_6 from "@/public/images/signature_work/Brand_6.jpg";
+
+const Carousel = dynamic(
+  () => import("@/components/ui/carousel").then((mod) => mod.Carousel),
+  { ssr: false },
+);
+const CarouselContent = dynamic(
+  () => import("@/components/ui/carousel").then((mod) => mod.CarouselContent),
+  { ssr: false },
+);
+const CarouselItem = dynamic(
+  () => import("@/components/ui/carousel").then((mod) => mod.CarouselItem),
+  { ssr: false },
+);
+const CarouselPrevious = dynamic(
+  () => import("@/components/ui/carousel").then((mod) => mod.CarouselPrevious),
+  { ssr: false },
+);
+const CarouselNext = dynamic(
+  () => import("@/components/ui/carousel").then((mod) => mod.CarouselNext),
+  { ssr: false },
+);
 
 const projects = [
   {
     id: 1,
-    image: work1,
-    title: "Luxury Skincare Campaign",
-    client: "Belle Botanics",
+    image: Brand_1,
+    title: "Unaav The Dakshin Cafe",
+    client: "Unaav The Dakshin Cafe",
   },
   {
     id: 2,
-    image: work2,
-    title: "Patisserie Menu Refresh",
-    client: "Maison Doux",
+    image: Brand_2,
+    title: "Ruva Organics",
+    client: "Ruva Organics",
   },
   {
     id: 3,
-    image: work3,
-    title: "Farm-to-Table Story",
-    client: "Green Roots Kitchen",
+    image: Brand_3,
+    title: "Zimero Icecreams",
+    client: "Zimero Icecreams",
   },
   {
     id: 4,
-    image: work4,
-    title: "Specialty Coffee Series",
-    client: "Roast & Pour",
+    image: Brand_4,
+    title: "Olani Candles",
+    client: "Olani Candles",
   },
   {
     id: 5,
-    image: work5,
-    title: "Fragrance Collection",
-    client: "Oud Atelier",
+    image: Brand_5,
+    title: "Shyam Sweets",
+    client: "Shyam Sweets",
   },
   {
     id: 6,
-    image: work6,
-    title: "Restaurant Rebrand",
-    client: "The Ember Grill",
+    image: Brand_6,
+    title: "Suave Bags",
+    client: "Suave Bags",
   },
 ];
 
 export const SignatureWork = () => {
-  const ref = useRef(null);
+  const ref = useRef<HTMLElement | null>(null);
+  const autoplayRef = useRef(Autoplay({ delay: 3000, stopOnInteraction: true }));
   const isInView = useInView(ref, { once: true, margin: "-80px" });
+  const sectionVisible = useInView(ref, { once: false, margin: "-20% 0px" });
+  const prefersReducedMotion = useReducedMotion();
+
+  useEffect(() => {
+    const autoplay = autoplayRef.current;
+    if (!autoplay) return;
+
+    if (!sectionVisible || prefersReducedMotion) {
+      autoplay.stop();
+      return;
+    }
+
+    autoplay.play();
+  }, [sectionVisible, prefersReducedMotion]);
 
   return (
-    <section
-      id="portfolio"
-      ref={ref}
-      className="py-16 -mt-16 bg-background "
-    >
+    <section id="portfolio" ref={ref} className="py-16 -mt-16 bg-background ">
       {/* <div className="max-w-7xl mx-auto"> */}
       <div className="w-full px-8 md:px-16">
         {/* Header */}
@@ -102,7 +128,7 @@ export const SignatureWork = () => {
               loop: true,
             }}
             className="w-full"
-            plugins={[Autoplay({ delay: 2000 })]}
+            plugins={[autoplayRef.current]}
           >
             <CarouselContent>
               {projects.map((project) => (
@@ -116,8 +142,12 @@ export const SignatureWork = () => {
                       <Image
                         src={project.image}
                         alt={project.title}
-                        className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                        fill
+                        sizes="(max-width: 640px) 96vw, (max-width: 1024px) 85vw, (max-width: 1280px) 48vw, 38vw"
+                        loading="lazy"
+                        className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
                         placeholder="blur"
+                        quality={74}
                       />
                       {/* Subtle overlay on hover */}
                       <div className="absolute inset-0 bg-linear-to-t from-charcoal/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />

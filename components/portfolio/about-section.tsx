@@ -12,13 +12,13 @@ export const AboutSection = () => {
 
   const images = [
     {
-      src: "./images/aboutme/aboutme1.jpeg",
+      src: "./images/aboutme/aboutme1.jpg",
     },
     {
-      src: "./images/aboutme/aboutme2.jpeg",
+      src: "./images/aboutme/aboutme2.jpg",
     },
     {
-      src: "./images/aboutme/aboutme3.jpeg",
+      src: "./images/aboutme/aboutme3.jpg",
     },
   ];
 

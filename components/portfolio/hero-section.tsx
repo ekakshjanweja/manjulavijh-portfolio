@@ -1,17 +1,11 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useInView, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import dynamic from "next/dynamic";
 import { useRef, useState, useEffect } from "react";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
 
 import Carousel_1 from "@/public/images/home_carousel/Carousel_1.jpg";
@@ -19,11 +13,33 @@ import Carousel_2 from "@/public/images/home_carousel/Carousel_2.jpg";
 import Carousel_3 from "@/public/images/home_carousel/Carousel_3.jpg";
 import Carousel_4 from "@/public/images/home_carousel/Carousel_4.jpg";
 import Carousel_5 from "@/public/images/home_carousel/Carousel_5.jpg";
-import carousel_1 from "@/public/images/home_carousel/carousel_1.jpg";
-import carousel_2 from "@/public/images/home_carousel/carousel_2.png";
+
+const Carousel = dynamic(
+  () => import("@/components/ui/carousel").then((mod) => mod.Carousel),
+  { ssr: false },
+);
+const CarouselContent = dynamic(
+  () => import("@/components/ui/carousel").then((mod) => mod.CarouselContent),
+  { ssr: false },
+);
+const CarouselItem = dynamic(
+  () => import("@/components/ui/carousel").then((mod) => mod.CarouselItem),
+  { ssr: false },
+);
+const CarouselPrevious = dynamic(
+  () => import("@/components/ui/carousel").then((mod) => mod.CarouselPrevious),
+  { ssr: false },
+);
+const CarouselNext = dynamic(
+  () => import("@/components/ui/carousel").then((mod) => mod.CarouselNext),
+  { ssr: false },
+);
 
 export const HeroSection = () => {
-  const ref = useRef(null);
+  const ref = useRef<HTMLElement | null>(null);
+  const autoplayRef = useRef(Autoplay({ delay: 4500, stopOnInteraction: true }));
+  const isInView = useInView(ref, { margin: "-20% 0px", once: false });
+  const prefersReducedMotion = useReducedMotion();
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -42,10 +58,22 @@ export const HeroSection = () => {
   const imageY = useTransform(
     scrollYProgress,
     [0, 1],
-    ["0%", isMobile ? "0%" : "20%"],
+    ["0%", isMobile || prefersReducedMotion ? "0%" : "20%"],
   );
   const contentOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
   const contentY = useTransform(scrollYProgress, [0, 0.5], [0, -60]);
+
+  useEffect(() => {
+    const autoplay = autoplayRef.current;
+    if (!autoplay) return;
+
+    if (!isInView || prefersReducedMotion) {
+      autoplay.stop();
+      return;
+    }
+
+    autoplay.play();
+  }, [isInView, prefersReducedMotion]);
 
   const scrollToSection = (href: string) => {
     const element = document.querySelector(href);
@@ -58,15 +86,14 @@ export const HeroSection = () => {
     <section
       id="home"
       ref={ref}
-      className="relative z-0 h-svh min-h-svh flex items-center justify-center overflow-hidden bg-black bg-cover bg-center"
-      style={{ backgroundImage: `url(${Carousel_1.src})` }}
+      className="relative z-0 h-svh min-h-svh flex items-center justify-center overflow-hidden bg-black"
     >
       {/* Parallax Background Image */}
       <motion.div className="absolute inset-0 z-0" style={{ y: imageY }}>
         <Carousel
           className="h-full"
           opts={{ loop: true }}
-          plugins={[Autoplay({ delay: 4000, stopOnInteraction: false })]}
+          plugins={[autoplayRef.current]}
         >
           <CarouselContent className="ml-0">
             <CarouselItem className="flex justify-center pl-0">
@@ -77,6 +104,7 @@ export const HeroSection = () => {
                   fill
                   priority
                   placeholder="blur"
+                  quality={75}
                   sizes="100vw"
                   className="object-cover object-top"
                 />
@@ -91,6 +119,7 @@ export const HeroSection = () => {
                   fill
                   loading="lazy"
                   placeholder="empty"
+                  quality={72}
                   sizes="100vw"
                   className="object-cover object-top"
                 />
@@ -105,6 +134,7 @@ export const HeroSection = () => {
                   fill
                   loading="lazy"
                   placeholder="empty"
+                  quality={72}
                   sizes="100vw"
                   className="object-cover object-top"
                 />
@@ -119,6 +149,7 @@ export const HeroSection = () => {
                   fill
                   loading="lazy"
                   placeholder="empty"
+                  quality={72}
                   sizes="100vw"
                   className="object-cover object-top"
                 />
@@ -132,6 +163,7 @@ export const HeroSection = () => {
                   fill
                   loading="lazy"
                   placeholder="empty"
+                  quality={72}
                   sizes="100vw"
                   className="object-cover object-top"
                 />
@@ -146,7 +178,7 @@ export const HeroSection = () => {
       {/* Gradient Overlays for depth */}
       {/* <div className="absolute inset-0 z-0 bg-linear-to-t from-black/70 via-black/30 to-black/10" />
       <div className="absolute inset-0 z-0 bg-linear-to-r from-black/20 to-transparent" /> */}
-      <div className="absolute inset-0 z-0 bg-gradient-to-t from-black/85 via-black/55 to-black/25" />
+      <div className="absolute inset-0 z-0 bg-linear-to-t from-black/85 via-black/55 to-black/25" />
       <div className="absolute inset-0 z-0 bg-black/20" />
 
       {/* Content */}

@@ -1,8 +1,9 @@
 import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import foodHero from "@/public/images/hero-food.jpg";
-import portraitHero from "@/public/images/photographer-portrait.jpg";
+import food_banner from "@/public/images/category/food_banner.jpg";
+import product_banner from "@/public/images/category/product_banner.jpg";
+import concept_banner from "@/public/images/category/concept_banner.jpg";
 import MasonryGrid from "@/components/portfolio/masonry-grid";
 import { socialLinks } from "@/components/portfolio/data/social-links";
 import { foodImages } from "@/components/portfolio/data/food-images";
@@ -22,19 +23,19 @@ const categoryMeta = {
     title: "Food",
     headline: "Bringing Brands to Life",
     subheadline: "Through Food Photography",
-    hero: foodHero,
+    hero: food_banner,
   },
   product: {
     title: "Product",
     headline: "Elevating Products",
     subheadline: "Through Visual Storytelling",
-    hero: foodHero,
+    hero: product_banner,
   },
   concept: {
     title: "Concept",
     headline: "Capturing Essence",
     subheadline: "Through Portrait Photography",
-    hero: portraitHero,
+    hero: concept_banner,
   },
 };
 
@@ -80,8 +81,9 @@ export default async function CategoryPage({
         </div>
 
         {/* Gradient Overlays */}
-        <div className="absolute inset-0 z-1 bg-linear-to-t from-black/60 via-black/30 to-black/20" />
-
+        {/* <div className="absolute inset-0 z-1 bg-linear-to-t from-black/60 via-black/30 to-black/20" /> */}
+ <div className="absolute inset-0 z-0 bg-linear-to-t from-black/85 via-black/55 to-black/25" />
+      <div className="absolute inset-0 z-0 bg-black/20" />
         {/* Content */}
         <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
           <h1 className="font-serif text-2xl md:text-3xl lg:text-4xl text-white/80 font-semibold tracking-wide mb-2">

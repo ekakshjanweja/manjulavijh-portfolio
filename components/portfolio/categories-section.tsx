@@ -5,25 +5,25 @@ import { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-import foodImage from "@/public/images/hero-food.jpg";
-import productImage from "@/public/images/carousel-one.jpg";
-import portraitImage from "@/public/images/photographer-portrait.jpg";
+import food_cover from "@/public/images/category/food_cover.jpg";
+import product_cover from "@/public/images/category/product_cover.jpg";
+import concept_cover from "@/public/images/category/concept_cover.jpg";
 
 const categories = [
   {
     title: "Food",
     slug: "food",
-    image: foodImage,
+    image: food_cover,
   },
   {
     title: "Product",
     slug: "product",
-    image: productImage,
+    image: product_cover,
   },
   {
     title: "Concept",
     slug: "concept",
-    image: portraitImage,
+    image: concept_cover,
   },
 ];
 
@@ -56,7 +56,7 @@ export const CategoriesSection = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.2 }}
-           className="grid grid-cols-1 sm:grid-cols-3 gap-6 items-stretch"
+          className="grid grid-cols-1 sm:grid-cols-3 gap-6 items-stretch"
           //className="grid grid-cols-1 md:grid-cols-2 gap-6"
         >
           {categories.map((category) => (
@@ -66,10 +66,11 @@ export const CategoriesSection = () => {
               className="group relative flex h-full flex-col overflow-hidden border border-border/60 bg-card"
             >
               {/* <div className="relative aspect-3/2 overflow-hidden"> */}
-              <div className="relative h-110 md:h-120 overflow-hidden">
+              <div className="relative aspect-4/5 overflow-hidden">
                 <Image
                   src={category.image}
                   alt={`${category.title} category sample`}
+                  fill
                   className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
                   placeholder="blur"
                 />
