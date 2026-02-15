@@ -48,7 +48,7 @@ export const CategoriesSection = () => {
               className="group relative flex h-full flex-col overflow-hidden border border-border/60 bg-card"
             >
               {/* <div className="relative aspect-3/2 overflow-hidden"> */}
-              <div className="relative aspect-4/5 overflow-hidden">
+              <div className="relative aspect-3/4 overflow-hidden">
                 <Image
                   src={category.image}
                   alt={`${category.title} category sample`}

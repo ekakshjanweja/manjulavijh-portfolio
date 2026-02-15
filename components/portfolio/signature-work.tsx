@@ -74,7 +74,9 @@ const projects = [
 
 export const SignatureWork = () => {
   const ref = useRef<HTMLElement | null>(null);
-  const autoplayRef = useRef(Autoplay({ delay: 3000, stopOnInteraction: true }));
+  const autoplayRef = useRef(
+    Autoplay({ delay: 3000, stopOnInteraction: true }),
+  );
   const [isInView, setIsInView] = useState(false);
   const [sectionVisible, setSectionVisible] = useState(true);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
@@ -150,10 +152,10 @@ export const SignatureWork = () => {
         >
           <Carousel
             opts={{
-              align: "start",
+              align: "center",
               loop: true,
             }}
-            className="w-full"
+            className="w-full overflow-visible"
             plugins={[autoplayRef.current]}
             setApi={setCarouselApi}
           >
@@ -161,7 +163,8 @@ export const SignatureWork = () => {
               {projects.map((project) => (
                 <CarouselItem
                   key={project.id}
-                  className="pl-4 md:pl-6 basis-[102%] sm:basis-[96%] md:basis-[85%] lg:basis-[48%] xl:basis-[38%]"
+                  // className="pl-4 md:pl-6 basis-[102%] sm:basis-[96%] md:basis-[85%] lg:basis-[48%] xl:basis-[38%]"
+                  className="pl-4 md:pl-6 basis-[80%] sm:basis-[70%] md:basis-[55%] lg:basis-[42%] xl:basis-[34%]"
                 >
                   <div className="group relative">
                     {/* Image */}
