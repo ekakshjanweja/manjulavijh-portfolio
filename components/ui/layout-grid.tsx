@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { motion } from "motion/react";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 type Card = {
@@ -60,16 +61,22 @@ export const LayoutGrid = ({ cards }: { cards: Card[] }) => {
 
 const ImageComponent = ({ card }: { card: Card }) => {
   return (
-    <motion.img
+    <motion.div
       layoutId={`image-${card.id}-image`}
-      src={card.thumbnail}
-      height="500"
-      width="500"
       className={cn(
-        "object-cover object-top absolute inset-0 h-full w-full transition duration-200",
+        "absolute inset-0 h-full w-full transition duration-200",
       )}
-      alt="thumbnail"
-    />
+    >
+      <Image
+        src={card.thumbnail}
+        alt="thumbnail"
+        fill
+        sizes="(max-width: 768px) 100vw, 33vw"
+        className="object-cover object-top"
+        quality={72}
+        loading="lazy"
+      />
+    </motion.div>
   );
 };
 

@@ -51,6 +51,8 @@ function Carousel({
   children,
   ...props
 }: React.ComponentProps<"div"> & CarouselProps) {
+  const containerRef = React.useRef<HTMLDivElement | null>(null)
+  const [isInView, setIsInView] = React.useState(true)
   const [carouselRef, api] = useEmblaCarousel(
     {
       ...opts,
@@ -104,6 +106,32 @@ function Carousel({
     }
   }, [api, onSelect])
 
+  React.useEffect(() => {
+    if (!containerRef.current) return
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsInView(entry.isIntersecting),
+      { rootMargin: "200px 0px", threshold: 0.1 }
+    )
+
+    observer.observe(containerRef.current)
+
+    return () => observer.disconnect()
+  }, [])
+
+  React.useEffect(() => {
+    if (!api) return
+    const autoplay = api.plugins()?.autoplay
+    if (!autoplay) return
+
+    if (!isInView) {
+      autoplay.stop()
+      return
+    }
+
+    autoplay.play()
+  }, [api, isInView])
+
   return (
     <CarouselContext.Provider
       value={{
@@ -119,6 +147,7 @@ function Carousel({
       }}
     >
       <div
+        ref={containerRef}
         onKeyDownCapture={handleKeyDown}
         className={cn("relative", className)}
         role="region"

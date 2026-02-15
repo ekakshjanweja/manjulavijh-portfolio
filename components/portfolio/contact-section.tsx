@@ -1,8 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { useInView } from "framer-motion";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import {
   Mail,
   Phone,
@@ -16,8 +14,6 @@ import { toast } from "sonner";
 import { socialLinks } from "@/components/portfolio/data/social-links";
 
 export const ContactSection = () => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -42,15 +38,10 @@ export const ContactSection = () => {
   ];
 
   return (
-    <section id="contact" ref={ref} className="py-16 bg-section-alt">
+    <section id="contact" className="py-16 bg-section-alt">
       <div className="max-w-5xl mx-auto">
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-14"
-        >
+        <div className="text-center mb-14">
           <p className="section-kicker text-accent text-2xl md:text-3xl lg:text-5xl mb-4 font-semibold">
             Contact
           </p>
@@ -62,16 +53,11 @@ export const ContactSection = () => {
             Ready to bring your vision to life? Drop me a message and let&apos;s
             create something beautiful together.
           </p> */}
-        </motion.div>
+        </div>
 
         <div className="grid lg:grid-cols-5 gap-10 lg:gap-14">
           {/* Contact Form -- takes 3 columns */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.2 }}
-            className="lg:col-span-3"
-          >
+          <div className="lg:col-span-3">
             <form
               onSubmit={handleSubmit}
               className="space-y-5 border border-border/50 bg-card/50 p-6 md:p-8 backdrop-blur-sm"
@@ -158,15 +144,10 @@ export const ContactSection = () => {
                 )}
               </Button>
             </form>
-          </motion.div>
+          </div>
 
           {/* Contact Info -- takes 2 columns */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.3 }}
-            className="lg:col-span-2 space-y-8"
-          >
+          <div className="lg:col-span-2 space-y-8">
             <div>
               <h3 className="font-serif text-xl text-foreground font-semibold tracking-tight mb-6">
                 Get in Touch
@@ -209,7 +190,7 @@ export const ContactSection = () => {
                 ))}
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

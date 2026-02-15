@@ -1,7 +1,3 @@
-"use client";
-
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -28,18 +24,10 @@ const categories = [
 ];
 
 export const CategoriesSection = () => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
-
   return (
-    <section id="categories" ref={ref} className="py-16 bg-background">
+    <section id="categories" className="py-16 bg-background">
       <div className="w-full px-8 md:px-16">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-12"
-        >
+        <div className="text-center mb-12">
           <p className="section-kicker text-accent text-2xl md:text-3xl lg:text-5xl mb-4 font-semibold">
             Explore Collections
           </p>
@@ -50,15 +38,9 @@ export const CategoriesSection = () => {
           {/* <p className="text-muted-foreground max-w-xl mx-auto text-sm md:text-base">
             Dive into focused galleries curated by subject and visual style.
           </p> */}
-        </motion.div>
+        </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="grid grid-cols-1 sm:grid-cols-3 gap-6 items-stretch"
-          //className="grid grid-cols-1 md:grid-cols-2 gap-6"
-        >
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 items-stretch">
           {categories.map((category) => (
             <Link
               key={category.slug}
@@ -71,6 +53,9 @@ export const CategoriesSection = () => {
                   src={category.image}
                   alt={`${category.title} category sample`}
                   fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 33vw, 360px"
+                  loading="lazy"
+                  quality={72}
                   className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
                   placeholder="blur"
                 />
@@ -86,7 +71,7 @@ export const CategoriesSection = () => {
               </div>
             </Link>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

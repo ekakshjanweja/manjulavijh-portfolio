@@ -2,7 +2,8 @@
 
 import { IconArrowLeft, IconArrowRight } from "@tabler/icons-react";
 import { motion, AnimatePresence } from "motion/react";
-import { useEffect, useState } from "react";
+import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
 
 type Image = {
   src: string;
@@ -16,6 +17,8 @@ export const AnimatedImages = ({
   autoplay?: boolean;
 }) => {
   const [active, setActive] = useState(0);
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const [isInView, setIsInView] = useState(true);
 
   const presetRotations = [-8, 6, -4, 9, -7, 5];
 
@@ -30,20 +33,34 @@ export const AnimatedImages = ({
   const isActive = (index: number) => index === active;
 
   useEffect(() => {
-    if (!autoplay) return;
+    if (!containerRef.current) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsInView(entry.isIntersecting),
+      { rootMargin: "200px 0px", threshold: 0.1 },
+    );
+
+    observer.observe(containerRef.current);
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!autoplay || !isInView) return;
 
     const interval = setInterval(() => {
       setActive((prev) => (prev + 1) % images.length);
     }, 5000);
 
     return () => clearInterval(interval);
-  }, [autoplay, images.length]);
+  }, [autoplay, images.length, isInView]);
 
   return (
-    <div className="w-full flex flex-col items-center">
+    <div ref={containerRef} className="w-full flex flex-col items-center">
       <div className="relative aspect-9/11 w-72 sm:w-8 md:w-96 lg:w-110 mx-auto">
         <AnimatePresence>
           {images.map((image, index) => {
+            if (!isActive(index)) return null;
             const rotation = presetRotations[index % presetRotations.length];
 
             return (
@@ -51,35 +68,35 @@ export const AnimatedImages = ({
                 key={image.src}
                 initial={{
                   opacity: 0,
-                  scale: 0.9,
-                  z: -100,
+                  scale: 0.96,
                   rotate: rotation,
                 }}
                 animate={{
-                  opacity: isActive(index) ? 1 : 0.7,
-                  scale: isActive(index) ? 1 : 0.95,
-                  z: isActive(index) ? 0 : -100,
-                  rotate: isActive(index) ? 0 : rotation,
-                  zIndex: isActive(index) ? 40 : images.length + 2 - index,
-                  y: isActive(index) ? [0, -40, 0] : 0,
+                  opacity: 1,
+                  scale: 1,
+                  rotate: 0,
                 }}
                 exit={{
                   opacity: 0,
-                  scale: 0.9,
-                  z: 100,
+                  scale: 0.98,
                   rotate: rotation,
                 }}
                 transition={{
-                  duration: 0.4,
+                  duration: 0.35,
                   ease: "easeInOut",
                 }}
                 className="absolute inset-0 origin-bottom"
               >
-                <img
+                <Image
                   src={image.src}
                   alt=""
+                  fill
+                  sizes="(max-width: 640px) 80vw, (max-width: 1024px) 50vw, 420px"
+                  className="object-cover object-center"
                   draggable={false}
-                  className="h-full w-full object-cover object-center"
+                  loading="lazy"
+                  quality={72}
+                  priority={false}
                 />
               </motion.div>
             );

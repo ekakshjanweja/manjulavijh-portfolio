@@ -44,6 +44,9 @@ export default function BrandsPage() {
                     src={brand.logo}
                     alt={brand.name}
                     fill
+                    sizes="(max-width: 768px) 50vw, (max-width: 1280px) 25vw, 320px"
+                    loading="lazy"
+                    quality={70}
                     className="object-contain"
                   />
                 </div>

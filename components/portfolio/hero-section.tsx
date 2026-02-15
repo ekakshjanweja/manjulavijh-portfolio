@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useInView, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
@@ -16,7 +16,7 @@ import Carousel_5 from "@/public/images/home_carousel/Carousel_5.jpg";
 
 const Carousel = dynamic(
   () => import("@/components/ui/carousel").then((mod) => mod.Carousel),
-  { ssr: false },
+  { ssr: false, loading: () => <div className="h-svh min-h-svh" /> },
 );
 const CarouselContent = dynamic(
   () => import("@/components/ui/carousel").then((mod) => mod.CarouselContent),
@@ -38,7 +38,7 @@ const CarouselNext = dynamic(
 export const HeroSection = () => {
   const ref = useRef<HTMLElement | null>(null);
   const autoplayRef = useRef(Autoplay({ delay: 4500, stopOnInteraction: true }));
-  const isInView = useInView(ref, { margin: "-20% 0px", once: false });
+  const [isInView, setIsInView] = useState(true);
   const prefersReducedMotion = useReducedMotion();
   const [isMobile, setIsMobile] = useState(false);
   const [carouselApi, setCarouselApi] = useState<any>(null);
@@ -49,6 +49,19 @@ export const HeroSection = () => {
     const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
     mq.addEventListener("change", handler);
     return () => mq.removeEventListener("change", handler);
+  }, []);
+
+  useEffect(() => {
+    if (!ref.current) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsInView(entry.isIntersecting),
+      { rootMargin: "200px 0px", threshold: 0.1 },
+    );
+
+    observer.observe(ref.current);
+
+    return () => observer.disconnect();
   }, []);
 
   const { scrollYProgress } = useScroll({
@@ -92,73 +105,76 @@ export const HeroSection = () => {
       className="relative z-0 h-svh min-h-svh flex items-center justify-center overflow-hidden bg-black"
     >
       {/* Parallax Background Image */}
-      <motion.div className="absolute inset-0 z-0" style={{ y: imageY }}>
-        <Carousel
-          setApi={setCarouselApi}
-          className="h-full"
-          opts={{ loop: true }}
-          plugins={[autoplayRef.current]}
+        <motion.div
+          className="absolute inset-0 z-0"
+          style={{ y: imageY, willChange: "transform" }}
         >
-          <CarouselContent className="ml-0">
-            <CarouselItem className="flex justify-center pl-0">
-              <div className="relative w-full h-svh min-h-svh bg-black">
-                <Image
-                  src={Carousel_1}
-                  alt="Food photography by Manjula Vijh"
-                  fill
-                  priority
-                  placeholder="blur"
-                  quality={75}
-                  sizes="100vw"
-                  className="object-cover object-top"
-                />
-              </div>
-            </CarouselItem>
+          <Carousel
+            setApi={setCarouselApi}
+            className="h-full"
+            opts={{ loop: true }}
+            plugins={[autoplayRef.current]}
+          >
+            <CarouselContent className="ml-0">
+              <CarouselItem className="flex justify-center pl-0">
+                <div className="relative w-full h-svh min-h-svh bg-black">
+                  <Image
+                    src={Carousel_1}
+                    alt="Food photography by Manjula Vijh"
+                    fill
+                    priority
+                    placeholder="blur"
+                    quality={75}
+                    sizes="100vw"
+                    className="object-cover object-top"
+                  />
+                </div>
+              </CarouselItem>
+
+              <CarouselItem className="flex justify-center pl-0">
+                <div className="relative w-full h-svh min-h-svh bg-black">
+                  <Image
+                    src={Carousel_2}
+                    alt="Food photography by Manjula Vijh"
+                    fill
+                    loading="lazy"
+                    placeholder="empty"
+                    quality={72}
+                    sizes="100vw"
+                    className="object-cover object-top"
+                  />
+                </div>
+              </CarouselItem>
 
             <CarouselItem className="flex justify-center pl-0">
               <div className="relative w-full h-svh min-h-svh bg-black">
-                <Image
-                  src={Carousel_2}
-                  alt="Food photography by Manjula Vijh"
-                  fill
-                  loading="lazy"
-                  placeholder="empty"
-                  quality={72}
-                  sizes="100vw"
-                  className="object-cover object-top"
-                />
-              </div>
-            </CarouselItem>
+                  <Image
+                    src={Carousel_3}
+                    alt="Food photography by Manjula Vijh"
+                    fill
+                    loading="lazy"
+                    placeholder="empty"
+                    quality={72}
+                    sizes="100vw"
+                    className="object-cover object-top"
+                  />
+                </div>
+              </CarouselItem>
 
             <CarouselItem className="flex justify-center pl-0">
               <div className="relative w-full h-svh min-h-svh bg-black">
-                <Image
-                  src={Carousel_3}
-                  alt="Food photography by Manjula Vijh"
-                  fill
-                  loading="lazy"
-                  placeholder="empty"
-                  quality={72}
-                  sizes="100vw"
-                  className="object-cover object-top"
-                />
-              </div>
-            </CarouselItem>
-
-            <CarouselItem className="flex justify-center pl-0">
-              <div className="relative w-full h-svh min-h-svh bg-black">
-                <Image
-                  src={Carousel_4}
-                  alt="Food photography by Manjula Vijh"
-                  fill
-                  loading="lazy"
-                  placeholder="empty"
-                  quality={72}
-                  sizes="100vw"
-                  className="object-cover object-top"
-                />
-              </div>
-            </CarouselItem>
+                  <Image
+                    src={Carousel_4}
+                    alt="Food photography by Manjula Vijh"
+                    fill
+                    loading="lazy"
+                    placeholder="empty"
+                    quality={72}
+                    sizes="100vw"
+                    className="object-cover object-top"
+                  />
+                </div>
+              </CarouselItem>
             <CarouselItem className="flex justify-center pl-0">
               <div className="relative w-full h-svh min-h-svh bg-black">
                 <Image
@@ -186,10 +202,10 @@ export const HeroSection = () => {
       <div className="absolute inset-0 z-0 bg-black/20" />
 
       {/* Content */}
-      <motion.div
-        className="relative z-10 text-center px-6 max-w-4xl mx-auto"
-        style={{ opacity: contentOpacity, y: contentY }}
-      >
+        <motion.div
+          className="relative z-10 text-center px-6 max-w-4xl mx-auto"
+          style={{ opacity: contentOpacity, y: contentY, willChange: "transform" }}
+        >
         {/* <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -198,29 +214,14 @@ export const HeroSection = () => {
         >
           Manjula Vijh
         </motion.h1> */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="text-white/80 text-4xl uppercase md:text-4xl font-bold font-serif mb-3"
-        >
+        <p className="text-white/80 text-4xl uppercase md:text-4xl font-bold font-serif mb-3 animate-fade-in">
           Culinary and Lifestyle Photography
-        </motion.p>
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="text-white/65 text-lg md:text-xl max-w-lg font-serif mx-auto mb-12 leading-relaxed"
-        >
+        </p>
+        <p className="text-white/65 text-lg md:text-xl max-w-lg font-serif mx-auto mb-12 leading-relaxed animate-fade-up">
           Thoughtful work across food, products, and everyday moments, shaped
           into timeless visuals.
-        </motion.p>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4"
-        >
+        </p>
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-up">
           <Button
             onClick={() => scrollToSection("#portfolio")}
             variant="hero"
@@ -237,26 +238,21 @@ export const HeroSection = () => {
           >
             Get in Touch
           </Button>
-        </motion.div>
+        </div>
       </motion.div>
 
       {/* Scroll Indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2"
-      >
-        <motion.button
-          onClick={() => scrollToSection("#about")}
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-          className="text-white/40 hover:text-white/70 transition-colors"
-          aria-label="Scroll to about section"
-        >
-          <ChevronDown size={24} strokeWidth={1.5} />
-        </motion.button>
-      </motion.div>
+        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-fade-in">
+          <motion.button
+            onClick={() => scrollToSection("#about")}
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+            className="text-white/40 hover:text-white/70 transition-colors"
+            aria-label="Scroll to about section"
+          >
+            <ChevronDown size={24} strokeWidth={1.5} />
+          </motion.button>
+        </div>
     </section>
   );
 };

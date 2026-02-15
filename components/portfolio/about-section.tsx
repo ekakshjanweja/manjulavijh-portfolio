@@ -1,24 +1,39 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { useInView } from "framer-motion";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import dynamic from "next/dynamic";
 
-import { AnimatedImages } from "@/components/ui/animated-images";
+const AnimatedImages = dynamic(
+  () => import("@/components/ui/animated-images").then((mod) => mod.AnimatedImages),
+  { ssr: false, loading: () => <div className="aspect-9/11 w-72 sm:w-8 md:w-96 lg:w-110" /> },
+);
 
 export const AboutSection = () => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const ref = useRef<HTMLElement | null>(null);
+  const [isInView, setIsInView] = useState(false);
+
+  useEffect(() => {
+    if (!ref.current) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsInView(entry.isIntersecting),
+      { rootMargin: "-100px 0px", threshold: 0.1 },
+    );
+
+    observer.observe(ref.current);
+
+    return () => observer.disconnect();
+  }, []);
 
   const images = [
     {
-      src: "./images/aboutme/aboutme1.jpg",
+      src: "/images/aboutme/aboutme1.jpg",
     },
     {
-      src: "./images/aboutme/aboutme2.jpg",
+      src: "/images/aboutme/aboutme2.jpg",
     },
     {
-      src: "./images/aboutme/aboutme3.jpg",
+      src: "/images/aboutme/aboutme3.jpg",
     },
   ];
 
@@ -30,11 +45,10 @@ export const AboutSection = () => {
     >
       <div className="max-w-7xl mx-auto">
         {/* Section header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+        <div
+          className={`text-center mb-16 transition-all duration-700 ease-out ${
+            isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+          }`}
         >
           <p className="section-kicker text-accent text-2xl md:text-3xl lg:text-5xl mb-4 font-semibold">
             About Dr. Manjula Vijh
@@ -43,7 +57,7 @@ export const AboutSection = () => {
             About Dr. Manjula Vijh
           </h1> */}
           <div className="section-divider mb-6" />
-        </motion.div>
+        </div>
 
         {/* <div className="mb-12 text-center">
           <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-foreground font-semibold tracking-tight leading-tight">
@@ -60,11 +74,10 @@ export const AboutSection = () => {
           </div>
 
           {/* Content -- takes 3 columns */}
-          <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="lg:col-span-3 lg:pl-8 min-w-0"
+          <div
+            className={`lg:col-span-3 lg:pl-8 min-w-0 transition-all duration-700 ease-out delay-150 ${
+              isInView ? "opacity-100 translate-x-0" : "opacity-0 translate-x-6"
+            }`}
           >
             <div className="mx-auto space-y-5 text-justify text-muted-foreground leading-relaxed text-base">
               <p>
@@ -102,7 +115,7 @@ export const AboutSection = () => {
                 purposeful, and true to the brand.
               </p>
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

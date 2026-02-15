@@ -76,6 +76,7 @@ export default async function CategoryPage({
             priority
             sizes="100vw"
             placeholder="blur"
+            quality={78}
             className="object-cover"
           />
         </div>

@@ -1,8 +1,7 @@
 "use client";
 
-import { motion, useInView, useReducedMotion } from "framer-motion";
 import dynamic from "next/dynamic";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Autoplay from "embla-carousel-autoplay";
 
@@ -15,7 +14,7 @@ import Brand_6 from "@/public/images/signature_work/Brand_6.jpg";
 
 const Carousel = dynamic(
   () => import("@/components/ui/carousel").then((mod) => mod.Carousel),
-  { ssr: false },
+  { ssr: false, loading: () => <div className="h-[60vh]" /> },
 );
 const CarouselContent = dynamic(
   () => import("@/components/ui/carousel").then((mod) => mod.CarouselContent),
@@ -76,12 +75,40 @@ const projects = [
 export const SignatureWork = () => {
   const ref = useRef<HTMLElement | null>(null);
   const autoplayRef = useRef(Autoplay({ delay: 3000, stopOnInteraction: true }));
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
-  const sectionVisible = useInView(ref, { once: false, margin: "-20% 0px" });
-  const prefersReducedMotion = useReducedMotion();
+  const [isInView, setIsInView] = useState(false);
+  const [sectionVisible, setSectionVisible] = useState(true);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const [carouselApi, setCarouselApi] = useState<any>(null);
 
   useEffect(() => {
-    const autoplay = autoplayRef.current;
+    if (!ref.current) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInView((prev) => prev || entry.isIntersecting);
+        setSectionVisible(entry.isIntersecting);
+      },
+      { rootMargin: "-20% 0px", threshold: 0.1 },
+    );
+
+    observer.observe(ref.current);
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setPrefersReducedMotion(media.matches);
+    const handler = (event: MediaQueryListEvent) =>
+      setPrefersReducedMotion(event.matches);
+    media.addEventListener("change", handler);
+    return () => media.removeEventListener("change", handler);
+  }, []);
+
+  useEffect(() => {
+    if (!carouselApi) return;
+
+    const autoplay = carouselApi.plugins()?.autoplay;
     if (!autoplay) return;
 
     if (!sectionVisible || prefersReducedMotion) {
@@ -90,18 +117,17 @@ export const SignatureWork = () => {
     }
 
     autoplay.play();
-  }, [sectionVisible, prefersReducedMotion]);
+  }, [carouselApi, sectionVisible, prefersReducedMotion]);
 
   return (
     <section id="portfolio" ref={ref} className="py-16 -mt-16 bg-background ">
       {/* <div className="max-w-7xl mx-auto"> */}
       <div className="w-full px-8 md:px-16">
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-14"
+        <div
+          className={`text-center mb-14 transition-all duration-700 ease-out ${
+            isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+          }`}
         >
           <p className="section-kicker text-accent text-2xl md:text-3xl lg:text-5xl mb-4 font-semibold">
             Signature Work
@@ -114,13 +140,13 @@ export const SignatureWork = () => {
             Curated collaborations and photo series that define my creative
             vision.
           </p> */}
-        </motion.div>
+        </div>
 
         {/* Carousel */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.2 }}
+        <div
+          className={`transition-all duration-700 ease-out delay-150 ${
+            isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+          }`}
         >
           <Carousel
             opts={{
@@ -129,6 +155,7 @@ export const SignatureWork = () => {
             }}
             className="w-full"
             plugins={[autoplayRef.current]}
+            setApi={setCarouselApi}
           >
             <CarouselContent>
               {projects.map((project) => (
@@ -148,6 +175,7 @@ export const SignatureWork = () => {
                         className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
                         placeholder="blur"
                         quality={74}
+                        priority={false}
                       />
                       {/* Subtle overlay on hover */}
                       <div className="absolute inset-0 bg-linear-to-t from-charcoal/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -177,7 +205,7 @@ export const SignatureWork = () => {
               <CarouselNext className="static translate-y-0 size-9 sm:size-10 rounded-none border-border/60 hover:border-accent/50 hover:bg-accent/5" />
             </div>
           </Carousel>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

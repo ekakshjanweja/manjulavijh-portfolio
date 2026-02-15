@@ -128,6 +128,8 @@ export const Lightbox = ({
                 alt={currentItem.title}
                 className="w-full h-full object-contain"
                 placeholder="blur"
+                sizes="(max-width: 768px) 100vw, 80vw"
+                quality={80}
               />
             </div>
 
