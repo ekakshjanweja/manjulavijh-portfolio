@@ -124,7 +124,7 @@ export const SignatureWork = () => {
   return (
     <section id="portfolio" ref={ref} className="py-16 -mt-16 bg-background ">
       {/* <div className="max-w-7xl mx-auto"> */}
-      <div className="w-full px-8 md:px-16">
+      <div className="w-full px-4 sm:px-8 md:px-16">
         {/* Header */}
         <div
           className={`text-center mb-14 transition-all duration-700 ease-out ${
@@ -164,11 +164,11 @@ export const SignatureWork = () => {
                 <CarouselItem
                   key={project.id}
                   // className="pl-4 md:pl-6 basis-[102%] sm:basis-[96%] md:basis-[85%] lg:basis-[48%] xl:basis-[38%]"
-                  className="pl-4 md:pl-6 basis-[80%] sm:basis-[70%] md:basis-[55%] lg:basis-[42%] xl:basis-[34%]"
+                  className="pl-4 md:pl-6 basis-[102%] sm:basis-[75%] md:basis-[55%] lg:basis-[42%] xl:basis-[34%]"
                 >
                   <div className="group relative">
                     {/* Image */}
-                    <div className="relative aspect-4/5 overflow-hidden rounded-none">
+                    <div className="relative aspect-3/4 sm:aspect-4/5 overflow-hidden rounded-none">
                       <Image
                         src={project.image}
                         alt={project.title}
