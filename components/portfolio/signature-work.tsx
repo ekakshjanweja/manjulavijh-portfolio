@@ -164,7 +164,7 @@ export const SignatureWork = () => {
                 <CarouselItem
                   key={project.id}
                   // className="pl-4 md:pl-6 basis-[102%] sm:basis-[96%] md:basis-[85%] lg:basis-[48%] xl:basis-[38%]"
-                  className="pl-4 md:pl-6 basis-[102%] sm:basis-[75%] md:basis-[55%] lg:basis-[42%] xl:basis-[34%]"
+                  className="pl-4 md:pl-6 basis-[102%] sm:basis-[96%] md:basis-[75%] lg:basis-[42%] xl:basis-[34%]"
                 >
                   <div className="group relative">
                     {/* Image */}

@@ -26,7 +26,7 @@ const categories = [
 export const CategoriesSection = () => {
   return (
     <section id="categories" className="py-16 bg-background">
-      <div className="w-full px-8 md:px-16">
+      <div className="w-full px-4 sm:px-8 md:px-16">
         <div className="text-center mb-12">
           <p className="section-kicker text-accent text-2xl md:text-3xl lg:text-5xl mb-4 font-semibold">
             Explore Collections
@@ -40,7 +40,7 @@ export const CategoriesSection = () => {
           </p> */}
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 items-stretch">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
           {categories.map((category) => (
             <Link
               key={category.slug}
@@ -48,7 +48,7 @@ export const CategoriesSection = () => {
               className="group relative flex h-full flex-col overflow-hidden border border-border/60 bg-card"
             >
               {/* <div className="relative aspect-3/2 overflow-hidden"> */}
-              <div className="relative aspect-3/4 overflow-hidden">
+              <div className="relative aspect-4/5 md:aspect-3/4 overflow-hidden">
                 <Image
                   src={category.image}
                   alt={`${category.title} category sample`}
