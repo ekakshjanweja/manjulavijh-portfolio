@@ -8,21 +8,21 @@ import { ModeToggle } from "@/components/common/mode-toggle";
 
 const navLinks = [
   { name: "Home", href: "#home" },
-  { name: "About", href: "#about" },
   { name: "Portfolio", href: "#portfolio" },
   { name: "Clients", href: "#clients" },
   { name: "Contact", href: "#contact" },
+  { name: "About", href: "#about" },
 ];
 
 const portfolioLinks = [
-  { name: "Signature Work", href: "#portfolio" },
+  // { name: "Signature Work", href: "#portfolio" },
   {
     name: "Explore Collections",
     href: "#categories",
     children: [
       { name: "Food", href: "/portfolio/food" },
       { name: "Product", href: "/portfolio/product" },
-      { name: "Concept", href: "/portfolio/concept" },
+      // { name: "Concept", href: "/portfolio/concept" },
     ],
   },
 ];
@@ -30,11 +30,11 @@ const portfolioLinks = [
 export const NavbarSection = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
+  const [isHero, setIsHero] = useState(false);
   const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
   const isMainPortfolioPage = pathname === "/portfolio";
-  const isHero = isMainPortfolioPage && activeSection === "home";
 
   const updateActiveSection = useCallback(() => {
     if (!isMainPortfolioPage) return;
@@ -55,6 +55,24 @@ export const NavbarSection = () => {
     updateActiveSection();
     return () => window.removeEventListener("scroll", updateActiveSection);
   }, [updateActiveSection]);
+
+  useEffect(() => {
+    if (!isMainPortfolioPage) {
+      setIsHero(false);
+      return;
+    }
+
+    const heroSection = document.getElementById("home");
+    if (!heroSection) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsHero(entry.isIntersecting),
+      { rootMargin: "-80px 0px", threshold: 0.1 },
+    );
+
+    observer.observe(heroSection);
+    return () => observer.disconnect();
+  }, [isMainPortfolioPage]);
 
   const scrollToSection = (href: string) => {
     const el = document.querySelector(href);

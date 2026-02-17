@@ -38,7 +38,7 @@ export const ContactSection = () => {
   ];
 
   return (
-    <section id="contact" className="py-16 bg-section-alt">
+    <section id="contact" className="py-16 bg-background">
       <div className="max-w-5xl mx-auto">
         {/* Header */}
         <div className="text-center mb-14">

@@ -16,11 +16,11 @@ const categories = [
     slug: "product",
     image: product_cover,
   },
-  {
-    title: "Concept",
-    slug: "concept",
-    image: concept_cover,
-  },
+  // {
+  //   title: "Concept",
+  //   slug: "concept",
+  //   image: concept_cover,
+  // },
 ];
 
 export const CategoriesSection = () => {
@@ -40,15 +40,15 @@ export const CategoriesSection = () => {
           </p> */}
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
+        <div className="mx-auto grid max-w-5xl grid-cols-1 md:grid-cols-2 gap-6 items-stretch justify-items-center">
           {categories.map((category) => (
             <Link
               key={category.slug}
               href={`/portfolio/${category.slug}`}
-              className="group relative flex h-full flex-col overflow-hidden border border-border/60 bg-card"
+              className="group relative flex h-full w-full flex-col overflow-hidden border border-border/60 bg-card"
             >
               {/* <div className="relative aspect-3/2 overflow-hidden"> */}
-              <div className="relative aspect-4/5 md:aspect-3/4 overflow-hidden">
+              <div className="relative aspect-4/5 md:aspect-square overflow-hidden">
                 <Image
                   src={category.image}
                   alt={`${category.title} category sample`}

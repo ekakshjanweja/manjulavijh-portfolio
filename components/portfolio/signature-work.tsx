@@ -38,37 +38,37 @@ const projects = [
     id: 1,
     image: Brand_1,
     title: "Unaav The Dakshin Cafe",
-    client: "Unaav The Dakshin Cafe",
+//    client: "Unaav The Dakshin Cafe",
   },
   {
     id: 2,
     image: Brand_2,
     title: "Ruva Organics",
-    client: "Ruva Organics",
+  //  client: "Ruva Organics",
   },
   {
     id: 3,
     image: Brand_3,
     title: "Zimero Icecreams",
-    client: "Zimero Icecreams",
+    //client: "Zimero Icecreams",
   },
   {
     id: 4,
     image: Brand_4,
     title: "Olani Candles",
-    client: "Olani Candles",
+    //client: "Olani Candles",
   },
   {
     id: 5,
     image: Brand_5,
     title: "Shyam Sweets",
-    client: "Shyam Sweets",
+    //client: "Shyam Sweets",
   },
   {
     id: 6,
     image: Brand_6,
     title: "Suave Bags",
-    client: "Suave Bags",
+    //client: "Suave Bags",
   },
 ];
 
@@ -187,9 +187,9 @@ export const SignatureWork = () => {
 
                     {/* Caption */}
                     <div className="mt-4 sm:mt-5">
-                      <p className="text-accent text-[10px] uppercase tracking-[0.3em] mb-1.5">
+                      {/* <p className="text-accent text-[10px] uppercase tracking-[0.3em] mb-1.5">
                         {project.client}
-                      </p>
+                      </p> */}
                       {/* <h3 className="font-serif text-base sm:text-lg md:text-xl text-foreground font-semibold leading-snug mb-2">
                         {project.title}
                       </h3> */}
