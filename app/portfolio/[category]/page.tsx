@@ -1,9 +1,5 @@
-import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import food_banner from "@/public/images/category/food_banner.jpg";
-import product_banner from "@/public/images/category/product_banner.jpg";
-import concept_banner from "@/public/images/category/concept_banner.jpg";
 import MasonryGrid from "@/components/portfolio/masonry-grid";
 import { socialLinks } from "@/components/portfolio/data/social-links";
 import { foodImages } from "@/components/portfolio/data/food-images";
@@ -15,7 +11,6 @@ type CategoryEntry = {
   description: string;
   headline: string;
   subheadline: string;
-  hero: StaticImageData;
 };
 
 const categoryMeta = {
@@ -23,19 +18,16 @@ const categoryMeta = {
     title: "Food",
     headline: "Bringing Brands to Life",
     subheadline: "Through Food Photography",
-    hero: food_banner,
   },
   product: {
     title: "Product",
     headline: "Elevating Products",
     subheadline: "Through Visual Storytelling",
-    hero: product_banner,
   },
   concept: {
     title: "Concept",
     headline: "Capturing Essence",
     subheadline: "Through Portrait Photography",
-    hero: concept_banner,
   },
 };
 
@@ -45,11 +37,11 @@ export default async function CategoryPage({
   params: Promise<{ category: string }>;
 }) {
   const { category: categorySlug } = await params;
-  const category = categoryMeta[categorySlug as keyof typeof categoryMeta];
+  // const category = categoryMeta[categorySlug as keyof typeof categoryMeta];
 
-  if (!category) {
-    notFound();
-  }
+  // if (!category) {
+  //   notFound();
+  // }
 
   const galleryMap = {
     food: foodImages,
@@ -64,44 +56,33 @@ export default async function CategoryPage({
   }
 
   return (
-    <div className="page-shell">
-      {/* Hero Section */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden">
-        {/* Background Image */}
-        <div className="absolute inset-0 z-0">
-          <Image
-            src={category.hero}
-            alt={`${category.title} hero`}
-            fill
-            priority
-            sizes="100vw"
-            placeholder="blur"
-            quality={78}
-            className="object-cover"
-          />
-        </div>
-
-        {/* Gradient Overlays */}
-        {/* <div className="absolute inset-0 z-1 bg-linear-to-t from-black/60 via-black/30 to-black/20" /> */}
- <div className="absolute inset-0 z-0 bg-linear-to-t from-black/85 via-black/55 to-black/25" />
-      <div className="absolute inset-0 z-0 bg-black/20" />
-        {/* Content */}
-        <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
-          <h1 className="font-serif text-2xl md:text-3xl lg:text-4xl text-white/80 font-semibold tracking-wide mb-2">
-            {category.headline}
-          </h1>
-          <h2 className="font-serif text-xl md:text-2xl lg:text-4xl text-white/80 font-semibold tracking-wide mb-8">
-            {category.subheadline}
-          </h2>
-          <a
-            href="#gallery"
-            className="text-white/65 text-sm md:text-md max-w-lg mx-auto mb-12 leading-relaxed"
+    <div className="page-shell mt-36">
+      {/* <section className="section-padding pt-10">
+        <div className="max-w-6xl mx-auto -mt-8">
+          <Link
+            href="/portfolio"
+            className="text-xs font-semibold uppercase tracking-[0.3em] text-accent"
           >
-            Scroll down to see more ↓
-          </a>
-
-          {/* Social Links */}
-          <div className="flex items-center justify-center mt-6 gap-4">
+            ← Back to portfolio
+          </Link>
+          <div className="mt-6">
+            <p className="section-kicker text-accent text-xs uppercase mb-4 font-semibold">
+              {category.title} Collection
+            </p>
+            <h1 className="font-serif text-2xl md:text-3xl lg:text-4xl text-foreground font-semibold tracking-wide mb-2">
+              {category.headline}
+            </h1>
+            <h2 className="font-serif text-xl md:text-2xl lg:text-4xl text-muted-foreground font-semibold tracking-wide mb-6">
+              {category.subheadline}
+            </h2>
+            <a
+              href="#gallery"
+              className="text-muted-foreground text-sm md:text-md max-w-lg mx-auto leading-relaxed"
+            >
+              Scroll down to see more ↓
+            </a>
+          </div>
+          <div className="flex items-center gap-4 mt-6">
             {socialLinks.map((social) => (
               <a
                 key={social.label}
@@ -116,18 +97,10 @@ export default async function CategoryPage({
             ))}
           </div>
         </div>
-
-        {/* Back to Portfolio Link */}
-        <Link
-          href="/portfolio"
-          className="absolute top-24 left-6 z-10 text-xs font-semibold tracking-[0.3em] text-accent"
-        >
-          ← Back to portfolio
-        </Link>
-      </section>
+      </section> */}
 
       <section id="gallery" className="py-8 md:py-12 lg:py-16 scroll-mt-24">
-        <main className="w-full px-1 sm:px-2">
+        <main className="w-full px-1 sm:px-2 -mt-42">
           <MasonryGrid images={images} />
         </main>
       </section>

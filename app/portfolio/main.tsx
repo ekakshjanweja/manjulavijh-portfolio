@@ -37,11 +37,11 @@ export default function PortfolioClient() {
   return (
     <div className="page-shell">
       <HeroSection />
-      {/* <SignatureWork /> */}
+      <SignatureWork />
       <CategoriesSection />
       <ClientsSection />
-      <ContactSection />
       <AboutSection />
+      <ContactSection />
     </div>
   );
 }

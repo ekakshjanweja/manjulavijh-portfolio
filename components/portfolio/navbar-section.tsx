@@ -15,20 +15,21 @@ const navLinks = [
 ];
 
 const portfolioLinks = [
-  // { name: "Signature Work", href: "#portfolio" },
+  { name: "Signature Work", href: "#portfolio" },
   {
     name: "Explore Collections",
     href: "#categories",
     children: [
       { name: "Food", href: "/portfolio/food" },
       { name: "Product", href: "/portfolio/product" },
-      // { name: "Concept", href: "/portfolio/concept" },
+      { name: "Concept", href: "/portfolio/concept" },
     ],
   },
 ];
 
 export const NavbarSection = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isPortfolioMenuOpen, setIsPortfolioMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
   const [isHero, setIsHero] = useState(false);
   const [mounted, setMounted] = useState(false);
@@ -81,6 +82,7 @@ export const NavbarSection = () => {
   };
 
   const handleLinkClick = (href: string, e?: MouseEvent<HTMLAnchorElement>) => {
+    setIsPortfolioMenuOpen(false);
     if (href.startsWith("#")) {
       e?.preventDefault();
       if (isMainPortfolioPage) {
@@ -129,7 +131,19 @@ export const NavbarSection = () => {
           <div className="hidden md:flex items-center gap-7">
             {navLinks.map((link) =>
               link.name === "Portfolio" ? (
-                <div key={link.name} className="relative group">
+                <div
+                  key={link.name}
+                  className="relative"
+                  onMouseEnter={() => setIsPortfolioMenuOpen(true)}
+                  onMouseLeave={() => setIsPortfolioMenuOpen(false)}
+                  onFocusCapture={() => setIsPortfolioMenuOpen(true)}
+                  onBlurCapture={(e) => {
+                    const next = e.relatedTarget as Node | null;
+                    if (!e.currentTarget.contains(next)) {
+                      setIsPortfolioMenuOpen(false);
+                    }
+                  }}
+                >
                   <a
                     key={link.name}
                     href={link.href}
@@ -155,7 +169,13 @@ export const NavbarSection = () => {
                       }`}
                     />
                   </a>
-                  <div className="absolute left-0 top-full z-40 pt-2 opacity-0 translate-y-1 pointer-events-none transition-all duration-200 group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto group-focus-within:opacity-100 group-focus-within:translate-y-0 group-focus-within:pointer-events-auto">
+                  <div
+                    className={`absolute left-0 top-full z-40 pt-2 transition-all duration-200 ${
+                      isPortfolioMenuOpen
+                        ? "opacity-100 translate-y-0 pointer-events-auto"
+                        : "opacity-0 translate-y-1 pointer-events-none"
+                    }`}
+                  >
                     <div className="min-w-48  border border-border/60 bg-background/95 shadow-lg backdrop-blur-md">
                       <div className="flex flex-col">
                         {portfolioLinks.map((item) => (

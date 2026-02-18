@@ -122,7 +122,7 @@ export const SignatureWork = () => {
   }, [carouselApi, sectionVisible, prefersReducedMotion]);
 
   return (
-    <section id="portfolio" ref={ref} className="py-16 -mt-16 bg-background ">
+    <section id="portfolio" ref={ref} className="py-16 bg-background">
       {/* <div className="max-w-7xl mx-auto"> */}
       <div className="w-full px-4 sm:px-8 md:px-16">
         {/* Header */}
