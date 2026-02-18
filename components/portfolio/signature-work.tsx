@@ -131,7 +131,7 @@ export const SignatureWork = () => {
             isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}
         >
-          <p className="section-kicker text-accent text-2xl md:text-3xl lg:text-5xl mb-4 font-semibold">
+          <p className="section-kicker text-accent mt-18 text-2xl md:text-3xl lg:text-5xl mb-4 font-semibold">
             Signature Work
           </p>
           {/* <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-foreground font-semibold tracking-tight mb-5">

@@ -57,7 +57,7 @@ export const AnimatedImages = ({
 
   return (
     <div ref={containerRef} className="w-full flex flex-col items-center">
-      <div className="relative aspect-9/11 w-72 sm:w-8 md:w-96 lg:w-110 mx-auto">
+      <div className="relative aspect-9/11 w-full max-w-72 sm:max-w-80 md:max-w-96 lg:max-w-104 mx-auto">
         <AnimatePresence>
           {images.map((image, index) => {
             if (!isActive(index)) return null;

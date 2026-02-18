@@ -6,7 +6,7 @@ import { socialLinks } from "@/components/portfolio/data/social-links";
 export default function ProductPortfolioPage() {
   return (
     <div className="page-shell">
-      <section className="section-padding pt-10">
+      <section className="section-padding mt-24 pt-10">
         {/* <div className="max-w-6xl mx-auto">
           <Link
             href="/portfolio"

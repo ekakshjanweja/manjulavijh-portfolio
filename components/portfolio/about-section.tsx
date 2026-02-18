@@ -5,7 +5,12 @@ import dynamic from "next/dynamic";
 
 const AnimatedImages = dynamic(
   () => import("@/components/ui/animated-images").then((mod) => mod.AnimatedImages),
-  { ssr: false, loading: () => <div className="aspect-9/11 w-72 sm:w-8 md:w-96 lg:w-110" /> },
+  {
+    ssr: false,
+    loading: () => (
+      <div className="aspect-9/11 w-full max-w-72 sm:max-w-80 md:max-w-96 lg:max-w-104" />
+    ),
+  },
 );
 
 export const AboutSection = () => {
@@ -43,7 +48,7 @@ export const AboutSection = () => {
       ref={ref}
       className="section-padding bg-background overflow-x-hidden"
     >
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-10 lg:px-14">
         {/* Section header */}
         <div
           className={`text-center mb-16 transition-all duration-700 ease-out ${
@@ -67,15 +72,15 @@ export const AboutSection = () => {
           </h2>
         </div> */}
 
-        <div className="about-grid-fix grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-16 lg:items-center">
+        <div className="about-grid-fix grid grid-cols-1 lg:grid-cols-5 gap-6 lg:gap-10 lg:items-center">
           {/* Image carousel -- takes 2 columns */}
-          <div className="about-image-container lg:col-span-2 min-w-0 flex justify-center lg:justify-start">
+          <div className="about-image-container lg:col-span-2 min-w-0 w-full flex justify-center lg:justify-start">
             <AnimatedImages images={images} autoplay />
           </div>
 
           {/* Content -- takes 3 columns */}
           <div
-            className={`lg:col-span-3 lg:pl-8 min-w-0 transition-all duration-700 ease-out delay-150 ${
+            className={`lg:col-span-3 lg:pl-4 min-w-0 transition-all duration-700 ease-out delay-150 ${
               isInView ? "opacity-100 translate-x-0" : "opacity-0 translate-x-6"
             }`}
           >

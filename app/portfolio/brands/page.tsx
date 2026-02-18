@@ -29,22 +29,22 @@ export default function BrandsPage() {
         </div>
       </section>
 
-      <section className="section-padding pt-0 -mt-32 md:-mt-48 lg:-mt-52">
+      <section className="section-padding pt-0 -mt-12 md:-mt-20 lg:-mt-24">
         {/* <div className="max-w-6xl mx-auto"> */}
-        <div className="max-w-screen-2xl mx-auto px-4 md:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-y-14 gap-x-10 items-center">
+        <div className="max-w-screen-2xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-y-10 md:gap-y-12 lg:gap-y-14 gap-x-4 sm:gap-x-6 md:gap-x-8 items-center">
             {brands.map((brand) => (
               <div
                 key={brand.name}
                 className="flex items-center justify-center"
               >
                 {/* <div className="relative w-52 h-28 md:w-60 md:h-36"> */}
-                <div className="relative w-64 h-32 md:w-72 md:h-40 lg:w-80 lg:h-44">
+                <div className="relative w-full max-w-47.5 h-24 sm:max-w-55 sm:h-28 md:max-w-60 md:h-32 lg:max-w-70 lg:h-36 xl:max-w-80 xl:h-40">
                   <Image
                     src={brand.logo}
                     alt={brand.name}
                     fill
-                    sizes="(max-width: 768px) 50vw, (max-width: 1280px) 25vw, 320px"
+                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 320px"
                     loading="lazy"
                     quality={70}
                     className="object-contain"

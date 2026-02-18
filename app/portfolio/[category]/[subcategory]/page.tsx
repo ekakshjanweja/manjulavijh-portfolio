@@ -17,7 +17,7 @@ export default async function SubcategoryPage({
   }
 
   return (
-    <div className="page-shell">
+    <div className="page-shell mt-3">
       {/* <section className="section-padding pt-10">
         <div className="max-w-6xl mx-auto">
           <Link

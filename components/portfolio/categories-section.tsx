@@ -26,7 +26,8 @@ const categories = [
 export const CategoriesSection = () => {
   return (
     <section id="categories" className="py-16 bg-background">
-      <div className="w-full px-2 sm:px-4 md:px-8">
+      {/* <div className="w-full px-2 sm:px-4 md:px-8"> */}
+<div className="w-full px-4 sm:px-8 md:px-16">
         <div className="text-center mb-12">
           <p className="section-kicker text-accent text-2xl md:text-3xl lg:text-5xl mb-4 font-semibold">
             Explore Collections
@@ -40,7 +41,7 @@ export const CategoriesSection = () => {
           </p> */}
         </div>
 
-        <div className="mx-auto grid max-w-6xl grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 items-stretch">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 items-stretch">
           {categories.map((category) => (
             <Link
               key={category.slug}
@@ -48,7 +49,7 @@ export const CategoriesSection = () => {
               className="group relative flex h-full w-full flex-col overflow-hidden border border-border/60 bg-card"
             >
               {/* <div className="relative aspect-3/2 overflow-hidden"> */}
-              <div className="relative aspect-4/5 overflow-hidden">
+              <div className="relative aspect-2/3 overflow-hidden">
                 <Image
                   src={category.image}
                   alt={`${category.title} category sample`}
@@ -56,7 +57,7 @@ export const CategoriesSection = () => {
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 420px"
                   loading="lazy"
                   quality={72}
-                  className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                  className="h-full w-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.04]"
                   placeholder="blur"
                 />
                 <div className="absolute inset-0 bg-linear-to-t from-charcoal/70 via-transparent to-transparent opacity-80" />

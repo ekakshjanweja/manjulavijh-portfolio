@@ -6,7 +6,7 @@ import { socialLinks } from "@/components/portfolio/data/social-links";
 export default function FoodPortfolioPage() {
   return (
     <div className="page-shell">
-      <section className="section-padding pt-10">
+      <section className="section-padding mt-24 pt-10">
         {/* <div className="max-w-6xl mx-auto">
           <Link
             href="/portfolio"
@@ -56,7 +56,7 @@ export default function FoodPortfolioPage() {
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 420px"
                     loading="lazy"
                     quality={72}
-                    className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                    className="h-full w-full object-cover  transition-transform duration-700 ease-out group-hover:scale-[1.04]"
                     placeholder="blur"
                   />
                   <div className="absolute inset-0 bg-linear-to-t from-charcoal/70 via-transparent to-transparent opacity-80" />
