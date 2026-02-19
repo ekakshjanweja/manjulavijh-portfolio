@@ -43,7 +43,6 @@ export default async function CategoryPage({
   // }
 
   const galleryMap = {
-    product: productImages,
     concept: conceptImages,
   };
 

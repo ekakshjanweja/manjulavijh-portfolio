@@ -1,4 +1,3 @@
-import { productImages } from "@/components/portfolio/data/product-images";
 import { indianCuisineImages } from "./food/indian-cuisine";
 import { sweetsDessertsImages } from "./food/sweets-desserts";
 import { streetFoodImages } from "./food/street-food";

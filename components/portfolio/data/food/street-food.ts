@@ -34,10 +34,10 @@ export const streetFoodImages: ImageItem[] = [
     id: 8,
     src: "/images/Street Food/image_8.jpg",
   },
-  // {
-  //   id: 9,
-  //   src: "/images/Street Food/image_9.jpg",
-  // },
+  {
+    id: 9,
+    src: "/images/Street Food/image_9.jpg",
+  },
   {
     id: 10,
     src: "/images/Street Food/image_10.jpg",
