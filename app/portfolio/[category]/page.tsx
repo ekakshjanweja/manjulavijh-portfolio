@@ -2,7 +2,6 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import MasonryGrid from "@/components/portfolio/masonry-grid";
 import { socialLinks } from "@/components/portfolio/data/social-links";
-import { foodImages } from "@/components/portfolio/data/food-images";
 import { productImages } from "@/components/portfolio/data/product-images";
 import { conceptImages } from "@/components/portfolio/data/concept-images";
 
@@ -44,7 +43,6 @@ export default async function CategoryPage({
   // }
 
   const galleryMap = {
-    food: foodImages,
     product: productImages,
     concept: conceptImages,
   };
