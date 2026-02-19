@@ -1,9 +1,8 @@
 import type { StaticImageData } from "next/image";
-import productCover1 from "@/public/images/signature_work/Brand_1.jpg";
-import productCover2 from "@/public/images/signature_work/Brand_2.jpg";
-import productCover3 from "@/public/images/signature_work/Brand_3.jpg";
-import productCover4 from "@/public/images/signature_work/Brand_4.jpg";
-import productCover5 from "@/public/images/signature_work/Brand_5.jpg";
+import Lifestyle_and_Gifting from "@/public/images/product_category_cover/Lifestyle_and_Gifting.jpg";
+import Accessories from "@/public/images/product_category_cover/Accessories.jpg";
+import Festive_Gifting from "@/public/images/product_category_cover/Festive_Gifting.jpg";
+import Packaged_Food from "@/public/images/product_category_cover/Packaged_Food Products.jpg";
 
 export type CategoryCard = {
   title: string;
@@ -13,28 +12,23 @@ export type CategoryCard = {
 
 export const productCategories: CategoryCard[] = [
   {
-    title: "Beauty",
-    slug: "beauty",
-    image: productCover1,
+    title: "Lifestyle and Gifting",
+    slug: "lifestyle-and-gifting",
+    image: Lifestyle_and_Gifting,
   },
   {
-    title: "Fragrance",
-    slug: "fragrance",
-    image: productCover2,
+    title: "Accessories",
+    slug: "accessories",
+    image: Accessories,
   },
   {
-    title: "Lifestyle",
-    slug: "lifestyle",
-    image: productCover3,
+    title: "Festive Gifting",
+    slug: "festive-gifting",
+    image: Festive_Gifting,
   },
   {
-    title: "Crafted Goods",
-    slug: "crafted-goods",
-    image: productCover4,
-  },
-  {
-    title: "Packaging",
-    slug: "packaging",
-    image: productCover5,
+    title: "Packaged Food Products",
+    slug: "packaged-food-products",
+    image: Packaged_Food,
   },
 ];

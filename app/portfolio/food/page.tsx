@@ -62,7 +62,7 @@ export default function FoodPortfolioPage() {
                   <div className="absolute inset-0 bg-linear-to-t from-charcoal/70 via-transparent to-transparent opacity-80" />
                 </div>
                 <div className="absolute inset-0 flex flex-col justify-end p-6">
-                  <h3 className="font-serif text-xl text-cream font-semibold mb-2">
+                  <h3 className="font-serif text-2xl text-cream font-semibold mb-2">
                     {category.title}
                   </h3>
                 </div>

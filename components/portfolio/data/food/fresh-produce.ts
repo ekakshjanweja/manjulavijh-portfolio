@@ -3,27 +3,23 @@ import type { ImageItem } from "../types";
 export const freshProduceImages: ImageItem[] = [
   {
     id: 1,
-    src: "/images/food/food-01.jpg",
+    src: "/images/Fresh Produce/image_1.jpg",
   },
   {
     id: 2,
-    src: "/images/food/food-02.jpg",
+    src: "/images/Fresh Produce/image_2.jpg",
   },
   {
     id: 3,
-    src: "/images/food/food-03.jpg",
+    src: "/images/Fresh Produce/image_3.jpg",
   },
 
   {
     id: 4,
-    src: "/images/food/food-04.jpg",
+    src: "/images/Fresh Produce/image_4.jpg",
   },
   {
     id: 5,
-    src: "/images/food/food-05.jpg",
-  },
-  {
-    id: 6,
-    src: "/images/food/food-06.jpg",
+    src: "/images/Fresh Produce/image_5.jpg",
   },
 ];
