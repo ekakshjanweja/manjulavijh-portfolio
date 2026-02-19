@@ -6,7 +6,7 @@ import { socialLinks } from "@/components/portfolio/data/social-links";
 export default function ProductPortfolioPage() {
   return (
     <div className="page-shell">
-      <section className="section-padding mt-24 pt-10">
+      <section className="section-padding mt-8 pt-10">
         {/* <div className="max-w-6xl mx-auto">
           <Link
             href="/portfolio"
@@ -40,7 +40,7 @@ export default function ProductPortfolioPage() {
       </section>
 
     <section className="pt-0 pb-12 md:pb-16 lg:pb-20 -mt-32 md:-mt-48 lg:-mt-52 px-2 sm:px-3 md:px-4 lg:px-6">
-        <div className="mx-auto max-w-375 px-0">
+        <div className="mx-auto w-full px-0">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 items-stretch">
                {productCategories.map((category) => (
               <Link
