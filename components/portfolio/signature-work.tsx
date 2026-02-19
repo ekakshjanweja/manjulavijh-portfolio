@@ -177,7 +177,7 @@ export const SignatureWork = () => {
                         loading="lazy"
                         className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
                         placeholder="blur"
-                        quality={74}
+                        quality={75}
                         priority={false}
                       />
                       {/* Subtle overlay on hover */}

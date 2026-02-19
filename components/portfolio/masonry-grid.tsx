@@ -78,7 +78,7 @@ export default function MasonryGrid({ images }: Props) {
                    (max-width:1024px) 50vw,
                    33vw"
             className="w-full h-auto transition-transform duration-500 group-hover:scale-105"
-            quality={72}
+            quality={75}
             loading="lazy"
           />
         </div>

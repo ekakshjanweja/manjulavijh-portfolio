@@ -154,7 +154,7 @@ export const HeroSection = () => {
                     fill
                     loading="lazy"
                     placeholder="empty"
-                    quality={72}
+                    quality={75}
                     sizes="100vw"
                     className="object-cover object-top"
                   />
@@ -169,7 +169,7 @@ export const HeroSection = () => {
                     fill
                     loading="lazy"
                     placeholder="empty"
-                    quality={72}
+                    quality={75}
                     sizes="100vw"
                     className="object-cover object-top"
                   />
@@ -184,7 +184,7 @@ export const HeroSection = () => {
                     fill
                     loading="lazy"
                     placeholder="empty"
-                    quality={72}
+                    quality={75}
                     sizes="100vw"
                     className="object-cover object-top"
                   />
@@ -198,7 +198,7 @@ export const HeroSection = () => {
                   fill
                   loading="lazy"
                   placeholder="empty"
-                  quality={72}
+                  quality={75}
                   sizes="100vw"
                   className="object-cover object-top"
                 />

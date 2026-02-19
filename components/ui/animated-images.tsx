@@ -95,7 +95,7 @@ export const AnimatedImages = ({
                   className="object-cover object-center"
                   draggable={false}
                   loading="lazy"
-                  quality={72}
+                  quality={75}
                   priority={false}
                 />
               </motion.div>

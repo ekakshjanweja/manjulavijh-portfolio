@@ -46,7 +46,7 @@ export default function BrandsPage() {
                     fill
                     sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 320px"
                     loading="lazy"
-                    quality={70}
+                    quality={75}
                     className="object-contain"
                   />
                 </div>

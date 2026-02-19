@@ -1,6 +1,12 @@
 "use client";
 
-import { useEffect, useState, useCallback, type MouseEvent } from "react";
+import {
+  useEffect,
+  useState,
+  useCallback,
+  useRef,
+  type MouseEvent,
+} from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
@@ -36,6 +42,7 @@ export const NavbarSection = () => {
   const pathname = usePathname();
   const router = useRouter();
   const isMainPortfolioPage = pathname === "/portfolio";
+  const navRef = useRef<HTMLElement | null>(null);
 
   const updateActiveSection = useCallback(() => {
     if (!isMainPortfolioPage) return;
@@ -107,10 +114,39 @@ export const NavbarSection = () => {
     setMounted(true);
   }, []);
 
+  useEffect(() => {
+    if (!isOpen) return;
+    const handleOutsideClick = (event: Event) => {
+      const target = event.target as Node | null;
+      if (navRef.current && target && !navRef.current.contains(target)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleOutsideClick);
+    document.addEventListener("touchstart", handleOutsideClick);
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+      document.removeEventListener("touchstart", handleOutsideClick);
+    };
+  }, [isOpen]);
+
+  useEffect(() => {
+    if (!isMainPortfolioPage) return;
+    const hash = window.location.hash;
+    if (!hash) return;
+    const timeout = window.setTimeout(() => {
+      const el = document.querySelector(hash);
+      if (el) el.scrollIntoView({ behavior: "smooth" });
+    }, 50);
+    return () => window.clearTimeout(timeout);
+  }, [isMainPortfolioPage, pathname]);
+
   if (!mounted) return null;
 
   return (
     <nav
+      ref={navRef}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isHero
           ? "bg-transparent"
@@ -118,7 +154,7 @@ export const NavbarSection = () => {
       }`}
     >
       <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-10">
-        <div className="flex items-center justify-between h-16">
+        <div className="relative z-50 flex items-center justify-between h-16">
           {/* Logo */}
           <a
             href="#home"
@@ -126,7 +162,11 @@ export const NavbarSection = () => {
               handleLinkClick("#home", e);
             }}
             className={`logo-script text-base sm:text-lg md:text-2xl font-semibold tracking-wide whitespace-nowrap shrink-0 ${
-              isHero ? "mix-blend-difference text-white" : "text-foreground"
+              isOpen
+                ? "text-foreground md:mix-blend-difference md:text-white"
+                : isHero
+                  ? "mix-blend-difference text-white"
+                  : "text-foreground"
             }`}
           >
             MANJULA VIJH
@@ -261,7 +301,11 @@ export const NavbarSection = () => {
             <button
               onClick={() => setIsOpen(!isOpen)}
               className={`p-2 ${
-                isHero ? "mix-blend-difference text-white" : "text-foreground"
+              isOpen
+                ? "text-foreground md:mix-blend-difference md:text-white"
+                : isHero
+                  ? "mix-blend-difference text-white"
+                  : "text-foreground"
               }`}
             >
               {isOpen ? <X size={22} /> : <Menu size={22} />}
@@ -279,9 +323,9 @@ export const NavbarSection = () => {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden bg-background/95 backdrop-blur-xl border-b border-border/30"
+            className="absolute inset-x-0 top-0 z-40 md:hidden overflow-hidden bg-background/95 backdrop-blur-xl border-b border-border/30"
           >
-            <div className="px-6 py-5 space-y-2">
+            <div className="px-6 pb-5 pt-16 space-y-2">
               {navLinks.map((link) =>
                 link.name === "Portfolio" ? (
                   <div key={link.name} className="space-y-1">

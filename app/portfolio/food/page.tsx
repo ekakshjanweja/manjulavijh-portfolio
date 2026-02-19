@@ -55,7 +55,7 @@ export default function FoodPortfolioPage() {
                     fill
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 420px"
                     loading="lazy"
-                    quality={72}
+                    quality={75}
                     className="h-full w-full object-cover  transition-transform duration-700 ease-out group-hover:scale-[1.04]"
                     placeholder="blur"
                   />

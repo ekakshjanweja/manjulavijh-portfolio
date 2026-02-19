@@ -36,7 +36,7 @@ export const ClientsSection = () => {
                   fill
                   sizes="(max-width: 768px) 50vw, (max-width: 1280px) 25vw, 320px"
                   priority={false}
-                  quality={70}
+                  quality={75}
                   className="object-contain"
                   loading={index < 2 ? "eager" : "lazy"}
                 />
