@@ -10,8 +10,8 @@ const navLinks = [
   { name: "Home", href: "#home" },
   { name: "Portfolio", href: "#portfolio" },
   { name: "Clients", href: "#clients" },
-  { name: "Contact", href: "#contact" },
   { name: "About", href: "#about" },
+  { name: "Contact", href: "#contact" },
 ];
 
 const portfolioLinks = [
@@ -85,6 +85,11 @@ export const NavbarSection = () => {
     setIsPortfolioMenuOpen(false);
     if (href.startsWith("#")) {
       e?.preventDefault();
+      if (pathname !== "/portfolio") {
+        router.push(`/portfolio${href}`);
+        setIsOpen(false);
+        return;
+      }
       if (isMainPortfolioPage) {
         scrollToSection(href);
       } else {

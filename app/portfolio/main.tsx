@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import dynamic from "next/dynamic";
 import { HeroSection } from "@/components/portfolio/hero-section";
 import { AboutSection } from "@/components/portfolio/about-section";
@@ -34,6 +35,35 @@ const ContactSection = dynamic(
 );
 
 export default function PortfolioClient() {
+  useEffect(() => {
+    const scrollToHash = () => {
+      const hash = window.location.hash;
+      if (!hash) return;
+
+      const targetId = hash.replace("#", "");
+      let attempts = 0;
+
+      const tryScroll = () => {
+        const el = document.getElementById(targetId);
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth" });
+          return;
+        }
+
+        attempts += 1;
+        if (attempts < 12) {
+          requestAnimationFrame(tryScroll);
+        }
+      };
+
+      tryScroll();
+    };
+
+    scrollToHash();
+    window.addEventListener("hashchange", scrollToHash);
+    return () => window.removeEventListener("hashchange", scrollToHash);
+  }, []);
+
   return (
     <div className="page-shell">
       <HeroSection />
