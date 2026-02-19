@@ -14,9 +14,24 @@ import Carousel_3 from "@/public/images/home_carousel/Carousel_3.jpg";
 import Carousel_4 from "@/public/images/home_carousel/Carousel_4.jpg";
 import Carousel_5 from "@/public/images/home_carousel/Carousel_5.jpg";
 
+const HeroCarouselFallback = () => (
+  <div className="relative h-svh min-h-svh bg-black">
+    <Image
+      src={Carousel_1}
+      alt="Food photography by Manjula Vijh"
+      fill
+      priority
+      placeholder="blur"
+      quality={75}
+      sizes="100vw"
+      className="object-cover object-top"
+    />
+  </div>
+);
+
 const Carousel = dynamic(
   () => import("@/components/ui/carousel").then((mod) => mod.Carousel),
-  { ssr: false, loading: () => <div className="h-svh min-h-svh" /> },
+  { ssr: false, loading: () => <HeroCarouselFallback /> },
 );
 const CarouselContent = dynamic(
   () => import("@/components/ui/carousel").then((mod) => mod.CarouselContent),

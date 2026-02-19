@@ -1,17 +1,24 @@
 "use client";
 
 import { useState } from "react";
-import {
-  Mail,
-  Phone,
-  MapPin,
-  Send,
-} from "lucide-react";
+import { Mail, Phone, MapPin, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import { socialLinks } from "@/components/portfolio/data/social-links";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+} from "@/components/ui/form";
+import { formSchema } from "@/lib/schema";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { send } from "@/lib/email";
+import z from "zod";
 
 export const ContactSection = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -36,7 +43,19 @@ export const ContactSection = () => {
     { icon: Phone, label: "Phone", value: "+91 99710 06505" },
     { icon: MapPin, label: "Location", value: "New Delhi, India" },
   ];
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      firstName: "",
+      lastName: "",
+      email: "",
+      message: "",
+    },
+  });
 
+  function onSubmit(values: z.infer<typeof formSchema>) {
+    send(values);
+  }
   return (
     <section id="contact" className="py-16 bg-background">
       <div className="max-w-5xl mx-auto">
@@ -58,7 +77,7 @@ export const ContactSection = () => {
         <div className="grid lg:grid-cols-5 gap-10 lg:gap-14">
           {/* Contact Form -- takes 3 columns */}
           <div className="lg:col-span-3">
-            <form
+            {/* <form
               onSubmit={handleSubmit}
               className="space-y-5 border border-border/50 bg-card/50 p-6 md:p-8 backdrop-blur-sm"
             >
@@ -143,7 +162,87 @@ export const ContactSection = () => {
                   </>
                 )}
               </Button>
-            </form>
+            </form> */}
+            <Form {...form}>
+              <form
+                onSubmit={form.handleSubmit(onSubmit)}
+                //className="space-y-8"
+                className="space-y-5 border border-border/50 bg-card/50 p-6 md:p-8 backdrop-blur-sm"
+              >
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <FormField
+                      control={form.control}
+                      name="firstName"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>First Name</FormLabel>
+                          <FormControl>
+                            <Input
+                              placeholder="Enter your first name"
+                              {...field}
+                            />
+                          </FormControl>
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <FormField
+                      control={form.control}
+                      name="lastName"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Last Name</FormLabel>
+                          <FormControl>
+                            <Input
+                              placeholder="Enter your last name"
+                              {...field}
+                            />
+                          </FormControl>
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Email</FormLabel>
+                        <FormControl>
+                          <Input placeholder="Enter your email" {...field} />
+                        </FormControl>
+                      </FormItem>
+                    )}
+                  />
+                </div>
+                <div className="space-y-2">
+                  <FormField
+                    control={form.control}
+                    name="message"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Message</FormLabel>
+                        <FormControl>
+                          <Textarea
+                            id="message"
+                            placeholder="Type in your message here..."
+                            className="min-h-30"
+                            {...field}
+                          />
+                        </FormControl>
+                      </FormItem>
+                    )}
+                  />
+                </div>
+                <Button type="submit" className="ml-auto">
+                  Send Message
+                </Button>
+              </form>
+            </Form>
           </div>
 
           {/* Contact Info -- takes 2 columns */}
