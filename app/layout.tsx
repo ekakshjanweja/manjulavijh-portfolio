@@ -22,6 +22,12 @@ const playfair = Playfair_Display({
 export const metadata: Metadata = {
   title: "Manjula Vijh",
   description: "Food & Product Photographer based in New Delhi.",
+  icons: {
+    icon: [
+      { url: "/favicon.ico" },
+      { url: "/favicon.svg", type: "image/svg+xml" },
+    ],
+  },
 };
 
 export default function RootLayout({

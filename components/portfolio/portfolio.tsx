@@ -3,12 +3,12 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef, useState, useCallback } from "react";
-import work1 from "@/public/images/carousel-one.jpg";
-import work2 from "@/public/images/carousel-two.jpg";
-import work3 from "@/public/images/carousel-three.jpg";
-import work4 from "@/public/images/carousel-four.jpg";
-import work5 from "@/public/images/carousel-five.jpg";
-import work6 from "@/public/images/carousel-six.jpg";
+import work1 from "@/public/images/home_carousel/Carousel_1.jpg";
+import work2 from "@/public/images/home_carousel/Carousel_2.jpg";
+import work3 from "@/public/images/home_carousel/Carousel_3.jpg";
+import work4 from "@/public/images/home_carousel/Carousel_4.jpg";
+import work5 from "@/public/images/home_carousel/Carousel_5.jpg";
+import work6 from "@/public/images/carousel/carousel-one.jpg";
 import Image from "next/image";
 import { Lightbox } from "./lightbox";
 

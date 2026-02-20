@@ -10,11 +10,11 @@ import Image from "next/image";
 import { useRef } from "react";
 
 const IMAGES = [
-  "/images/carousel-one.jpg",
-  "/images/carousel-two.jpg",
-  "/images/carousel-three.jpg",
-  "/images/carousel-four.jpg",
-  "/images/carousel-five.jpg",
+  "/images/home_carousel/Carousel_1.jpg",
+  "/images/home_carousel/Carousel_2.jpg",
+  "/images/home_carousel/Carousel_3.jpg",
+  "/images/home_carousel/Carousel_4.jpg",
+  "/images/home_carousel/Carousel_5.jpg",
 ];
 
 interface ParallaxBackgroundProps {
