@@ -29,7 +29,7 @@ export default function BrandsPage() {
         </div>
       </section>
 
-      <section className="section-padding pt-0 -mt-12 md:-mt-20 lg:-mt-24">
+      <section className="pt-0 -mt-12 md:-mt-20 lg:-mt-24">
         {/* <div className="max-w-6xl mx-auto"> */}
         <div className="max-w-screen-2xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-y-10 md:gap-y-12 lg:gap-y-14 gap-x-4 sm:gap-x-6 md:gap-x-8 items-center">
@@ -39,7 +39,7 @@ export default function BrandsPage() {
                 className="flex items-center justify-center"
               >
                 {/* <div className="relative w-52 h-28 md:w-60 md:h-36"> */}
-                <div className="relative w-full max-w-47.5 h-24 sm:max-w-55 sm:h-28 md:max-w-60 md:h-32 lg:max-w-70 lg:h-36 xl:max-w-80 xl:h-40">
+                <div className="relative w-full max-w-47.5 h-24 mb-8 sm:max-w-55 sm:h-28 md:max-w-60 md:h-32 lg:max-w-70 lg:h-36 xl:max-w-80 xl:h-40">
                   <Image
                     src={brand.logo}
                     alt={brand.name}

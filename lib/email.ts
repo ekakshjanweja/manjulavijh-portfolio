@@ -1,21 +1,34 @@
-"use server";
-
-import z from "zod";
 import { Resend } from "resend";
 import { EmailTemplate } from "@/components/ui/email-template";
 import { AdminEmailTemplate } from "@/components/ui/admin-email-template";
-import { formSchema } from "./schema";
+
+type ContactEmailInput = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  message: string;
+};
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-export const send = async (emailFormData: z.infer<typeof formSchema>) => {
+const getRequiredEnv = (key: string) => {
+  const value = process.env[key];
+  if (!value) {
+    throw new Error(`Missing environment variable: ${key}`);
+  }
+  return value;
+};
+
+export const sendContactEmails = async (emailFormData: ContactEmailInput) => {
   try {
     const { firstName, lastName, email, message } = emailFormData;
+    const fromEmail = getRequiredEnv("RESEND_FROM_EMAIL");
+    const adminEmail = getRequiredEnv("ADMIN_EMAIL");
 
     await resend.emails.send({
-      from: `Website Contact <${process.env.RESEND_FROM_EMAIL}>`,
-      to: ["manjulavijhphotography@gmail.com"], 
-      subject: "New Contact Form Message",
+      from: `Website Contact <${fromEmail}>`,
+      to: [adminEmail],
+      subject: "New Contact Form Submission",
       react: AdminEmailTemplate({
         firstName,
         lastName,
@@ -25,9 +38,9 @@ export const send = async (emailFormData: z.infer<typeof formSchema>) => {
     });
 
     await resend.emails.send({
-      from: `Manjula Vijh Photography <${process.env.RESEND_FROM_EMAIL}>`,
+      from: `Manjula Vijh Photography <${fromEmail}>`,
       to: [email],
-      subject: "Thank you for contacting us",
+      subject: "Thank you for getting in touch",
       react: EmailTemplate({ firstName }),
     });
 

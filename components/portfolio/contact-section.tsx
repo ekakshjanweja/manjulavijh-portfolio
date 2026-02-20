@@ -7,55 +7,86 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import { socialLinks } from "@/components/portfolio/data/social-links";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-} from "@/components/ui/form";
 import { formSchema } from "@/lib/schema";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { send } from "@/lib/email";
 import z from "zod";
 
 export const ContactSection = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-
-    toast.success("Message Sent!", {
-      description: "Thank you for reaching out. I'll get back to you soon!",
-    });
-
-    setIsSubmitting(false);
-    (e.target as HTMLFormElement).reset();
-  };
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [formValues, setFormValues] = useState<z.infer<typeof formSchema>>({
+    firstName: "",
+    lastName: "",
+    email: "",
+    message: "",
+  });
+  const [formErrors, setFormErrors] = useState<
+    Partial<Record<keyof z.infer<typeof formSchema>, string>>
+  >({});
 
   const contactInfo = [
     { icon: Mail, label: "Email", value: " manjulavijhphotography@gmail.com" },
     { icon: Phone, label: "Phone", value: "+91 99710 06505" },
     { icon: MapPin, label: "Location", value: "New Delhi, India" },
   ];
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      firstName: "",
-      lastName: "",
-      email: "",
-      message: "",
-    },
-  });
+  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setIsSubmitting(true);
+    setSubmitError(null);
+    setSubmitSuccess(false);
+    setFormErrors({});
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    send(values);
-  }
+    const parsed = formSchema.safeParse(formValues);
+    if (!parsed.success) {
+      const fieldErrors = parsed.error.flatten().fieldErrors;
+      setFormErrors({
+        firstName: fieldErrors.firstName?.[0],
+        lastName: fieldErrors.lastName?.[0],
+        email: fieldErrors.email?.[0],
+        message: fieldErrors.message?.[0],
+      });
+      setIsSubmitting(false);
+      return;
+    }
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(parsed.data),
+      });
+
+      if (!response.ok) {
+        const data = await response.json().catch(() => null);
+        const message = data?.error ?? "Unable to send message.";
+        throw new Error(message);
+      }
+
+      setSubmitSuccess(true);
+      setFormValues({
+        firstName: "",
+        lastName: "",
+        email: "",
+        message: "",
+      });
+      toast.success("Message Sent!", {
+        description: "Thank you for reaching out. I'll get back to you soon!",
+      });
+    } catch (error) {
+      const message =
+        error instanceof Error
+          ? error.message
+          : "Something went wrong. Please try again.";
+      setSubmitError(message);
+      toast.error("Message failed", {
+        description: message,
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
   return (
     <section id="contact" className="py-16 bg-background">
       <div className="max-w-5xl mx-auto">
@@ -163,86 +194,112 @@ export const ContactSection = () => {
                 )}
               </Button>
             </form> */}
-            <Form {...form}>
-              <form
-                onSubmit={form.handleSubmit(onSubmit)}
-                //className="space-y-8"
-                className="space-y-5 border border-border/50 bg-card/50 p-6 md:p-8 backdrop-blur-sm"
-              >
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <FormField
-                      control={form.control}
-                      name="firstName"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>First Name</FormLabel>
-                          <FormControl>
-                            <Input
-                              placeholder="Enter your first name"
-                              {...field}
-                            />
-                          </FormControl>
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <FormField
-                      control={form.control}
-                      name="lastName"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Last Name</FormLabel>
-                          <FormControl>
-                            <Input
-                              placeholder="Enter your last name"
-                              {...field}
-                            />
-                          </FormControl>
-                        </FormItem>
-                      )}
-                    />
-                  </div>
+            <form
+              onSubmit={onSubmit}
+              className="space-y-5 border border-border/50 bg-card/50 p-6 md:p-8 backdrop-blur-sm"
+            >
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <label className="block text-xs uppercase tracking-[0.15em] text-muted-foreground mb-2">
+                    First Name
+                  </label>
+                  <Input
+                    name="firstName"
+                    value={formValues.firstName}
+                    onChange={(event) =>
+                      setFormValues((prev) => ({
+                        ...prev,
+                        firstName: event.target.value,
+                      }))
+                    }
+                    placeholder="Enter your first name"
+                  />
+                  {formErrors.firstName ? (
+                    <p className="text-xs text-red-600">{formErrors.firstName}</p>
+                  ) : null}
                 </div>
                 <div className="space-y-2">
-                  <FormField
-                    control={form.control}
-                    name="email"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Email</FormLabel>
-                        <FormControl>
-                          <Input placeholder="Enter your email" {...field} />
-                        </FormControl>
-                      </FormItem>
-                    )}
+                  <label className="block text-xs uppercase tracking-[0.15em] text-muted-foreground mb-2">
+                    Last Name
+                  </label>
+                  <Input
+                    name="lastName"
+                    value={formValues.lastName}
+                    onChange={(event) =>
+                      setFormValues((prev) => ({
+                        ...prev,
+                        lastName: event.target.value,
+                      }))
+                    }
+                    placeholder="Enter your last name"
                   />
+                  {formErrors.lastName ? (
+                    <p className="text-xs text-red-600">{formErrors.lastName}</p>
+                  ) : null}
                 </div>
-                <div className="space-y-2">
-                  <FormField
-                    control={form.control}
-                    name="message"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Message</FormLabel>
-                        <FormControl>
-                          <Textarea
-                            id="message"
-                            placeholder="Type in your message here..."
-                            className="min-h-30"
-                            {...field}
-                          />
-                        </FormControl>
-                      </FormItem>
-                    )}
-                  />
-                </div>
-                <Button type="submit" className="ml-auto">
-                  Send Message
+              </div>
+              <div className="space-y-2">
+                <label className="block text-xs uppercase tracking-[0.15em] text-muted-foreground mb-2">
+                  Email
+                </label>
+                <Input
+                  name="email"
+                  type="email"
+                  value={formValues.email}
+                  onChange={(event) =>
+                    setFormValues((prev) => ({
+                      ...prev,
+                      email: event.target.value,
+                    }))
+                  }
+                  placeholder="Enter your email"
+                />
+                {formErrors.email ? (
+                  <p className="text-xs text-red-600">{formErrors.email}</p>
+                ) : null}
+              </div>
+              <div className="space-y-2">
+                <label className="block text-xs uppercase tracking-[0.15em] text-muted-foreground mb-2">
+                  Message
+                </label>
+                <Textarea
+                  id="message"
+                  name="message"
+                  value={formValues.message}
+                  onChange={(event) =>
+                    setFormValues((prev) => ({
+                      ...prev,
+                      message: event.target.value,
+                    }))
+                  }
+                  placeholder="Type in your message here..."
+                  className="min-h-30"
+                />
+                {formErrors.message ? (
+                  <p className="text-xs text-red-600">{formErrors.message}</p>
+                ) : null}
+              </div>
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                <Button type="submit" className="ml-auto" disabled={isSubmitting}>
+                  {isSubmitting ? (
+                    "Sending..."
+                  ) : (
+                    <>
+                      Send Message
+                      <Send className="ml-2 h-4 w-4" />
+                    </>
+                  )}
                 </Button>
-              </form>
-            </Form>
+                {submitSuccess ? (
+                  <p className="text-sm text-emerald-600">
+                    Thanks! Your message has been sent.
+                  </p>
+                ) : null}
+                {submitError ? (
+                  <p className="text-sm text-red-600">{submitError}</p>
+                ) : null}
+              </div>
+            </form>
           </div>
 
           {/* Contact Info -- takes 2 columns */}

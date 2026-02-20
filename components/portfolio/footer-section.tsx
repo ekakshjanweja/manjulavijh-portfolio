@@ -76,10 +76,10 @@ export const FooterSection = () => {
 
           {/* Contact Info */}
           <div>
-            <h4 className="text-xs uppercase tracking-[0.2em] text-primary-foreground/40 mb-4">
+            <h4 className="text-xs uppercase -ml-10 tracking-[0.2em] text-primary-foreground/40 mb-4">
               Contact
             </h4>
-            <div className="space-y-2.5 text-primary-foreground/50 text-sm">
+            <div className="space-y-2.5 -ml-10 text-primary-foreground/50 text-sm">
               <p>manjulavijhphotography@gmail.com</p>
               <p>+91 99710 06505</p>
               <p>New Delhi, India</p>
