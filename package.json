@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "bunx next dev",
-    "build": "bunx next build",
-    "start": "bunxnext start",
+    "build": "bunx prisma generate && bunx next build",
+    "start": "bunx next start",
     "lint": "bunx eslint"
   },
   "dependencies": {
