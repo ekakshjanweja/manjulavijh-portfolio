@@ -318,12 +318,12 @@ h6 {
   position: fixed;
   inset: 0;
   z-index: 100;
-  background-color: hsl(30 10% 5% / 0.95);
-  backdrop-filter: blur(20px);
+  background-color: hsl(30 10% 5% / 0.7);
+  backdrop-filter: blur(18px);
 }
 
 .dark .lightbox-overlay {
-  background-color: hsl(30 10% 3% / 0.95);
+  background-color: hsl(30 10% 3% / 0.7);
 }
 
 /* Carousel section */

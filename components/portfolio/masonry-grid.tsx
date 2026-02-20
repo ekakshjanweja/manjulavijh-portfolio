@@ -2,6 +2,8 @@
 
 import Masonry from "react-masonry-css";
 import Image from "next/image";
+import { useCallback, useState } from "react";
+import { Lightbox } from "./lightbox";
 
 type ImageItem = {
   id: number;
@@ -13,76 +15,72 @@ type Props = {
 };
 
 export default function MasonryGrid({ images }: Props) {
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [lightboxIndex, setLightboxIndex] = useState(0);
+
+  const openLightbox = useCallback((index: number) => {
+    setLightboxIndex(index);
+    setLightboxOpen(true);
+  }, []);
+
+  const closeLightbox = useCallback(() => {
+    setLightboxOpen(false);
+  }, []);
+
+  const navigateLightbox = useCallback((index: number) => {
+    setLightboxIndex(index);
+  }, []);
+
+  const lightboxItems = images.map((image) => ({
+    id: image.id,
+    image: image.src,
+  }));
+
   const breakpoints = {
-    // default: 4,
-    // 1280: 3,
     default: 3,
     1024: 2,
     640: 1,
   };
 
   return (
-    <Masonry
-      breakpointCols={breakpoints}
-      className="flex gap-2"
-      columnClassName="flex flex-col gap-2"
-    >
-      {images.map((item) => (
-        //   // const sizeClass =
-        //   //   item.size === "large"
-        //   //     ? "aspect-[4/5]"
-        //   //     : item.size === "medium"
-        //   //       ? "aspect-[1/1.2]"
-        //   //       : "aspect-square";
+    <>
+      <Masonry
+        breakpointCols={breakpoints}
+        className="flex gap-2"
+        columnClassName="flex flex-col gap-2"
+      >
+        {images.map((item, index) => (
+          <button
+            key={item.id}
+            type="button"
+            onClick={() => openLightbox(index)}
+            className="group relative overflow-hidden text-left"
+          >
+            <Image
+              src={item.src}
+              alt=""
+              width={0}
+              height={0}
+              sizes="(max-width:640px) 100vw,
+                     (max-width:1024px) 50vw,
+                     33vw"
+              className="w-full h-auto transition-transform duration-500 group-hover:scale-105"
+              quality={75}
+              loading="lazy"
+            />
+            <div className="absolute inset-0 bg-linear-to-t from-charcoal/70 via-charcoal/5 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+            <div className="absolute inset-0 ring-1 ring-inset ring-black/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+          </button>
+        ))}
+      </Masonry>
 
-        //   // const shapeClass =
-        //   //   item.shape === "portrait" ? "aspect-[3/4]" : "aspect-square";
-        //   const sizeClass =
-        //     item.size === "large"
-        //       ? "aspect-[3/4]"
-        //       : item.size === "medium"
-        //         ? "aspect-[4/5]"
-        //         : "aspect-square";
-
-        //   const shapeClass =
-        //     item.shape === "portrait" ? "aspect-[2/3]" : "aspect-square";
-
-        //   return (
-        //     <div
-        //       key={item.id}
-        //       className={`relative overflow-hidden group ${
-        //         item.size ? sizeClass : shapeClass
-        //       }`}
-        //     >
-        //       <Image
-        //         src={item.src}
-        //         alt=""
-        //         fill
-        //         className="object-cover transition-transform duration-500 group-hover:scale-105"
-        //         // sizes="(max-width:768px) 100vw, 25vw"
-        //         sizes="(max-width:640px) 100vw,
-        //  (max-width:1024px) 50vw,
-        //  33vw"
-        //         quality={72}
-        //         loading="lazy"
-        //       />
-        //     </div>
-        //   );
-        <div key={item.id} className="overflow-hidden group">
-          <Image
-            src={item.src}
-            alt=""
-            width={0}
-            height={0}
-            sizes="(max-width:640px) 100vw,
-                   (max-width:1024px) 50vw,
-                   33vw"
-            className="w-full h-auto transition-transform duration-500 group-hover:scale-105"
-            quality={75}
-            loading="lazy"
-          />
-        </div>
-      ))}
-    </Masonry>
+      <Lightbox
+        items={lightboxItems}
+        currentIndex={lightboxIndex}
+        isOpen={lightboxOpen}
+        onClose={closeLightbox}
+        onNavigate={navigateLightbox}
+      />
+    </>
   );
 }

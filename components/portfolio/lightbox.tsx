@@ -7,9 +7,9 @@ import { useEffect, useCallback } from "react";
 
 interface LightboxItem {
   id: number;
-  image: StaticImageData;
-  title: string;
-  category: string;
+  image: StaticImageData | string;
+  title?: string;
+  category?: string;
   description?: string;
 }
 
@@ -29,6 +29,11 @@ export const Lightbox = ({
   onNavigate,
 }: LightboxProps) => {
   const currentItem = items[currentIndex];
+  const hasCaption = Boolean(
+    currentItem?.title || currentItem?.category || currentItem?.description
+  );
+  const placeholder =
+    currentItem && typeof currentItem.image !== "string" ? "blur" : "empty";
 
   const goNext = useCallback(() => {
     onNavigate((currentIndex + 1) % items.length);
@@ -119,17 +124,18 @@ export const Lightbox = ({
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
             transition={{ duration: 0.3 }}
-            className="relative max-w-5xl w-full mx-4 md:mx-8"
+            className="relative max-w-6xl w-full mx-4 md:mx-8"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="relative aspect-4/3 md:aspect-16/10 overflow-hidden rounded-none">
+            <div className="relative w-full h-[70vh] md:h-[80vh] overflow-hidden rounded-none">
               <Image
                 src={currentItem.image}
-                alt={currentItem.title}
-                className="w-full h-full object-contain"
-                placeholder="blur"
-                sizes="(max-width: 768px) 100vw, 80vw"
-                quality={75}
+                alt={currentItem.title ?? "Gallery image"}
+                fill
+                className="object-contain"
+                placeholder={placeholder}
+                sizes="(max-width: 768px) 100vw, 90vw"
+                quality={80}
               />
             </div>
 
@@ -159,27 +165,33 @@ export const Lightbox = ({
             )}
 
             {/* Caption */}
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.15 }}
-              className="mt-6 text-center"
-            >
-              <p className="text-white/40 text-xs uppercase tracking-[0.3em] mb-2">
-                {currentItem.category}
-              </p>
-              <h3 className="font-serif text-xl md:text-2xl text-white font-semibold">
-                {currentItem.title}
-              </h3>
-              {currentItem.description && (
-                <p className="text-white/50 text-sm mt-2 max-w-lg mx-auto">
-                  {currentItem.description}
+            {hasCaption && (
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.15 }}
+                className="mt-6 text-center"
+              >
+                {currentItem.category && (
+                  <p className="text-white/40 text-xs uppercase tracking-[0.3em] mb-2">
+                    {currentItem.category}
+                  </p>
+                )}
+                {currentItem.title && (
+                  <h3 className="font-serif text-xl md:text-2xl text-white font-semibold">
+                    {currentItem.title}
+                  </h3>
+                )}
+                {currentItem.description && (
+                  <p className="text-white/50 text-sm mt-2 max-w-lg mx-auto">
+                    {currentItem.description}
+                  </p>
+                )}
+                <p className="text-white/25 text-xs mt-4">
+                  {currentIndex + 1} / {items.length}
                 </p>
-              )}
-              <p className="text-white/25 text-xs mt-4">
-                {currentIndex + 1} / {items.length}
-              </p>
-            </motion.div>
+              </motion.div>
+            )}
           </motion.div>
         </motion.div>
       )}
