@@ -1,7 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
 import { foodCategories } from "@/components/portfolio/data/food-categories";
-import { socialLinks } from "@/components/portfolio/data/social-links";
 
 export default function FoodPortfolioPage() {
   return (
@@ -53,7 +52,7 @@ export default function FoodPortfolioPage() {
                     src={category.image}
                     alt={`${category.title} category sample`}
                     fill
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 420px"
+                    sizes="(max-width: 640px) 100vw, 50vw"
                     loading="lazy"
                     quality={75}
                     className="h-full w-full object-cover  transition-transform duration-700 ease-out group-hover:scale-[1.04]"

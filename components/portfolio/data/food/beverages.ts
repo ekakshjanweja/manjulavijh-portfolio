@@ -1,10 +1,10 @@
 import type { ImageItem } from "../types";
 
 export const beveragesImages: ImageItem[] = [
-  {
-    id: 1,
-    src: "/images/Beverages/image_1.jpg",
-  },
+  // {
+  //   id: 1,
+  //   src: "/images/Beverages/image_1.jpg",
+  // },
   {
     id: 2,
     src: "/images/Beverages/image_2.jpg",
