@@ -30,7 +30,7 @@ export const Lightbox = ({
 }: LightboxProps) => {
   const currentItem = items[currentIndex];
   const hasCaption = Boolean(
-    currentItem?.title || currentItem?.category || currentItem?.description
+    currentItem?.title || currentItem?.category || currentItem?.description,
   );
   const placeholder =
     currentItem && typeof currentItem.image !== "string" ? "blur" : "empty";
@@ -124,10 +124,12 @@ export const Lightbox = ({
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
             transition={{ duration: 0.3 }}
-            className="relative max-w-6xl w-full mx-4 md:mx-8"
+            // className="relative max-w-6xl w-full mx-4 md:mx-8"
+            className="relative w-screen h-screen"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="relative w-full h-[70vh] md:h-[80vh] overflow-hidden rounded-none">
+            {/* <div className="relative w-full h-[70vh] md:h-[80vh] overflow-hidden rounded-none"> */}
+            <div className="relative w-screen h-screen overflow-hidden">
               <Image
                 src={currentItem.image}
                 alt={currentItem.title ?? "Gallery image"}

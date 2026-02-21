@@ -73,9 +73,9 @@ export const AboutSection = () => {
           </h2>
         </div> */}
 
-        <div className="about-grid-fix grid grid-cols-1 lg:grid-cols-5 gap-6 lg:gap-10 lg:items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 lg:gap-10 lg:items-stretch">
           {/* Image carousel -- takes 2 columns */}
-          <div className="about-image-container lg:col-span-2 min-w-0 w-full flex justify-center lg:justify-start">
+          <div className="lg:col-span-2 min-w-0 w-full flex flex-col items-center lg:items-start justify-center mt-8 xl:-mt-2">
             <AnimatedImages images={images} autoplay />
           </div>
 

@@ -52,7 +52,7 @@ const CarouselNext = dynamic(
 
 export const HeroSection = () => {
   const ref = useRef<HTMLElement | null>(null);
-  const autoplayRef = useRef(Autoplay({ delay: 4500, stopOnInteraction: true }));
+  const autoplayRef = useRef(Autoplay({ delay: 3000, stopOnInteraction: false }));
   const [isInView, setIsInView] = useState(true);
   const prefersReducedMotion = useReducedMotion();
   const [isMobile, setIsMobile] = useState(false);

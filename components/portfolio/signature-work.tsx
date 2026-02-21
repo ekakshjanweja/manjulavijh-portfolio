@@ -75,7 +75,7 @@ const projects = [
 export const SignatureWork = () => {
   const ref = useRef<HTMLElement | null>(null);
   const autoplayRef = useRef(
-    Autoplay({ delay: 3000, stopOnInteraction: true }),
+    Autoplay({ delay: 2000, stopOnInteraction: false }),
   );
   const [isInView, setIsInView] = useState(false);
   const [sectionVisible, setSectionVisible] = useState(true);

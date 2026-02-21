@@ -34,14 +34,14 @@ const portfolioLinks = [
 ];
 
 export const NavbarSection = () => {
+  const pathname = usePathname();
+  const router = useRouter();
+  const isMainPortfolioPage = pathname === "/";
   const [isOpen, setIsOpen] = useState(false);
   const [isPortfolioMenuOpen, setIsPortfolioMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
-  const [isHero, setIsHero] = useState(false);
+  const [isHero, setIsHero] = useState(isMainPortfolioPage);
   const [mounted, setMounted] = useState(false);
-  const pathname = usePathname();
-  const router = useRouter();
-  const isMainPortfolioPage = pathname === "/portfolio";
   const navRef = useRef<HTMLElement | null>(null);
 
   const updateActiveSection = useCallback(() => {
@@ -85,29 +85,28 @@ export const NavbarSection = () => {
   const scrollToSection = (href: string) => {
     const el = document.querySelector(href);
     if (el) el.scrollIntoView({ behavior: "smooth" });
-    setIsOpen(false);
   };
 
   const handleLinkClick = (href: string, e?: MouseEvent<HTMLAnchorElement>) => {
+    e?.preventDefault();
     setIsPortfolioMenuOpen(false);
+    setIsOpen(false);
+    
     if (href.startsWith("#")) {
-      e?.preventDefault();
-      if (pathname !== "/portfolio") {
-        router.push(`/portfolio${href}`);
-        setIsOpen(false);
+      if (!isMainPortfolioPage) {
+        // Navigate to home page with hash
+        router.push(`/${href}`);
         return;
       }
-      if (isMainPortfolioPage) {
+      // Already on portfolio page, just scroll to section
+      setTimeout(() => {
         scrollToSection(href);
-      } else {
-        // Navigate to main portfolio page with hash
-        router.push(`/portfolio${href}`);
-      }
-      setIsOpen(false);
+      }, 100);
       return;
     }
 
-    setIsOpen(false);
+    // Handle full route navigation (e.g., /portfolio/food, /portfolio/product)
+    router.push(href);
   };
 
   useEffect(() => {
