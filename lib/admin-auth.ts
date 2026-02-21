@@ -71,6 +71,10 @@ export async function verifyAdminSessionValue(value: string | undefined) {
     return false;
   }
 
+  if (!process.env.ADMIN_PASSWORD) {
+    return false;
+  }
+
   const [payload, signature] = value.split(".");
   if (!payload || !signature) {
     return false;

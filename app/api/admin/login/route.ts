@@ -12,7 +12,9 @@ export async function POST(request: Request) {
 
   const adminPassword = process.env.ADMIN_PASSWORD;
   if (!adminPassword) {
-    return NextResponse.json({ error: "Admin password not configured." }, { status: 500 });
+    const loginUrl = new URL("/admin/login", request.url);
+    loginUrl.searchParams.set("error", "config");
+    return NextResponse.redirect(loginUrl, 303);
   }
 
   if (typeof password !== "string" || password !== adminPassword) {

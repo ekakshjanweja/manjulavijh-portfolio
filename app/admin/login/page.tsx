@@ -7,7 +7,9 @@ export const metadata = {
 };
 
 export default function AdminLoginPage({ searchParams }: AdminLoginPageProps) {
-  const hasError = searchParams?.error === "1";
+  const error = searchParams?.error;
+  const hasError = error === "1";
+  const hasConfigError = error === "config";
 
   return (
     <div className="flex min-h-[70vh] items-center justify-center">
@@ -32,7 +34,11 @@ export default function AdminLoginPage({ searchParams }: AdminLoginPageProps) {
             />
           </div>
 
-          {hasError ? (
+          {hasConfigError ? (
+            <p className="text-sm text-red-600">
+              Admin password is not configured. Set ADMIN_PASSWORD and redeploy.
+            </p>
+          ) : hasError ? (
             <p className="text-sm text-red-600">Incorrect password. Try again.</p>
           ) : null}
 
