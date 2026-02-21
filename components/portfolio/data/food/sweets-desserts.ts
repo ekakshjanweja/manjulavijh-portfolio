@@ -66,8 +66,4 @@ export const sweetsDessertsImages: ImageItem[] = [
     id: 16,
     src: "/images/Sweets and Desserts/image_16.jpg",
   },
-  {
-    id: 17,
-    src: "/images/Sweets and Desserts/image_10.jpg",
-  },  
 ];
