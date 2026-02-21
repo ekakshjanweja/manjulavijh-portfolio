@@ -58,4 +58,8 @@ export const lifestyleGiftingImages: ImageItem[] = [
     id: 14,
     src: "/images/Lifestyle and Gifting/image_14.jpg",
   },
+   {
+    id: 15,
+    src: "/images/Lifestyle and Gifting/image_15.jpg",
+  },
 ];
