@@ -4,7 +4,7 @@ import { useEffect, useState, useRef, type MouseEvent } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import { ModeToggle } from "@/components/common/mode-toggle";
+import { ModeToggle } from "@/components/portfolio/mode-toggle";
 
 const navLinks = [
   { name: "Home", href: "#home" },

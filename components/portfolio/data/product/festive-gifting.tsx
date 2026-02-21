@@ -42,8 +42,4 @@ export const festiveGiftingImages: ImageItem[] = [
     id: 10,
     src: "/images/Festive Gifting/image_10.jpg",
   },
-  {
-    id: 11,
-    src: "/images/Festive Gifting/image_11.jpg",
-  }
 ];
