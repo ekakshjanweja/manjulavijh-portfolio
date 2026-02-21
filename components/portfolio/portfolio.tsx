@@ -10,7 +10,12 @@ import work4 from "@/public/images/home_carousel/Carousel_4.jpg";
 import work5 from "@/public/images/home_carousel/Carousel_5.jpg";
 import work6 from "@/public/images/carousel/carousel-one.jpg";
 import Image from "next/image";
-import { Lightbox } from "./lightbox";
+import dynamic from "next/dynamic";
+
+const Lightbox = dynamic(
+  () => import("./lightbox").then((mod) => mod.Lightbox),
+  { ssr: false },
+);
 
 const workItems = [
   {
@@ -99,7 +104,7 @@ export const WorkSection = () => {
         <div className="max-w-7xl mx-auto">
           {/* Header */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={false}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
             className="text-center mb-14"
@@ -119,7 +124,7 @@ export const WorkSection = () => {
 
           {/* Category Filter */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={false}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
             className="flex flex-wrap justify-center gap-2 mb-14"
@@ -145,7 +150,7 @@ export const WorkSection = () => {
               <motion.div
                 key={item.id}
                 layout
-                initial={{ opacity: 0 }}
+                initial={false}
                 animate={isInView ? { opacity: 1 } : {}}
                 transition={{ duration: 0.5, delay: 0.06 * index }}
                 className={`group relative overflow-hidden rounded-none cursor-pointer bg-card/40 ${

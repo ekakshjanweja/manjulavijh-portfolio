@@ -19,6 +19,7 @@ export const AnimatedImages = ({
   const [active, setActive] = useState(0);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [isInView, setIsInView] = useState(true);
+  const [mounted, setMounted] = useState(false);
 
   const presetRotations = [-8, 6, -4, 9, -7, 5];
 
@@ -55,6 +56,12 @@ export const AnimatedImages = ({
     return () => clearInterval(interval);
   }, [autoplay, images.length, isInView]);
 
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null;
+
   return (
     <div ref={containerRef} className="w-full flex flex-col items-center">
       <div className="relative aspect-9/11 w-full max-w-72 sm:max-w-80 md:max-w-96 lg:max-w-104 mx-auto">
@@ -66,11 +73,7 @@ export const AnimatedImages = ({
             return (
               <motion.div
                 key={image.src}
-                initial={{
-                  opacity: 0,
-                  scale: 0.96,
-                  rotate: rotation,
-                }}
+                initial={false}
                 animate={{
                   opacity: 1,
                   scale: 1,

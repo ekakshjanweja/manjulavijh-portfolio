@@ -1,13 +1,33 @@
 "use client";
 
-import { ParallaxBackground } from "@/components/coming-soon/parallax-background";
-import { CustomCursor } from "@/components/coming-soon/custom-cursor";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
+import dynamic from "next/dynamic";
+
+const ParallaxBackground = dynamic(
+  () =>
+    import("@/components/coming-soon/parallax-background").then(
+      (mod) => mod.ParallaxBackground,
+    ),
+  { ssr: false },
+);
+
+const CustomCursor = dynamic(
+  () =>
+    import("@/components/coming-soon/custom-cursor").then(
+      (mod) => mod.CustomCursor,
+    ),
+  { ssr: false },
+);
 
 export default function ComingSoon() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isMobile, setIsMobile] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
@@ -68,6 +88,8 @@ export default function ComingSoon() {
     };
   }, [isMobile]);
 
+  if (!mounted) return null;
+
   return (
     <main
       ref={containerRef}
@@ -79,7 +101,7 @@ export default function ComingSoon() {
       {/* Content Overlay - Sticky */}
       <div className="fixed inset-0 z-10 pointer-events-none">
         <motion.div
-          initial={{ opacity: 0 }}
+          initial={false}
           animate={{ opacity: 1 }}
           transition={{ duration: 1.5, ease: "easeOut" }}
           className="flex min-h-screen flex-col justify-between p-8 md:p-16 pointer-events-auto"

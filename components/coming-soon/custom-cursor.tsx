@@ -7,28 +7,23 @@ import {
   useScroll,
   useTransform,
 } from "framer-motion";
-import { useEffect, useSyncExternalStore } from "react";
+import { useEffect, useState } from "react";
 import { ArrowUp } from "lucide-react";
-
-function getIsMobile() {
-  if (typeof window === "undefined") return true;
-  return window.matchMedia("(max-width: 768px)").matches;
-}
-
-function subscribeToMediaQuery(callback: () => void) {
-  const mq = window.matchMedia("(max-width: 768px)");
-  mq.addEventListener("change", callback);
-  return () => mq.removeEventListener("change", callback);
-}
 
 export function CustomCursor() {
   const cursorX = useMotionValue(-1000);
   const cursorY = useMotionValue(-1000);
-  const isMobile = useSyncExternalStore(
-    subscribeToMediaQuery,
-    getIsMobile,
-    () => true
-  );
+  const [isMobile, setIsMobile] = useState(true);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    const mq = window.matchMedia("(max-width: 768px)");
+    const update = () => setIsMobile(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
 
   const springConfig = { damping: 100, stiffness: 500 };
   const cursorXSpring = useSpring(cursorX, springConfig);
@@ -43,7 +38,7 @@ export function CustomCursor() {
   });
 
   useEffect(() => {
-    if (isMobile) return;
+    if (!mounted || isMobile) return;
 
     const moveCursor = (e: MouseEvent) => {
       cursorX.set(e.clientX);
@@ -54,7 +49,7 @@ export function CustomCursor() {
     return () => window.removeEventListener("mousemove", moveCursor);
   }, [cursorX, cursorY, isMobile]);
 
-  if (isMobile) return null;
+  if (!mounted || isMobile) return null;
 
   return (
     <motion.div

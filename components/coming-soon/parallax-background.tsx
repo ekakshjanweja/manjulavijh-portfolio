@@ -7,7 +7,7 @@ import {
   MotionValue,
 } from "framer-motion";
 import Image from "next/image";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const IMAGES = [
   "/images/home_carousel/Carousel_1.jpg",
@@ -57,7 +57,7 @@ function ProgressIndicator({
   return (
     <motion.div
       className="fixed top-1/2 right-6 md:right-10 -translate-y-1/2 z-50 flex flex-col gap-2"
-      initial={{ opacity: 0 }}
+      initial={false}
       animate={{ opacity: 1 }}
       transition={{ delay: 0.5 }}
     >
@@ -165,6 +165,11 @@ function ParallaxImage({
 
 export function ParallaxBackground({ progress }: ParallaxBackgroundProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const { scrollYProgress: localProgress } = useScroll({
     target: containerRef,
@@ -172,6 +177,8 @@ export function ParallaxBackground({ progress }: ParallaxBackgroundProps) {
   });
 
   const activeProgress = progress || localProgress;
+
+  if (!mounted) return null;
 
   return (
       <div

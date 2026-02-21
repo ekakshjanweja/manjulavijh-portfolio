@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { socialLinks } from "@/components/portfolio/data/social-links";
 import { ArrowUp } from "lucide-react";
 
@@ -12,15 +13,29 @@ const footerLinks = [
 ];
 
 export const FooterSection = () => {
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
+  const [pendingScroll, setPendingScroll] = useState<string | null>(null);
 
-  const scrollToSection = (href: string) => {
-    const element = document.querySelector(href);
+  useEffect(() => {
+    if (!pendingScroll) return;
+    if (pendingScroll === "top") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      setPendingScroll(null);
+      return;
+    }
+
+    const element = document.querySelector(pendingScroll);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
     }
+    setPendingScroll(null);
+  }, [pendingScroll]);
+
+  const scrollToTop = () => {
+    setPendingScroll("top");
+  };
+
+  const scrollToSection = (href: string) => {
+    setPendingScroll(href);
   };
 
   return (

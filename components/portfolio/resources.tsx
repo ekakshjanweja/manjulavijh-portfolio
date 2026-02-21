@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { BookOpen, FolderOpen, PenLine, ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -32,13 +32,16 @@ const learningCards = [
 export const LearningSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
+  const [pendingScroll, setPendingScroll] = useState<string | null>(null);
 
-  const scrollToSection = (href: string) => {
-    const element = document.querySelector(href);
+  useEffect(() => {
+    if (!pendingScroll) return;
+    const element = document.querySelector(pendingScroll);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
     }
-  };
+    setPendingScroll(null);
+  }, [pendingScroll]);
 
   return (
     <section
@@ -48,7 +51,7 @@ export const LearningSection = () => {
     >
       <div className="max-w-6xl mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={false}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
@@ -67,7 +70,7 @@ export const LearningSection = () => {
           {learningCards.map((card, index) => (
             <motion.div
               key={card.title}
-              initial={{ opacity: 0, y: 30 }}
+              initial={false}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.1 * index }}
               className="group flex flex-col rounded-none border border-border/50 bg-card/50 p-6 hover:border-accent/30 transition-all duration-300 backdrop-blur-sm"
@@ -85,7 +88,7 @@ export const LearningSection = () => {
                 variant="outline"
                 size="sm"
                 className="w-full justify-between text-xs"
-                onClick={() => scrollToSection("#contact")}
+                onClick={() => setPendingScroll("#contact")}
               >
                 {card.action}
                 <ArrowUpRight className="h-3.5 w-3.5" />

@@ -3,7 +3,12 @@
 import Masonry from "react-masonry-css";
 import Image from "next/image";
 import { useCallback, useState } from "react";
-import { Lightbox } from "./lightbox";
+import dynamic from "next/dynamic";
+
+const Lightbox = dynamic(
+  () => import("./lightbox").then((mod) => mod.Lightbox),
+  { ssr: false },
+);
 
 type ImageItem = {
   id: number;

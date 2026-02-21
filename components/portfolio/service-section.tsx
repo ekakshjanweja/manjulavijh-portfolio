@@ -38,7 +38,7 @@ export const ServicesSection = () => {
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={false}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
           className="text-center mb-14"
@@ -57,7 +57,7 @@ export const ServicesSection = () => {
           {services.map((service, index) => (
             <motion.div
               key={service.title}
-              initial={{ opacity: 0, y: 30 }}
+              initial={false}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.1 * index }}
               className="group p-6 md:p-8 bg-card/60 rounded-none border border-border/50 hover:border-accent/30 transition-all duration-500 hover-lift backdrop-blur-sm"

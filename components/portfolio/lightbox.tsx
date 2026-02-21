@@ -3,7 +3,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import Image, { type StaticImageData } from "next/image";
-import { useEffect, useCallback } from "react";
+import { useEffect, useCallback, useState } from "react";
 
 interface LightboxItem {
   id: number;
@@ -28,12 +28,17 @@ export const Lightbox = ({
   onClose,
   onNavigate,
 }: LightboxProps) => {
+  const [mounted, setMounted] = useState(false);
   const currentItem = items[currentIndex];
   const hasCaption = Boolean(
     currentItem?.title || currentItem?.category || currentItem?.description,
   );
   const placeholder =
     currentItem && typeof currentItem.image !== "string" ? "blur" : "empty";
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const goNext = useCallback(() => {
     onNavigate((currentIndex + 1) % items.length);
@@ -62,11 +67,13 @@ export const Lightbox = ({
     };
   }, [isOpen, onClose, goNext, goPrev]);
 
+  if (!mounted) return null;
+
   return (
     <AnimatePresence>
       {isOpen && currentItem && (
         <motion.div
-          initial={{ opacity: 0 }}
+          initial={false}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.3 }}
@@ -75,7 +82,7 @@ export const Lightbox = ({
         >
           {/* Close button */}
           <motion.button
-            initial={{ opacity: 0, y: -10 }}
+            initial={false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
             onClick={onClose}
@@ -89,7 +96,7 @@ export const Lightbox = ({
           {items.length > 1 && (
             <>
               <motion.button
-                initial={{ opacity: 0, x: -10 }}
+                initial={false}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.2 }}
                 onClick={(e) => {
@@ -102,7 +109,7 @@ export const Lightbox = ({
                 <ChevronLeft size={20} strokeWidth={1.5} />
               </motion.button>
               <motion.button
-                initial={{ opacity: 0, x: 10 }}
+                initial={false}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.2 }}
                 onClick={(e) => {
@@ -120,7 +127,7 @@ export const Lightbox = ({
           {/* Image container */}
           <motion.div
             key={currentItem.id}
-            initial={{ opacity: 0, scale: 0.95 }}
+            initial={false}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
             transition={{ duration: 0.3 }}
@@ -169,7 +176,7 @@ export const Lightbox = ({
             {/* Caption */}
             {hasCaption && (
               <motion.div
-                initial={{ opacity: 0, y: 10 }}
+                initial={false}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.15 }}
                 className="mt-6 text-center"

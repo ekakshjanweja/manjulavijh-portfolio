@@ -57,6 +57,7 @@ export const HeroSection = () => {
   const prefersReducedMotion = useReducedMotion();
   const [isMobile, setIsMobile] = useState(false);
   const [carouselApi, setCarouselApi] = useState<any>(null);
+  const [pendingScroll, setPendingScroll] = useState<string | null>(null);
 
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 768px)");
@@ -106,12 +107,14 @@ export const HeroSection = () => {
     autoplay.play();
   }, [carouselApi, isInView, prefersReducedMotion]);
 
-  const scrollToSection = (href: string) => {
-    const element = document.querySelector(href);
+  useEffect(() => {
+    if (!pendingScroll) return;
+    const element = document.querySelector(pendingScroll);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
     }
-  };
+    setPendingScroll(null);
+  }, [pendingScroll]);
 
   return (
     <section
@@ -238,7 +241,7 @@ export const HeroSection = () => {
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-up">
           <Button
-            onClick={() => scrollToSection("#portfolio")}
+            onClick={() => setPendingScroll("#portfolio")}
             variant="hero"
             size="default"
             className="w-full sm:w-auto sm:min-w-44 rounded-none dark:text-white! hover:cursor-pointer"
@@ -246,7 +249,7 @@ export const HeroSection = () => {
             View Portfolio
           </Button>
           <Button
-            onClick={() => scrollToSection("#contact")}
+            onClick={() => setPendingScroll("#contact")}
             variant="heroOutline"
             size="default"
             className="w-full sm:w-auto sm:min-w-44 rounded-none text-white! border-white! hover:cursor-pointer"
@@ -259,7 +262,7 @@ export const HeroSection = () => {
       {/* Scroll Indicator */}
         <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-fade-in">
           <motion.button
-            onClick={() => scrollToSection("#about")}
+            onClick={() => setPendingScroll("#about")}
             animate={{ y: [0, 8, 0] }}
             transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
             className="text-white/40 hover:text-white/70 transition-colors"

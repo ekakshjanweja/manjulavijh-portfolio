@@ -1,12 +1,6 @@
 "use client";
 
-import {
-  useEffect,
-  useState,
-  useCallback,
-  useRef,
-  type MouseEvent,
-} from "react";
+import { useEffect, useState, useRef, type MouseEvent } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
@@ -42,27 +36,31 @@ export const NavbarSection = () => {
   const [activeSection, setActiveSection] = useState("home");
   const [isHero, setIsHero] = useState(isMainPortfolioPage);
   const [mounted, setMounted] = useState(false);
+  const [pendingScroll, setPendingScroll] = useState<{
+    href: string;
+    delay?: number;
+  } | null>(null);
   const navRef = useRef<HTMLElement | null>(null);
 
-  const updateActiveSection = useCallback(() => {
-    if (!isMainPortfolioPage) return;
-    const sections = navLinks.map((l) => l.href.slice(1));
-    const scrollPosition = window.scrollY + 120;
-
-    for (let i = sections.length - 1; i >= 0; i--) {
-      const section = document.getElementById(sections[i]);
-      if (section && section.offsetTop <= scrollPosition) {
-        setActiveSection(sections[i]);
-        break;
-      }
-    }
-  }, [isMainPortfolioPage]);
-
   useEffect(() => {
+    if (!isMainPortfolioPage) return;
+    const updateActiveSection = () => {
+      const sections = navLinks.map((l) => l.href.slice(1));
+      const scrollPosition = window.scrollY + 120;
+
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const section = document.getElementById(sections[i]);
+        if (section && section.offsetTop <= scrollPosition) {
+          setActiveSection(sections[i]);
+          break;
+        }
+      }
+    };
+
     window.addEventListener("scroll", updateActiveSection, { passive: true });
     updateActiveSection();
     return () => window.removeEventListener("scroll", updateActiveSection);
-  }, [updateActiveSection]);
+  }, [isMainPortfolioPage]);
 
   useEffect(() => {
     if (!isMainPortfolioPage) {
@@ -82,10 +80,15 @@ export const NavbarSection = () => {
     return () => observer.disconnect();
   }, [isMainPortfolioPage]);
 
-  const scrollToSection = (href: string) => {
-    const el = document.querySelector(href);
-    if (el) el.scrollIntoView({ behavior: "smooth" });
-  };
+  useEffect(() => {
+    if (!pendingScroll) return;
+    const timeout = window.setTimeout(() => {
+      const el = document.querySelector(pendingScroll.href);
+      if (el) el.scrollIntoView({ behavior: "smooth" });
+      setPendingScroll(null);
+    }, pendingScroll.delay ?? 0);
+    return () => window.clearTimeout(timeout);
+  }, [pendingScroll]);
 
   const handleLinkClick = (href: string, e?: MouseEvent<HTMLAnchorElement>) => {
     e?.preventDefault();
@@ -99,9 +102,7 @@ export const NavbarSection = () => {
         return;
       }
       // Already on portfolio page, just scroll to section
-      setTimeout(() => {
-        scrollToSection(href);
-      }, 100);
+      setPendingScroll({ href, delay: 100 });
       return;
     }
 
@@ -318,7 +319,7 @@ export const NavbarSection = () => {
         {isOpen && (
           <motion.div
             id="mobile-nav"
-            initial={{ opacity: 0, height: 0 }}
+            initial={false}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}

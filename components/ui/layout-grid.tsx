@@ -84,9 +84,7 @@ const SelectedCard = ({ selected }: { selected: Card | null }) => {
   return (
     <div className="bg-transparent h-full w-full flex flex-col justify-end rounded-lg shadow-2xl relative z-60">
       <motion.div
-        initial={{
-          opacity: 0,
-        }}
+        initial={false}
         animate={{
           opacity: 0.6,
         }}
@@ -94,10 +92,7 @@ const SelectedCard = ({ selected }: { selected: Card | null }) => {
       />
       <motion.div
         layoutId={`content-${selected?.id}`}
-        initial={{
-          opacity: 0,
-          y: 100,
-        }}
+        initial={false}
         animate={{
           opacity: 1,
           y: 0,
