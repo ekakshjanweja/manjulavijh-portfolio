@@ -24,7 +24,7 @@ export const socialLinks = [
   },
   {
     icon: Linkedin,
-    href: "https://www.linkedin.com/in/manjulavijh",
+    href: " https://www.linkedin.com/in/dr-manjula-vijh-648b5b2b5/",
     label: "LinkedIn",
   },
   {
