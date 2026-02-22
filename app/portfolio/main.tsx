@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import { HeroSection } from "@/components/portfolio/hero-section";
 import { AboutSection } from "@/components/portfolio/about-section";
@@ -35,7 +35,44 @@ const ContactSection = dynamic(
 );
 
 export default function PortfolioClient() {
+  // useEffect(() => {
+  //   const scrollToHash = () => {
+  //     const hash = window.location.hash;
+  //     if (!hash) return;
+
+  //     const targetId = hash.replace("#", "");
+  //     let attempts = 0;
+
+  //     const tryScroll = () => {
+  //       const el = document.getElementById(targetId);
+  //       if (el) {
+  //         el.scrollIntoView({ behavior: "smooth" });
+  //         return;
+  //       }
+
+  //       attempts += 1;
+  //       if (attempts < 12) {
+  //         requestAnimationFrame(tryScroll);
+  //       }
+  //     };
+
+  //     tryScroll();
+  //   };
+
+  //   scrollToHash();
+  //   window.addEventListener("hashchange", scrollToHash);
+  //   return () => window.removeEventListener("hashchange", scrollToHash);
+  // }, []);
+
+  const [mounted, setMounted] = useState(false);
+
   useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!mounted) return;
+
     const scrollToHash = () => {
       const hash = window.location.hash;
       if (!hash) return;
@@ -45,24 +82,38 @@ export default function PortfolioClient() {
 
       const tryScroll = () => {
         const el = document.getElementById(targetId);
-        if (el) {
-          el.scrollIntoView({ behavior: "smooth" });
+
+        if (el && document.readyState === "complete") {
+          requestAnimationFrame(() => {
+            el.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          });
           return;
         }
 
-        attempts += 1;
-        if (attempts < 12) {
+        attempts++;
+
+        if (attempts < 60) {
           requestAnimationFrame(tryScroll);
         }
       };
 
-      tryScroll();
+      requestAnimationFrame(tryScroll);
     };
 
-    scrollToHash();
+    const timeout = setTimeout(scrollToHash, 150);
+
     window.addEventListener("hashchange", scrollToHash);
-    return () => window.removeEventListener("hashchange", scrollToHash);
-  }, []);
+
+    return () => {
+      clearTimeout(timeout);
+      window.removeEventListener("hashchange", scrollToHash);
+    };
+  }, [mounted]);
+
+  if (!mounted) return null;
 
   return (
     <div className="page-shell">

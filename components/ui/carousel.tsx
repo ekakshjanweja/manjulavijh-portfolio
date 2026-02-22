@@ -53,6 +53,7 @@ function Carousel({
 }: React.ComponentProps<"div"> & CarouselProps) {
   const containerRef = React.useRef<HTMLDivElement | null>(null)
   const [isInView, setIsInView] = React.useState(true)
+  const [prefersReducedMotion, setPrefersReducedMotion] = React.useState(false)
   const [carouselRef, api] = useEmblaCarousel(
     {
       ...opts,
@@ -120,17 +121,41 @@ function Carousel({
   }, [])
 
   React.useEffect(() => {
+    const media = window.matchMedia("(prefers-reduced-motion: reduce)")
+    setPrefersReducedMotion(media.matches)
+    const handler = (event: MediaQueryListEvent) =>
+      setPrefersReducedMotion(event.matches)
+    media.addEventListener("change", handler)
+    return () => media.removeEventListener("change", handler)
+  }, [])
+
+  React.useEffect(() => {
     if (!api) return
     const autoplay = api.plugins()?.autoplay
     if (!autoplay) return
+    const syncAutoplay = () => {
+      if (api.scrollSnapList().length <= 1 || prefersReducedMotion) {
+        autoplay.stop()
+        return
+      }
 
-    if (!isInView) {
-      autoplay.stop()
-      return
+      if (!isInView) {
+        autoplay.stop()
+        return
+      }
+
+      autoplay.play()
     }
 
-    autoplay.play()
-  }, [api, isInView])
+    syncAutoplay()
+    api.on("reInit", syncAutoplay)
+    api.on("slidesChanged", syncAutoplay)
+
+    return () => {
+      api.off("reInit", syncAutoplay)
+      api.off("slidesChanged", syncAutoplay)
+    }
+  }, [api, isInView, prefersReducedMotion])
 
   return (
     <CarouselContext.Provider

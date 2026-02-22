@@ -78,9 +78,6 @@ export const SignatureWork = () => {
     Autoplay({ delay: 2000, stopOnInteraction: false }),
   );
   const [isInView, setIsInView] = useState(false);
-  const [sectionVisible, setSectionVisible] = useState(true);
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
-  const [carouselApi, setCarouselApi] = useState<any>(null);
 
   useEffect(() => {
     if (!ref.current) return;
@@ -88,7 +85,6 @@ export const SignatureWork = () => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         setIsInView((prev) => prev || entry.isIntersecting);
-        setSectionVisible(entry.isIntersecting);
       },
       { rootMargin: "-20% 0px", threshold: 0.1 },
     );
@@ -97,29 +93,6 @@ export const SignatureWork = () => {
 
     return () => observer.disconnect();
   }, []);
-
-  useEffect(() => {
-    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setPrefersReducedMotion(media.matches);
-    const handler = (event: MediaQueryListEvent) =>
-      setPrefersReducedMotion(event.matches);
-    media.addEventListener("change", handler);
-    return () => media.removeEventListener("change", handler);
-  }, []);
-
-  useEffect(() => {
-    if (!carouselApi) return;
-
-    const autoplay = carouselApi.plugins()?.autoplay;
-    if (!autoplay) return;
-
-    if (!sectionVisible || prefersReducedMotion) {
-      autoplay.stop();
-      return;
-    }
-
-    autoplay.play();
-  }, [carouselApi, sectionVisible, prefersReducedMotion]);
 
   return (
     <section id="portfolio" ref={ref} className="py-16 bg-background">
@@ -157,7 +130,6 @@ export const SignatureWork = () => {
             }}
             className="w-full overflow-visible"
             plugins={[autoplayRef.current]}
-            setApi={setCarouselApi}
           >
             <CarouselContent>
               {projects.map((project) => (

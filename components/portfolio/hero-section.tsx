@@ -53,10 +53,8 @@ const CarouselNext = dynamic(
 export const HeroSection = () => {
   const ref = useRef<HTMLElement | null>(null);
   const autoplayRef = useRef(Autoplay({ delay: 3000, stopOnInteraction: false }));
-  const [isInView, setIsInView] = useState(true);
   const prefersReducedMotion = useReducedMotion();
   const [isMobile, setIsMobile] = useState(false);
-  const [carouselApi, setCarouselApi] = useState<any>(null);
   const [pendingScroll, setPendingScroll] = useState<string | null>(null);
 
   useEffect(() => {
@@ -65,19 +63,6 @@ export const HeroSection = () => {
     const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
     mq.addEventListener("change", handler);
     return () => mq.removeEventListener("change", handler);
-  }, []);
-
-  useEffect(() => {
-    if (!ref.current) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => setIsInView(entry.isIntersecting),
-      { rootMargin: "200px 0px", threshold: 0.1 },
-    );
-
-    observer.observe(ref.current);
-
-    return () => observer.disconnect();
   }, []);
 
   const { scrollYProgress } = useScroll({
@@ -92,20 +77,6 @@ export const HeroSection = () => {
   );
   const contentOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
   const contentY = useTransform(scrollYProgress, [0, 0.5], [0, -60]);
-
-  useEffect(() => {
-    if (!carouselApi) return;
-
-    const autoplay = carouselApi.plugins()?.autoplay;
-    if (!autoplay) return;
-
-    if (!isInView || prefersReducedMotion) {
-      autoplay.stop();
-      return;
-    }
-
-    autoplay.play();
-  }, [carouselApi, isInView, prefersReducedMotion]);
 
   useEffect(() => {
     if (!pendingScroll) return;
@@ -128,7 +99,6 @@ export const HeroSection = () => {
           style={{ y: imageY, willChange: "transform" }}
         >
           <Carousel
-            setApi={setCarouselApi}
             className="h-full"
             opts={{ loop: true }}
             plugins={[autoplayRef.current]}
