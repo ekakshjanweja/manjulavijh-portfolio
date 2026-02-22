@@ -232,11 +232,11 @@ export const HeroSection = () => {
       {/* Scroll Indicator */}
         <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-fade-in">
           <motion.button
-            onClick={() => setPendingScroll("#about")}
+            onClick={() => setPendingScroll("#portfolio")}
             animate={{ y: [0, 8, 0] }}
             transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
             className="text-white/40 hover:text-white/70 transition-colors"
-            aria-label="Scroll to about section"
+            aria-label="Scroll to portfolio section"
           >
             <ChevronDown size={24} strokeWidth={1.5} />
           </motion.button>
