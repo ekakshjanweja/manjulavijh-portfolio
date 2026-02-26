@@ -104,9 +104,26 @@ export const FooterSection = () => {
 
         {/* Bottom */}
         <div className="border-t border-primary-foreground/8 mt-10 pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-primary-foreground/30">
+          //<p className="text-xs text-primary-foreground/30">
             &copy; {new Date().getFullYear()} Manjula Vijh. All rights reserved.
-          </p>
+         // </p>
+<div className="flex flex-col md:flex-row items-center gap-2 md:gap-4 text-center md:text-left">
+    <p className="text-xs text-primary-foreground/30">
+      &copy; {new Date().getFullYear()} Manjula Vijh. All rights reserved.
+    </p>
+
+    <p className="text-xs text-primary-foreground/30">
+      Made by{" "}
+      <a
+        href="https://tanishi.app"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="underline underline-offset-4 hover:text-primary-foreground transition-colors duration-300"
+      >
+        @tanishi.app
+      </a>
+    </p>
+  </div>
           <button
             onClick={scrollToTop}
             className="flex items-center gap-1.5 text-xs text-primary-foreground/40 hover:text-primary-foreground transition-colors duration-300"
