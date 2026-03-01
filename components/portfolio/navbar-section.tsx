@@ -35,6 +35,7 @@ export const NavbarSection = () => {
   const [isPortfolioMenuOpen, setIsPortfolioMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
   const [isHero, setIsHero] = useState(isMainPortfolioPage);
+  const [scrolled, setScrolled] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [pendingScroll, setPendingScroll] = useState<{
     href: string;
@@ -79,6 +80,16 @@ export const NavbarSection = () => {
     observer.observe(heroSection);
     return () => observer.disconnect();
   }, [isMainPortfolioPage]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll(); // Check initial state
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   useEffect(() => {
     if (!pendingScroll) return;
@@ -144,11 +155,15 @@ export const NavbarSection = () => {
 
   if (!mounted) return null;
 
+  // Unified check: only use hero styling (transparent bg + blend mode)
+  // when BOTH in the hero section AND not scrolled past 20px
+  const isOverHero = isHero && !scrolled;
+
   return (
     <nav
       ref={navRef}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isHero
+        isOverHero
           ? "bg-transparent"
           : "bg-background/70 backdrop-blur-xl border-b border-border/30 shadow-sm shadow-black/3"
       }`}
@@ -164,7 +179,7 @@ export const NavbarSection = () => {
             className={`logo-script text-base sm:text-lg md:text-2xl font-semibold tracking-wide whitespace-nowrap shrink-0 ${
               isOpen
                 ? "text-foreground md:mix-blend-difference md:text-white"
-                : isHero
+                : isOverHero
                   ? "mix-blend-difference text-white"
                   : "text-foreground"
             }`}
@@ -196,7 +211,7 @@ export const NavbarSection = () => {
                       handleLinkClick(link.href, e);
                     }}
                     className={`relative text-xs font-medium uppercase tracking-[0.15em] transition-all ${
-                      isHero
+                      isOverHero
                         ? `mix-blend-difference text-white ${
                             activeSection === link.href.slice(1)
                               ? ""
@@ -272,7 +287,7 @@ export const NavbarSection = () => {
                     handleLinkClick(link.href, e);
                   }}
                   className={`relative text-xs font-medium uppercase tracking-[0.15em] transition-all ${
-                    isHero
+                    isOverHero
                       ? `mix-blend-difference text-white ${
                           activeSection === link.href.slice(1)
                             ? ""
@@ -292,18 +307,18 @@ export const NavbarSection = () => {
                 </a>
               ),
             )}
-            <ModeToggle isHero={isHero} />
+            <ModeToggle isHero={isOverHero} />
           </div>
 
           {/* Mobile Controls */}
           <div className="flex items-center gap-1 sm:gap-3 md:hidden shrink-0">
-            <ModeToggle isHero={isHero} />
+            <ModeToggle isHero={isOverHero} />
             <button
               onClick={() => setIsOpen(!isOpen)}
               className={`p-2 ${
               isOpen
                 ? "text-foreground md:mix-blend-difference md:text-white"
-                : isHero
+                : isOverHero
                   ? "mix-blend-difference text-white"
                   : "text-foreground"
               }`}
