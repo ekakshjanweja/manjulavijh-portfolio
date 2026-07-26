@@ -1,9 +1,6 @@
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import MasonryGrid from "@/components/portfolio/masonry-grid";
-import { socialLinks } from "@/components/portfolio/data/social-links";
-import { productImages } from "@/components/portfolio/data/product-images";
-import { conceptImages } from "@/components/portfolio/data/concept-images";
+import { fetchPhotosByCategory } from "@/lib/photos";
 
 type CategoryEntry = {
   title: string;
@@ -36,21 +33,15 @@ export default async function CategoryPage({
   params: Promise<{ category: string }>;
 }) {
   const { category: categorySlug } = await params;
-  // const category = categoryMeta[categorySlug as keyof typeof categoryMeta];
-
-  // if (!category) {
-  //   notFound();
-  // }
-
-  const galleryMap = {
-    concept: conceptImages,
-  };
-
-  const images = galleryMap[categorySlug as keyof typeof galleryMap];
-
-  if (!images) {
+  if (!(categorySlug in categoryMeta)) {
     notFound();
   }
+
+  if (categorySlug !== "concept") {
+    notFound();
+  }
+
+  const images = await fetchPhotosByCategory("concept");
 
   return (
     <div className="page-shell mt-46">
@@ -98,7 +89,12 @@ export default async function CategoryPage({
 
       <section id="gallery" className="py-8 md:py-12 lg:py-16 scroll-mt-24">
         <main className="w-full px-1 sm:px-2 -mt-42">
-          <MasonryGrid images={images} />
+          <MasonryGrid
+            images={images.map((image) => ({
+              id: image.id,
+              src: image.image_url,
+            }))}
+          />
         </main>
       </section>
     </div>

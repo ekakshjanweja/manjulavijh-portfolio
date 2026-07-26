@@ -1,13 +1,14 @@
 type AdminLoginPageProps = {
-  searchParams?: { error?: string };
+  searchParams?: Promise<{ error?: string }>;
 };
 
 export const metadata = {
   title: "Admin Login",
 };
 
-export default function AdminLoginPage({ searchParams }: AdminLoginPageProps) {
-  const error = searchParams?.error;
+export default async function AdminLoginPage({ searchParams }: AdminLoginPageProps) {
+  const resolvedSearchParams = await searchParams;
+  const error = resolvedSearchParams?.error;
   const hasError = error === "1";
   const hasConfigError = error === "config";
 

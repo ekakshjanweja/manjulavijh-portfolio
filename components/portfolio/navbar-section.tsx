@@ -20,9 +20,9 @@ const portfolioLinks = [
     name: "Explore Collections",
     href: "#categories",
     children: [
-      { name: "Food", href: "/portfolio/food" },
-      { name: "Product", href: "/portfolio/product" },
-      { name: "Concept", href: "/portfolio/concept" },
+      { name: "Food", href: "/food" },
+      { name: "Product", href: "/product" },
+      { name: "Concept", href: "/concept" },
     ],
   },
 ];

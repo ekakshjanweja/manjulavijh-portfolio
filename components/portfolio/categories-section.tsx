@@ -1,25 +1,18 @@
 import Image from "next/image";
 import Link from "next/link";
-
-import food_cover from "@/public/images/category/food_cover.jpg";
-import product_cover from "@/public/images/category/product_cover.jpg";
-import concept_cover from "@/public/images/category/concept_cover.jpg";
+import { CATEGORY_COVER_PATHS, CATEGORY_LABELS } from "@/lib/portfolio-categories";
 
 const categories = [
+  { title: CATEGORY_LABELS.food, slug: "food", image: CATEGORY_COVER_PATHS.food },
   {
-    title: "Food",
-    slug: "food",
-    image: food_cover,
-  },
-  {
-    title: "Product",
+    title: CATEGORY_LABELS.product,
     slug: "product",
-    image: product_cover,
+    image: CATEGORY_COVER_PATHS.product,
   },
   {
-    title: "Concept",
+    title: CATEGORY_LABELS.concept,
     slug: "concept",
-    image: concept_cover,
+    image: CATEGORY_COVER_PATHS.concept,
   },
 ];
 
@@ -45,7 +38,7 @@ export const CategoriesSection = () => {
           {categories.map((category) => (
             <Link
               key={category.slug}
-              href={`/portfolio/${category.slug}`}
+              href={`/${category.slug}`}
               className="group relative flex h-full w-full flex-col overflow-hidden border border-border/60 bg-card"
             >
               {/* <div className="relative aspect-3/2 overflow-hidden"> */}
@@ -58,7 +51,6 @@ export const CategoriesSection = () => {
                   loading="lazy"
                   quality={75}
                   className="h-full w-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.04]"
-                  placeholder="blur"
                 />
                 <div className="absolute inset-0 bg-linear-to-t from-charcoal/70 via-transparent to-transparent opacity-80" />
               </div>

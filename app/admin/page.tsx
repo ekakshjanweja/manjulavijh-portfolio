@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import AdminTable from "@/app/admin/admin-table";
 import { prisma } from "@/lib/prisma";
 
@@ -24,14 +26,28 @@ export default async function AdminPage() {
           <h1 className="text-2xl font-semibold text-slate-900">Contact Messages</h1>
           <p className="text-sm text-slate-500">Review recent contact submissions.</p>
         </div>
-        <form action="/api/admin/logout" method="post">
-          <button
-            type="submit"
+        <div className="flex flex-wrap gap-2">
+          <Link
+            href="/admin/photos"
             className="rounded-full border border-slate-200 px-4 py-2 text-xs font-semibold uppercase tracking-widest text-slate-600 transition hover:border-slate-300 hover:text-slate-900"
           >
-            Sign out
-          </button>
-        </form>
+            Manage galleries
+          </Link>
+          <Link
+            href="/admin/clients"
+            className="rounded-full border border-slate-200 px-4 py-2 text-xs font-semibold uppercase tracking-widest text-slate-600 transition hover:border-slate-300 hover:text-slate-900"
+          >
+            Manage clients
+          </Link>
+          <form action="/api/admin/logout" method="post">
+            <button
+              type="submit"
+              className="rounded-full border border-slate-200 px-4 py-2 text-xs font-semibold uppercase tracking-widest text-slate-600 transition hover:border-slate-300 hover:text-slate-900"
+            >
+              Sign out
+            </button>
+          </form>
+        </div>
       </header>
 
       <AdminTable messages={serializedMessages} />

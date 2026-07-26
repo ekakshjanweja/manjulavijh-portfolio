@@ -11,7 +11,7 @@ const Lightbox = dynamic(
 );
 
 type ImageItem = {
-  id: number;
+  id: string;
   src: string;
 };
 

@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useLayoutEffect } from "react";
 import dynamic from "next/dynamic";
 import { HeroSection } from "@/components/portfolio/hero-section";
 import { AboutSection } from "@/components/portfolio/about-section";
+import { LearningSection } from "@/components/portfolio/resources";
 
 const SignatureWork = dynamic(
   () =>
@@ -34,37 +35,25 @@ const ContactSection = dynamic(
   { ssr: false },
 );
 
+function PageLoader() {
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-background">
+      <div className="flex flex-col items-center gap-4">
+        <div className="w-12 h-12 border-4 border-accent/20 border-t-accent rounded-full animate-spin" />
+        <p className="text-sm text-muted-foreground uppercase tracking-widest">
+          Loading...
+        </p>
+      </div>
+    </div>
+  );
+}
+
 export default function PortfolioClient() {
-  // useEffect(() => {
-  //   const scrollToHash = () => {
-  //     const hash = window.location.hash;
-  //     if (!hash) return;
-
-  //     const targetId = hash.replace("#", "");
-  //     let attempts = 0;
-
-  //     const tryScroll = () => {
-  //       const el = document.getElementById(targetId);
-  //       if (el) {
-  //         el.scrollIntoView({ behavior: "smooth" });
-  //         return;
-  //       }
-
-  //       attempts += 1;
-  //       if (attempts < 12) {
-  //         requestAnimationFrame(tryScroll);
-  //       }
-  //     };
-
-  //     tryScroll();
-  //   };
-
-  //   scrollToHash();
-  //   window.addEventListener("hashchange", scrollToHash);
-  //   return () => window.removeEventListener("hashchange", scrollToHash);
-  // }, []);
-
   const [mounted, setMounted] = useState(false);
+
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   useEffect(() => {
     setMounted(true);
@@ -73,55 +62,28 @@ export default function PortfolioClient() {
   useEffect(() => {
     if (!mounted) return;
 
-    const scrollToHash = () => {
-      const hash = window.location.hash;
-      if (!hash) return;
+    const hash = window.location.hash;
+    if (!hash) return;
 
-      const targetId = hash.replace("#", "");
-      let attempts = 0;
-
-      const tryScroll = () => {
-        const el = document.getElementById(targetId);
-
-        if (el && document.readyState === "complete") {
-          requestAnimationFrame(() => {
-            el.scrollIntoView({
-              behavior: "smooth",
-              block: "start",
-            });
-          });
-          return;
-        }
-
-        attempts++;
-
-        if (attempts < 60) {
-          requestAnimationFrame(tryScroll);
-        }
-      };
-
-      requestAnimationFrame(tryScroll);
-    };
-
-    const timeout = setTimeout(scrollToHash, 150);
-
-    window.addEventListener("hashchange", scrollToHash);
-
-    return () => {
-      clearTimeout(timeout);
-      window.removeEventListener("hashchange", scrollToHash);
-    };
+    const targetId = hash.replace("#", "");
+    const el = document.getElementById(targetId);
+    if (el) {
+      setTimeout(() => {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 300);
+    }
   }, [mounted]);
 
-  if (!mounted) return null;
+  if (!mounted) return <PageLoader />;
 
   return (
-    <div className="page-shell">
+    <div className="min-h-screen bg-background">
       <HeroSection />
       <SignatureWork />
       <CategoriesSection />
       <ClientsSection />
       <AboutSection />
+      {/* <LearningSection /> */}
       <ContactSection />
     </div>
   );

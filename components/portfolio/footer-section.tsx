@@ -1,18 +1,22 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
 import { socialLinks } from "@/components/portfolio/data/social-links";
 import { ArrowUp } from "lucide-react";
 
 const footerLinks = [
-  { name: "Home", href: "#home" },
-  { name: "About", href: "#about" },
-  { name: "Portfolio", href: "#portfolio" },
-  { name: "Clients", href: "#clients" },
-  { name: "Contact", href: "#contact" },
+  { name: "Home", href: "/#home" },
+  { name: "About", href: "/#about" },
+  { name: "Portfolio", href: "/#portfolio" },
+  { name: "Clients", href: "/brands" },
+  { name: "Contact", href: "/#contact" },
 ];
 
 export const FooterSection = () => {
+  const router = useRouter();
+  const pathname = usePathname();
+  const isHomePage = pathname === "/";
   const [pendingScroll, setPendingScroll] = useState<string | null>(null);
 
   useEffect(() => {
@@ -26,16 +30,32 @@ export const FooterSection = () => {
     const element = document.querySelector(pendingScroll);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
+    } else if (!isHomePage && pendingScroll.startsWith("/#")) {
+      router.push(pendingScroll);
     }
     setPendingScroll(null);
-  }, [pendingScroll]);
+  }, [pendingScroll, isHomePage, router]);
 
   const scrollToTop = () => {
+    if (!isHomePage) {
+      router.push("/");
+      return;
+    }
     setPendingScroll("top");
   };
 
   const scrollToSection = (href: string) => {
-    setPendingScroll(href);
+    if (href === "/#home") {
+      router.push("/");
+      return;
+    }
+    
+    if (href.startsWith("/#")) {
+      router.push(href);
+      return;
+    }
+    
+    router.push(href);
   };
 
   return (
@@ -47,9 +67,6 @@ export const FooterSection = () => {
             <h3 className="logo-script text-xl font-semibold mb-3">
               Dr. Manjula Vijh
             </h3>
-            {/* <p className="text-primary-foreground/50 leading-relaxed text-sm mb-5">
-              Light-rich, editorial imagery for culinary and lifestyle brands.
-            </p> */}
             <div className="flex gap-3">
               {socialLinks.map((social) => (
                 <a
@@ -104,23 +121,22 @@ export const FooterSection = () => {
 
         {/* Bottom */}
         <div className="border-t border-primary-foreground/8 mt-10 pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
-<div className="flex flex-col md:flex-row items-center gap-2 md:gap-4 text-center md:text-left">
-    <p className="text-xs text-primary-foreground/30">
-      &copy; {new Date().getFullYear()} Manjula Vijh. All rights reserved.
-    </p>
-
-    <p className="text-xs text-primary-foreground/30">
-      Made by{" "}
-      <a
-        href="https://tanishi.app"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="underline underline-offset-4 hover:text-primary-foreground transition-colors duration-300"
-      >
-        @tanishi.app
-      </a>
-    </p>
-  </div>
+          <div className="flex flex-col md:flex-row items-center gap-2 md:gap-4 text-center md:text-left">
+            <p className="text-xs text-primary-foreground/30">
+              &copy; {new Date().getFullYear()} Manjula Vijh. All rights reserved.
+            </p>
+            <p className="text-xs text-primary-foreground/30">
+              Made by{" "}
+              <a
+                href="https://tanishi.app"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline underline-offset-4 hover:text-primary-foreground transition-colors duration-300"
+              >
+                @tanishi.app
+              </a>
+            </p>
+          </div>
           <button
             onClick={scrollToTop}
             className="flex items-center gap-1.5 text-xs text-primary-foreground/40 hover:text-primary-foreground transition-colors duration-300"

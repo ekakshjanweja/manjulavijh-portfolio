@@ -17,3 +17,30 @@ model ContactMessage {
   @@index([email])
   @@index([createdAt])
 }
+
+model Photo {
+  id          String   @id @default(uuid()) @db.Uuid
+  imageUrl    String   @map("image_url")
+  altText    String?  @map("alt_text")
+  description String?
+  category    String
+  subcategory String?
+  position    Int
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  @@index([category, subcategory])
+  @@index([position])
+  @@map("photos")
+}
+
+model Client {
+  id        String   @id @default(uuid()) @db.Uuid
+  name      String
+  logoUrl   String   @map("logo_url")
+  website   String?
+  position  Int      @default(0)
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@index([position])
+  @@map("clients")
+}

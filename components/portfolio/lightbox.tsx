@@ -6,7 +6,7 @@ import Image, { type StaticImageData } from "next/image";
 import { useEffect, useCallback, useState } from "react";
 
 interface LightboxItem {
-  id: number;
+  id: number | string;
   image: StaticImageData | string;
   title?: string;
   category?: string;
@@ -79,6 +79,9 @@ export const Lightbox = ({
           transition={{ duration: 0.3 }}
           className="lightbox-overlay flex items-center justify-center"
           onClick={onClose}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Image lightbox"
         >
           {/* Close button */}
           <motion.button

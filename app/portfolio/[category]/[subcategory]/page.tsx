@@ -1,7 +1,7 @@
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import MasonryGrid from "@/components/portfolio/masonry-grid";
-import { categoryGallery } from "@/components/portfolio/data/category-gallery";
+import { fetchPhotosByCategory } from "@/lib/photos";
+import { CATEGORY_SUBCATEGORIES } from "@/lib/portfolio-categories";
 
 export default async function SubcategoryPage({
   params,
@@ -9,12 +9,21 @@ export default async function SubcategoryPage({
   params: Promise<{ category: string; subcategory: string }>;
 }) {
   const { category: categorySlug, subcategory } = await params;
-  const galleryKey = `${categorySlug}-${subcategory}`;
-  const images = categoryGallery[galleryKey];
-
-  if (!images) {
+  if (!(categorySlug in CATEGORY_SUBCATEGORIES)) {
     notFound();
   }
+
+  const allowed = CATEGORY_SUBCATEGORIES[categorySlug as "food" | "product"].some(
+    (entry) => entry.slug === subcategory,
+  );
+  if (!allowed) {
+    notFound();
+  }
+
+  const images = await fetchPhotosByCategory(
+    categorySlug as "food" | "product",
+    subcategory,
+  );
 
   return (
     <div className="page-shell mt-3">
@@ -31,7 +40,12 @@ export default async function SubcategoryPage({
 
       <section id="gallery" className="py-8 md:py-12 lg:py-16 scroll-mt-24">
         <main className="w-full px-1  sm:px-2">
-          <MasonryGrid images={images} />
+          <MasonryGrid
+            images={images.map((image) => ({
+              id: image.id,
+              src: image.image_url,
+            }))}
+          />
         </main>
       </section>
     </div>
